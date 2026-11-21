@@ -40,7 +40,7 @@ If the file is missing or the grep finds nothing, stop. Say exactly which line t
 1. If `01-ideas.md` already exists for the week, ask before overwriting and stop.
 2. Read the last four rows of `content-agent/packs/log.csv` and avoid repeating those topics.
 3. Search for developments from the past 14 days across the subject areas in `brand.md`. Use several searches. Prefer sources from the priority list in `sources.md`, and go to the primary source behind any news report.
-4. Open the lead source for each idea (WebFetch, or the web-fetch agent if WebFetch is not available) to confirm the page loads and says what you think it says. Drop any idea whose only support is a source you could not open or a source on the avoid list.
+4. Open the lead source for each idea (WebFetch, or the web-fetch agent if WebFetch is not available) to confirm the page loads and says what you think it says. Drop any idea whose only support is a source on the avoid list. If pages cannot be opened at all (network or permission block), do not drop everything silently: mark each unopened source `(search result only, not opened)`, put a warning at the top of `01-ideas.md`, and tell Charlotte what is blocked. `research` must never record an unopened source as verified.
 5. Choose five ideas that are useful to a UK small business owner who is capable in their field but new to AI. Mix the subject areas. At least one should be evergreen (not tied to this week's news) and at least one should be very practical ("how to do X in 20 minutes").
 6. Write `01-ideas.md` from `templates/ideas.md`, then commit it.
 7. Reply with a short table (number, title, one-line why) and the exact approval instruction. Stop.
