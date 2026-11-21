@@ -16,7 +16,7 @@ On 10 November 2026 Google started rolling out two Gemini features in Gmail, AI 
 
 ## Verified facts
 
-All pages were opened and read on 21 November 2026 with the agent's read-only page reader. Prices exclude any VAT information, because none was visible on the page read.
+All pages were opened and read on 21 November 2026 with the agent's read-only page reader. Prices are quoted exactly as shown. The page text didn't say whether they include VAT.
 
 | ID | Fact | Source | Published / updated | Accessed | Type |
 |---|---|---|---|---|---|
