@@ -69,15 +69,16 @@ If the file is missing or the grep finds nothing, stop. Say exactly which line t
 
 1. Gate check (above). If `03-content-pack.md` already exists, ask before overwriting and stop.
 2. **Load the `charlotte-style` skill** (it may be listed as `anthropic-skills:charlotte-style`) and read its `references/practical-ai-teaching.md`. If it is not available, say so in the review note and follow `brand.md` alone.
-3. Use only the verified facts in the approved brief (including any edits Charlotte made). Tag each factual sentence with its fact ID in square brackets, for example `[F3]`. Introduce no new facts, figures, prices or dates. If you need a fact that is not in the brief, leave a `[NEEDS FACT: ...]` marker instead.
-4. Write the pack from `templates/content-pack.md`:
+3. **Recheck time-sensitive facts.** Reopen every source listed in the brief's "Recheck before drafting" section and compare it with the brief. Record the result in the review note. If anything has changed (dates, availability, feature names), stop before drafting, tell Charlotte what changed, and wait.
+4. Use only the verified facts in the approved brief (including any edits Charlotte made). Tag each factual sentence with its fact ID in square brackets, for example `[F3]`. Introduce no new facts, figures, prices or dates. If you need a fact that is not in the brief, leave a `[NEEDS FACT: ...]` marker instead.
+5. Write the pack from `templates/content-pack.md`:
    - LinkedIn post, Facebook post, Instagram caption, each written for its platform (see `brand.md` for lengths).
    - One carousel of 6-8 slides with a headline and short body text per slide, ready to paste into Canva.
    - One image concept per post.
    - Each post contains one practical thing the reader can try. This is how the content shows expertise.
    - At most one call to action per post, chosen word for word from `brand.md`, and only where it fits naturally.
-5. If the argument `blog` is present, also write `04-blog.md` from `templates/blog.md` (600-800 words, same rules).
-6. **Review pass.** Reread everything you wrote and fill in the review note honestly:
+6. If the argument `blog` is present, also write `04-blog.md` from `templates/blog.md` (600-800 words, same rules).
+7. **Review pass.** Reread everything you wrote and fill in the review note honestly:
    - every factual sentence has a fact ID that exists in the approved brief
    - British spelling throughout (check for -ize, color, program as software excepted, center, analyze)
    - no em dashes, semicolons or ellipses in post copy, and no phrases from the avoid list in `brand.md`
@@ -86,8 +87,8 @@ If the file is missing or the grep finds nothing, stop. Say exactly which line t
    - which posts carry a CTA and why, and why any do not
    - word counts per piece
    Fix what you can before writing the note. List what you could not fix.
-7. Append one row to `content-agent/packs/log.csv`: week, main topic, override topics, blog (y/n), and leave Charlotte's columns blank.
-8. Commit, then reply with a short summary, the review note's open issues, and a reminder that nothing has been published. Stop.
+8. Append one row to `content-agent/packs/log.csv`: week, main topic, override topics, blog (y/n), and leave Charlotte's columns blank.
+9. Commit, then reply with a short summary, the review note's open issues, and a reminder that nothing has been published. Stop.
 
 ---
 
