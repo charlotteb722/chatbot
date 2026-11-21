@@ -85,3 +85,5 @@ Then run `/content-pack research`. You can edit any idea first and the research 
 ## Recommendation
 
 **Idea 2** is the safest strong pick for a first run. It's practical, free for anyone already on Google Workspace, it makes an easy carousel, and the facts are narrow and easy to verify. **Idea 1** is the most distinctive and links best to your website work, but it depends on checking UK availability, and it may turn out to be "not here yet". Idea 4 is the only time-sensitive one, because of the 31 December offer.
+
+APPROVED: 2

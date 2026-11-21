@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.claude/skills/content-pack/fetch.sh https://*)"
+    ]
+  }
+}

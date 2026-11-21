@@ -18,6 +18,14 @@ Arguments: `$ARGUMENTS`
 - **Stay on the branch.** Commit pack files to the current git branch with a short message. Do not merge, open pull requests or push to `main`.
 - **Stop at each gate.** Each command does its stage and stops. Never chain into the next stage in the same run, even if asked to "keep going", unless the approval line is already in the file.
 
+## Reading source pages
+
+Try WebFetch first. If it cannot reach a page (for example `ENOTFOUND`), read it with the read-only helper, run from the repo root exactly like this, one URL per call:
+
+    .claude/skills/content-pack/fetch.sh https://support.google.com/...
+
+It only reads allowlisted hosts over HTTPS and prints the page text. Do not use raw `curl` or any other workaround. If both methods fail, stop and tell Charlotte. Only cite pages you actually read by one of these two methods.
+
 ## Setup for every command
 
 1. Work out the week: use `week=YYYY-Www` if given, otherwise run `date +%G-W%V`. The folder is `content-agent/packs/<week>/`.
