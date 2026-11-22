@@ -1,68 +1,76 @@
 # JOB: AI Content Marketing Agent
 
-**Owner:** Charlotte · **Status:** Approved with adjustments (21 Nov 2026) · **Version:** v1 (on demand only)
+**Owner:** Charlotte · **Status:** v2 specification: automated weekly run (22 Nov 2026), awaiting build approval · **Previous:** v1 manual, three-command workflow (kept as fallback)
 
 ## Purpose
-Help me research, plan, create and improve marketing content for my AI consultancy, aimed at UK small business owners, sole traders and entrepreneurs. Subjects: practical AI tools, AI marketing and content creation, automation and productivity, websites and digital business support, and real examples of businesses saving time with AI.
+Every Monday, without me starting anything, produce a finished, fact-checked marketing content package for my AI consultancy, aimed at UK small business owners, sole traders and entrepreneurs. Subjects: practical AI tools, AI marketing and content creation, automation and productivity, websites and digital business support, and real examples of businesses saving time with AI.
 
 The content must support the consultancy by showing practical expertise and encouraging genuine enquiries, not by hard selling.
 
 Personal business project only. Completely separate from my employment. No employer systems, data or accounts.
 
-## How it runs
-One Claude Code skill, three commands, started by me. Each one writes to a weekly folder (`packs/YYYY-Www/`) and stops.
+**Success:** every Monday I receive a finished content package without opening Claude Code or starting anything manually.
 
-| Command | Workflow steps | Needs | Writes |
-|---|---|---|---|
-| `/content-pack ideas` | 1 Research opportunities, 2 Recommend five ideas | nothing | `01-ideas.md`: five ideas, each with why it matters to a UK small business, the angle, the best platform, and 2-3 lead sources |
-| `/content-pack research` | 4 Research the chosen topic(s) | `APPROVED: <n>` in `01-ideas.md` (step 3) | `02-research-brief.md` |
-| `/content-pack draft` | 5 Draft, 6 Carousel/images/CTAs, 7 Review, 8 Present | `APPROVED` in `02-research-brief.md` | `03-content-pack.md` (everything I copy from, in one file) |
+## Core requirement: automatic weekly run
+- **When:** every Monday at 08:00 UK time, following BST automatically (the schedule is set in `Europe/London`).
+- **Where:** in the cloud, so my computer can be off.
+- **How:** one scheduled run carries out every stage in order, with **no human approval between stages**:
+  1. Research current AI and automation developments relevant to UK small businesses (past 14 days, plus evergreen angles)
+  2. Score candidate topics and select the strongest one without asking me, avoiding anything covered in the previous four weeks
+  3. Verify sources and facts automatically
+  4. Draft LinkedIn, Facebook and Instagram posts, an 8-slide carousel, image briefs and a blog article
+  5. Apply my `charlotte-style` skill and `brand.md`
+  6. Run all quality and consistency checks, and fix any failures
+  7. Save the complete publication-ready package
+  8. Notify me by email that it's ready for review
+- **My only approval point:** reviewing the finished package before I publish anything myself.
 
-The next command won't run until its approval line is in place. I can edit any file before approving, and the next stage uses my edits.
+## Automatic quality gates (they replace the manual approvals)
+- **Topic selection:** each candidate is scored on UK relevance, practical value, verifiability, freshness, fit with my consultancy and repetition. The scores and two runner-up topics are included in the pack.
+- **Verification gate:** a fact counts only if the agent opened and read the source page itself. Primary sources come first, and there must be at least 5 verified facts. A feature is only recommended to an audience (for example free Gmail or Workspace) if its UK availability for that audience is confirmed. Anything unverified is excluded. If too little survives, the agent moves to the next topic, with at most 2 switches.
+- **No pack rather than a weak pack:** if no topic passes, I get a "No pack this week" notification with the reasons.
+- **Quality gate:** fact IDs, British English, punctuation rules, avoid-list phrases, word counts, carousel structure, no prices unless relevant and verified, approved CTAs only, no invented experiences or customer stories, and hedged availability wording. These checks must pass before the pack is saved.
+- **Status on every pack:** Ready, Ready with notes (for example, live-account checks I need to do), or No pack.
 
-**One main topic per week by default.** If I want a different topic on one platform, I add a line such as `INSTAGRAM: 4` under my approval, and the research brief covers both topics.
+## Weekly package
+Saved to `content-agent/packs/YYYY-Www/` on the `content-packs` branch:
+- `00-run-log.md`: what happened, sources opened, topic scores, check results, status
+- `01-ideas.md`: candidate topics and scores
+- `02-research-brief.md`: verified facts, assumptions, exclusions
+- `03-content-pack.md` and `04-blog.md`: drafts with fact IDs (the research record)
+- `05-publication-copy.md`: clean copy, ready to post
+- `06-canva-instructions.md`: Canva sizes, slide layout, image briefs, alt text, live-account checks, posting checklist
 
-**Optional blog.** `/content-pack draft blog` also produces a short blog article (around 600-800 words) in `04-blog.md`, from the same approved facts.
-
-## Weekly output (`03-content-pack.md`)
-- **Three posts:** one each for LinkedIn, Facebook and Instagram, written for each platform rather than copied across.
-- **One carousel:** 6-8 slides, with the headline and body text for each slide, ready to paste into Canva. Works for Instagram and LinkedIn.
-- **Image concepts:** one per post, described clearly enough to build in Canva.
-- **Consultancy angle:** each post includes something practical the reader can try, so it shows expertise rather than just reporting news.
-- **Review note:** accuracy, clarity, UK suitability, anything time-sensitive, any claim missing a fact ID, and where a CTA was used or left out and why.
+## Notifications and failures
+- An email when the run finishes: the topic, status, where to find the pack, and anything needing my attention.
+- A watchdog at 10:00 every Monday checks that the week's pack exists, and emails me if it doesn't (for example, a crashed run or a usage limit).
+- Every run is logged in `00-run-log.md` and `content-agent/packs/runs.csv`.
 
 ## Calls to action
-Use one only where it fits naturally. Never more than one per post.
-- "Would you like help using AI in your business? Send me a message."
-- "Discover how I can help your business at https://charlottebjuren.com/"
-- "Want to save time with AI and automation? Get in touch for a chat."
+Use one only where it fits naturally, and never more than one per post. Approved wording is listed in `brand.md`, including my own closing lines.
 
 ## Research rules
-- **Prioritise:** official documentation and primary sources, including OpenAI, Anthropic, Microsoft Learn, Google, gov.uk, ICO, ONS, and established UK business organisations (for example FSB, British Chambers of Commerce, British Business Bank).
-- **Avoid:** unverified social media claims, promotional articles without evidence, and outdated information. Anything about AI products older than 12 months is flagged and rechecked.
-- The brief has three sections: **Verified facts**, **Assumptions and interpretation**, and **Unverified or conflicting (do not use)**.
-- Each verified fact gets an ID (F1, F2...), a link, the publisher, the publication date and the date accessed. It only counts as verified if the agent read the page itself, not just a search snippet.
-- Drafts may only use facts from the approved brief, tagged with their IDs. No new facts are added at drafting.
+- **Prioritise:** official documentation and primary sources, including OpenAI, Anthropic, Microsoft Learn, Google, gov.uk, ICO, ONS, and established UK business organisations.
+- **Avoid:** unverified social media claims, promotional articles without evidence, and outdated information. Anything about AI products older than 12 months is rechecked.
+- **Search results:** search snippets are never evidence.
+- **Facts:** every fact has an ID, link, publisher, date and accessed date. Drafts use only verified facts.
 
 ## Brand voice
-British English throughout. Professional, friendly and practical. No hype, no invented figures, no client names. Voice comes from my existing `charlotte-style` skill, plus short `brand.md` and `sources.md` files in the repo that I can edit myself.
+British English. Professional, friendly and practical. Uses my `charlotte-style` skill and `brand.md`. No hype, no invented figures, experiences, clients or results.
 
 ## Hard limits
-- Drafts only. Nothing is published, posted, emailed or scheduled by the agent.
-- No new external services or connections without my approval. Canva, Microsoft 365 and ChatGPT stay manual in v1: I copy from the pack.
-- £0 extra software. Runs inside my existing Claude plan with its built-in web search.
+- Drafts only. The agent never publishes, posts or schedules social content, and never emails anyone but me through the built-in run notification.
+- No connectors (Gmail, Drive, Canva, social) in scheduled runs. Web access is limited to the allowlisted research sites through the read-only reader.
+- No paid service and no credentials stored without my explicit approval.
+- No merge into `main` without my approval.
 - Single agent. No sub-agents.
 
-## Out of scope for v1
-Canva automation, scheduling, auto-publishing, analytics dashboards.
+## Manual fallback
+The v1 commands stay available: `/content-pack ideas`, `research` and `draft`, with approval gates, plus `/content-pack auto` to run the whole automated pipeline on demand (for example, a re-run with a different topic).
 
-## Build plan
-- **Session 1:** skill, `brand.md`, `sources.md`, folder structure, `ideas` and `research`. Run a real week up to an approved brief.
-- **Session 2:** `draft` (including the blog option and review note). Run a full week, time my review, and fix whatever annoyed me.
-- **Monday scheduling:** only once three weeks in a row have run cleanly, and only for `ideas`.
-
-## Success within 30 days
-- Three posts and one carousel I'm happy to publish, every week.
-- Total weekly effort (choosing, approving, reviewing, Canva) under 2 hours, out of my 5-8 business hours.
-- Brand voice consistent enough that I'm making light edits, not rewrites.
-- Tracked in `packs/log.csv`, one line per week: topic, review minutes, edit level (light/heavy), what got published, and any enquiries traced to it.
+## Success measures (first 30 days)
+- A pack arrives every Monday without me doing anything
+- Three posts and one carousel a week that I'm happy to publish
+- My weekly effort (review, Canva, posting) under 2 hours
+- Light edits, not rewrites
+- Tracked in `log.csv`: review minutes, edit level, what was published, enquiries

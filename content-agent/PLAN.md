@@ -1,71 +1,121 @@
-# Implementation plan: AI Content Marketing Agent v1
+# Implementation plan v2: automated weekly run
 
-Status: awaiting approval. Nothing below has been built yet.
+Status: **proposed, awaiting approval.** Nothing in this plan has been built yet. The v1 manual workflow (three commands with gates) is built, tested on 2026-W47, and stays as the fallback.
 
-## What gets built (7 files, no code to maintain)
+---
+
+## 1. Scheduling options investigated
+
+| Option | Runs with computer off | UK time incl. BST | Needs API key / paid service | Cost | Notes |
+|---|---|---|---|---|---|
+| **A. Claude Code scheduled task (cloud)**, recommended | Yes | Yes, schedule set as `CRON_TZ=Europe/London 0 8 * * 1` | No. Uses the existing Claude subscription | **£0 extra.** Uses plan usage allowance | Reuses everything already built: research environment, page reader, charlotte-style, repo. Built-in email notification. Fresh session each Monday. Can be created with **no connectors**. |
+| B. GitHub Actions + Claude API | Yes | Not natively. Actions schedules run in UTC, so it needs two schedules (07:00 and 08:00 UTC) plus a "is it 08:00 in London?" check | **Yes:** Anthropic API key (pay as you go) stored as a GitHub secret. Email needs Gmail app-password secrets, or a GitHub issue that triggers GitHub's own email | About **£1–2 per run on Sonnet 5.5, £2.50–4 on Opus 5.5** (£5–17 a month). Actions minutes probably free for a private repo (to confirm) | charlotte-style isn't available outside Claude, so it would need copying into the repo. GitHub may delay scheduled runs under load. |
+| C. Claude Managed Agents scheduled deployment | Yes | Cron schedules (time-zone support to confirm) | **Yes:** API account, billed per token plus session runtime | Similar to B, plus runtime | Anthropic hosts the agent. More set-up than A for the same result. |
+| D. Power Automate cloud flow | Yes | Yes | Can't run Claude without the API | £0 for a reminder only | Could send a reminder, not do the work. |
+| E. Local cron / Task Scheduler | **No**, the computer must be on | Yes | Depends | £0 | Fails the "computer off" requirement. |
+
+**Decision proposed:** Option A. It's the only option that meets every requirement with no paid service and no stored credentials. B is the fallback if A proves unreliable, and it would need your approval because it costs money and stores an API key.
+
+**Option A's limits:**
+- **Plan usage:** a full run uses a meaningful share of your Claude plan's usage allowance. I can't see your plan or remaining allowance, and a run that hits a limit can stop partway. The watchdog catches this.
+- **Timing:** start times can drift by a few minutes when servers are busy.
+- **Email content:** the notification email carries the run summary, not the whole pack. The pack itself lives in the repo, which you can read in GitHub or the Claude app.
+
+---
+
+## 2. How the automatic workflow operates
 
 ```
-.claude/skills/content-pack/
-  SKILL.md                    # the agent: commands, gates, rules for each stage
-  templates/ideas.md          # layout for 01-ideas.md
-  templates/research-brief.md # layout for 02-research-brief.md
-  templates/content-pack.md   # layout for 03-content-pack.md
-  templates/blog.md           # layout for 04-blog.md (optional)
-content-agent/
-  brand.md                    # audience, tone, CTAs, words to avoid (yours to edit)
-  sources.md                  # trusted and avoided sources (yours to edit)
-  README.md                   # the weekly routine in ten lines
-  packs/log.csv               # weekly tracking, header row only
+MONDAY 08:00 UK  ─ scheduled task "Weekly content pack" fires (CRON_TZ=Europe/London)
+│                  fresh cloud session · environment "chatbot (content research)" · no connectors
+│
+├─ 1. SET UP       check out content-packs branch (create from agent branch if new)
+│                  work out week (date +%G-W%V), create packs/<week>/, start 00-run-log.md
+│                  read JOB.md, brand.md, sources.md, last 4 rows of log.csv
+│
+├─ 2. IDEAS        several web searches over the past 14 days, prefer priority sources
+│                  shortlist 5 candidates → 01-ideas.md
+│
+├─ 3. SELECT       score each 1–5 on: UK relevance · practical value · verifiability
+│                  (≥2 primary sources opened) · freshness · consultancy fit · not repeated
+│                  pick highest; record scores and 2 runners-up
+│
+├─ 4. RESEARCH     open every source with fetch.sh (read-only) → 02-research-brief.md
+│   └─ GATE        ≥5 verified primary facts? UK availability confirmed for each
+│                  recommended feature/audience? → pass: continue
+│                  fail: log reason, next-best topic (max 2 switches) → back to 4
+│                  all fail: write NO PACK report → step 8
+│
+├─ 5. DRAFT        load charlotte-style + brand.md; recheck time-sensitive sources
+│                  LinkedIn · Facebook · Instagram · 8-slide carousel · image briefs ·
+│                  blog → 03-content-pack.md, 04-blog.md (with fact IDs)
+│
+├─ 6. CHECK        checks.py: fact IDs valid · British spelling · no em dashes/semicolons/
+│   └─ GATE        ellipses · avoid list · word counts · 8 slides · approved CTAs ·
+│                  hedged availability · no invented experience · copy matches records
+│                  fail: fix and re-run (max 3 rounds), then mark READY WITH NOTES
+│
+├─ 7. PACKAGE      publication_copy.py → 05-publication-copy.md (IDs removed)
+│                  06-canva-instructions.md · status: READY / READY WITH NOTES
+│
+├─ 8. SAVE         commit to content-packs, push · append runs.csv and log.csv
+│
+└─ 9. NOTIFY       run ends with a summary: status, topic, what to check, file path
+                   → built-in email notification to Charlotte's account email
+
+MONDAY 10:00 UK  ─ watchdog task: is packs/<week>/00-run-log.md on content-packs
+                   with a final status? no → summary "Monday pack missing" → email
 ```
 
-It's all plain Markdown. The skill is instructions to Claude, not a program, so there are no dependencies, no API keys and nothing to update.
+**What never happens in a scheduled run:**
+- No posting, scheduling or publishing.
+- No connectors (Gmail, Drive, Canva).
+- No merge into `main`.
+- No sites outside the allowlist.
+- No raw `curl`.
 
-## How each command works
+---
 
-**`/content-pack ideas`**
-1. Works out the week folder (for example `packs/2026-W48/`) and creates it.
-2. Reads `brand.md` and `sources.md`, and checks the last four weeks' topics in `log.csv` to avoid repeats.
-3. Searches for developments from the past 14 days, preferring trusted sources.
-4. Writes five ideas using the template, then stops and tells you how to approve.
+## 3. What gets built
 
-**`/content-pack research`**
-1. Gate: checks `01-ideas.md` for `APPROVED: <n>` and any platform override (`INSTAGRAM: 4`). If it's missing, it stops and says what to add.
-2. Reads each source page directly and records the facts with IDs, links, publisher, publication date and date accessed.
-3. Sorts everything into verified, assumptions, and do-not-use, and flags anything about AI products older than 12 months.
-4. Stops for your fact check.
+| File | Purpose |
+|---|---|
+| `.claude/skills/content-pack/SKILL.md` | Adds the `auto` command (the full pipeline above), topic scoring rules and the gate rules. Keeps `ideas`, `research` and `draft` unchanged as the fallback. |
+| `.claude/skills/content-pack/checks.py` | The consistency checks from 2026-W47, generalised so they work for any week. They exit with a failure code if any check fails. |
+| `.claude/skills/content-pack/publication_copy.py` | Already built. |
+| `.claude/skills/content-pack/watchdog.md` | Instructions for the 10:00 check. |
+| `.claude/settings.json` | Adds narrow allow rules for unattended runs: the two check scripts, git commit and push to `content-packs`, and the page reader (already there). |
+| `content-agent/packs/runs.csv` | One line per run: date, week, status, topic, minutes, topic switches, check failures. |
+| `content-agent/brand.md` | Adds your two closing lines as approved CTAs. |
+| Scheduled task: "Weekly content pack" | `CRON_TZ=Europe/London 0 8 * * 1`, a fresh session per run, email notifications on, no connectors |
+| Scheduled task: "Content pack watchdog" | `CRON_TZ=Europe/London 0 10 * * 1`, email notifications on, no connectors |
 
-**`/content-pack draft` (or `draft blog`)**
-1. Gate: checks `02-research-brief.md` for `APPROVED`.
-2. Loads `charlotte-style`, then drafts the three posts, the carousel, image concepts and CTAs (only where they fit). It writes the blog too if you asked for it.
-3. Review pass: checks that every claim has a fact ID, the spelling is British, the content suits the UK, nothing is time-sensitive, and the CTA use makes sense. Writes the review note at the bottom of the pack.
-4. Adds a line to `log.csv`, leaving your review minutes and outcomes blank for you to fill in.
+---
 
-A note on the gates: they're enforced by the skill checking the file before it does anything. That's reliable in practice but it isn't a hard lock, so if you ever see a stage run without approval, treat it as a bug and tell me.
+## 4. Testing before the first real Monday
 
-## Your weekly routine (about 2 hours)
-1. Run `ideas` and pick a topic (10 minutes).
-2. Run `research` and check the facts (30 minutes).
-3. Run `draft` and edit (45 minutes).
-4. Build in Canva and post manually (30 minutes). Fill in your line in `log.csv`.
+1. **Full test run.** Fire the weekly task manually, producing `packs/2026-W48-test/`. Check the pack quality, the run log, the email, the time taken, and that it ran without permission prompts.
+2. **Unattended-run checks.** Confirm the fired session:
+   - checks out the right branch
+   - loads charlotte-style (if it can't, it uses `brand.md` alone and says so in the pack)
+   - can use `fetch.sh`
+   - can push
+3. **Failure tests**, fired with a test instruction:
+   - **Unverifiable topic:** the agent must switch topic and log why.
+   - **All sources unreachable:** the agent must produce a "No pack" report and email.
+   - **Watchdog:** run it for a week with no pack, and it must email an alert.
+4. **Report back** to you with the results, the test pack, and any changes needed.
+5. **Turn on the Monday schedule** once you approve the test results. The first real pack gets your full review, and I tune the topic scoring from your feedback.
 
-You run it from Claude Code (the web app or the desktop app) on this repo. Packs are saved to the branch, and you copy them to OneDrive yourself if you want them there.
+---
 
-## Build sessions
-**Session 1 (about 2 hours of my work, about 30 minutes of yours)**
-- Write `SKILL.md`, the templates, `brand.md`, `sources.md`, the README and the log.
-- Run `ideas` for real on this week. You approve a topic, then I run `research` for real and you check the brief.
-- Done when: you'd be happy to approve that brief.
+## 5. Decisions on record
 
-**Session 2**
-- Run `draft` on the approved brief, plus the blog once to test it.
-- You time your review. I fix whatever slowed you down (usually tone, length or the carousel structure).
-- Done when: the pack needs light edits only.
+- **Option A,** £0 extra, no API key.
+- **Start time:** exactly 08:00 UK, as requested. Allow up to about 40 minutes for the pack to arrive.
+- **Where packs are saved:** a `content-packs` branch. `main` stays untouched until you approve a merge.
+- **Watchdog:** on, at 10:00.
+- **No paid services or stored credentials** without your approval.
 
-## Decisions I've made (shout if you disagree)
-- **Skill location:** the skill lives in the repo, so it only loads in sessions on this branch. Once it works, it's worth merging into `main` so every new session picks it up. I won't do that without asking.
-- **Ideas look back 14 days.** That gives a better choice than 7 days while staying current.
-- **The blog is 600-800 words.** That's long enough to show expertise and short enough to review in 15 minutes.
-- **The CTA rule:** at most one per post, and the review note says why each was used or left out. Expect roughly two of the three posts to carry one.
-
-## Not doing in v1
-No Canva, OneDrive, Google Drive or social connections. No scheduling, no sub-agents, no paid tools.
+## 6. Not in this version
+Auto-publishing, Canva automation, Google Drive or OneDrive copies, analytics. Each would need your approval, and most need connectors or credentials.
