@@ -51,7 +51,8 @@ body = pub.split("Status: not yet published")[-1]
 check("No em dashes, semicolons or ellipses", not re.search(r"—|;|…|\.\.\.", body))
 unquoted = re.sub(r"\"[^\"]*\"|“[^”]*”", "", body)
 us = sorted({w for w in re.findall(r"\b\w*(?:iz(?:e|es|ed|ing|ation)|yz(?:e|ed)|color|center|favorite|behavior|program(?:me)?s?)\b", unquoted, re.I)
-             if w.lower() not in ("formalize", "programme", "programmes", "program", "programs")})
+             if w.lower() not in ("formalize", "programme", "programmes", "program", "programs",
+                                "size", "sized", "sizes", "seize", "seized", "prize", "prized", "capsize", "downsized", "oversized")})
 check("British spelling outside quoted interface labels", not us, ", ".join(us))
 avoid = ["game-changer", "game changer", "revolutionise", "unlock", "supercharge", "fast-paced", "dive in",
          "harness the power", "the future is here", "10x"]
