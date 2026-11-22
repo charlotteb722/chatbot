@@ -57,6 +57,28 @@ Discover how I can help your business at https://charlottebjuren.com/
 
 ---
 
+## Instagram caption
+
+**Topic:** Try the AI you already have
+
+Already paying for Microsoft 365? You might have an AI assistant you've never opened.
+
+Microsoft says Copilot Chat is included at no additional cost with eligible Microsoft 365 plans [F1]. Sign in with your work account to try it [F2]. It works mainly from the web, and only uses your own files when you add them [F5, F8].
+
+Three easy first tasks: summarise a web page in Edge, get the key points from a long document, or draft a reply to an email open in Outlook [F7, F8].
+
+Copilot inside Word and Excel is a paid extra, so start with what's included [F3, F9].
+
+Swipe through for the steps.
+
+#SmallBusinessUK #SoleTrader #UKSmallBusiness #Microsoft365 #AITools #ProductivityTips #AIForBusiness
+
+**CTA used:** none. The caption points to the carousel, and slide 8 carries the website link.
+
+**Image concept:** Use carousel slide 1 as the cover, so the caption and carousel post together.
+
+---
+
 ## X post
 
 **Topic:** Short version
