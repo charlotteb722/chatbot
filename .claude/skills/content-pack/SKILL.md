@@ -1,7 +1,7 @@
 ---
 name: content-pack
-description: Charlotte's weekly AI content pack for UK small businesses. Three gated commands - "ideas" (five topic options), "research" (fact-checked brief, needs topic approval) and "draft" (three posts, carousel, image concepts, review note, optional blog; needs brief approval). Use when Charlotte runs /content-pack or asks for her weekly content ideas, research brief or drafts.
-argument-hint: ideas | research | draft [blog] [week=YYYY-Www]
+description: Charlotte's weekly AI content pack for UK small businesses. "auto" runs the whole pipeline unattended (used by the Monday scheduled task). Fallback gated commands - "ideas", "research" (needs topic approval) and "draft" (needs brief approval). Use when Charlotte runs /content-pack, asks for her weekly content pack, or a scheduled task asks for an automatic run.
+argument-hint: auto [week=YYYY-Www] [test=...] | ideas | research | draft [blog] [week=YYYY-Www]
 ---
 
 # Content pack agent
@@ -15,8 +15,9 @@ Arguments: `$ARGUMENTS`
 - **Drafts only.** Never publish, post, email, schedule or share anything. Never connect, authorise or call an external service (Canva, Microsoft 365, Google Drive, social platforms, Gmail and so on) even if a connector is available. Public web search and reading public web pages are the only outside access.
 - **Private business only.** Never use, look for or mention employer systems, data, colleagues or accounts (including SSEN).
 - **British English** in every file you write (organise, colour, programme, licence as a noun, £, dates as 21 November 2026).
-- **Stay on the branch.** Commit pack files to the current git branch with a short message. Do not merge, open pull requests or push to `main`.
-- **Stop at each gate.** Each command does its stage and stops. Never chain into the next stage in the same run, even if asked to "keep going", unless the approval line is already in the file.
+- **Stay on the branch.** `auto` runs commit and push to `content-packs` only. Manual commands commit to the current branch. Never merge, open pull requests or push to `main`.
+- **No connectors, ever.** Gmail, Drive, Calendar, Canva, Docs and similar tools are blocked in `.claude/settings.json`. Never try to use or work around them.
+- **Manual commands stop at each gate.** `ideas`, `research` and `draft` each do one stage and stop, and never chain into the next stage unless the approval line is already in the file. Only `auto` runs all stages, using the automatic gates below instead of Charlotte's approvals.
 
 ## Reading source pages
 
@@ -30,7 +31,7 @@ It only reads allowlisted hosts over HTTPS and prints the page text. Do not use 
 
 1. Work out the week: use `week=YYYY-Www` if given, otherwise run `date +%G-W%V`. The folder is `content-agent/packs/<week>/`.
 2. Read `content-agent/brand.md` and `content-agent/sources.md`. These are Charlotte's settings and override the defaults below.
-3. Parse the first word of the arguments: `ideas`, `research` or `draft`. Anything else (or nothing): explain the three commands in four lines and stop.
+3. Parse the first word of the arguments: `auto`, `ideas`, `research` or `draft`. Anything else (or nothing): explain the commands in five lines and stop.
 
 ## Gate check (research and draft)
 
@@ -40,6 +41,81 @@ Run the check with a shell command, not by eye, and report the result in one lin
 - draft: `grep -Eim1 '^APPROVED[[:space:]]*$' content-agent/packs/<week>/02-research-brief.md`
 
 If the file is missing or the grep finds nothing, stop. Say exactly which line to add to which file, then end. Do not do any research or drafting. Placeholder lines in templates begin with `<!--` or `>` so they never match.
+
+## `auto` (scheduled run: no human approvals)
+
+Runs every stage in one go. Charlotte reviews only the finished pack. Work unattended: never ask questions or wait for replies. If something blocks you, record it and follow the failure rules.
+
+**Arguments:** `week=...` sets the folder (default `date +%G-W%V`). `test=...` names a test scenario (see Testing below). Tests always use a week name ending in `-test`.
+
+### A0. Set up
+1. If the repo isn't present, clone `https://github.com/charlotteb722/chatbot.git`. Run `git fetch origin content-packs` and `git checkout content-packs` (track it if new). Work from the repo root.
+2. Create `content-agent/packs/<week>/` and start `00-run-log.md` from `templates/run-log.md`. Append to the log as you go: time (`TZ=Europe/London date +%H:%M`), stage, what happened.
+3. If `content-agent/packs/<week>/05-publication-copy.md` already exists and this is not a test, stop: log "pack already exists" and finish with status SKIPPED.
+4. Read `content-agent/JOB.md`, `brand.md`, `sources.md`, and the last 4 rows of `content-agent/packs/log.csv` (topics to avoid).
+
+### A1. Ideas
+Follow the `ideas` steps 3-5 below, but shortlist 5 candidates without stopping. Write `01-ideas.md` from the template, without the "How to approve" section.
+
+### A2. Select (automatic, replaces Charlotte's topic approval)
+Score each candidate 1-5 on each criterion and record the table in `01-ideas.md` under "## Automatic selection":
+- **UK relevance:** matters to UK sole traders and small businesses, and is available or applicable in the UK
+- **Practical value:** the reader can do something useful with it within a week
+- **Verifiability:** at least 2 primary sources from `sources.md` are likely to confirm it
+- **Freshness:** past 14 days, or an evergreen topic with a recent hook
+- **Consultancy fit:** shows the kind of help Charlotte offers
+- **Not repeated:** score 0 and exclude if it overlaps a topic in the last 4 weeks of `log.csv`
+
+Pick the highest total. Ties go to higher verifiability, then practical value. Record the choice and two runners-up. Add `SELECTED: <n> (automatic)` on its own line.
+
+### A3. Research and verification gate (replaces Charlotte's brief approval)
+Follow the `research` steps 3-8 below for the selected topic. Then apply the gate, recording each result in the run log:
+- at least **5 verified facts**, each from a page you opened with WebFetch or `fetch.sh`, and at least 3 of them from primary sources
+- every feature or offer you plan to recommend has its **UK availability confirmed for the audience** you'll recommend it to (for example, free Gmail versus Workspace). If you can't confirm it, drop that feature from the content.
+- nothing in the brief relies on a search snippet
+
+If the gate fails: log why, move to the next-best candidate, and repeat A3. Allow at most **2 switches**. If all three fail, go to **A7 with status NO PACK**.
+
+When the gate passes, add a line `APPROVED (automatic verification gate, <date>)` to the brief, so the record shows how it was approved.
+
+### A4. Draft
+Follow the `draft` steps 2-6 below (load `charlotte-style`, recheck time-sensitive sources, draft everything, review pass). Always produce the three posts, the 8-slide carousel and image concepts. Write the blog (`04-blog.md`) if the brief has at least 8 verified facts and a how-to angle. Otherwise record "blog skipped" and why. Use CTAs only from `brand.md`, at most one per post. Never invent experiences, clients or results, and label any illustration as made up.
+
+If `charlotte-style` can't be loaded, continue with `brand.md` alone and record that in the run log and the pack.
+
+### A5. Package
+1. `python3 -I .claude/skills/content-pack/publication_copy.py content-agent/packs/<week>` builds `05-publication-copy.md`.
+2. Write `06-canva-instructions.md` from `templates/canva-instructions.md`. List any checks only Charlotte can do (for example, checking a feature in her own account) in its section 1.
+
+### A6. Quality gate
+Run `python3 -I .claude/skills/content-pack/checks.py content-agent/packs/<week>`. If anything fails, fix the drafts in `03`/`04`, rebuild `05`, and run the checks again. Allow at most 3 rounds. Status:
+- **READY:** all checks pass, and nothing needs Charlotte to check before posting
+- **READY WITH NOTES:** all checks pass, but there are live-account checks or other notes for her. Or some checks still fail after 3 rounds (list them).
+
+### A7. Save and finish
+1. Finish `00-run-log.md` with the status, topic, timings, sources opened, topic switches, check results and anything for Charlotte.
+2. Append a row to `content-agent/packs/runs.csv`: `date,week,status,topic,minutes,topic_switches,checks_passed,checks_total,notes`. For READY or READY WITH NOTES, also append the usual row to `log.csv`.
+3. `git add content-agent/packs`, commit ("Content pack <week>: <status>"), and `git push origin content-packs`. If the push fails, retry up to 3 times, then record it in your final message.
+4. Your **final message is emailed to Charlotte**. Keep it short and plain:
+
+```
+Monday content pack <week>: <STATUS>
+Topic: <title>  (or: No pack this week, with the reason)
+Before posting: <the 1-3 things she needs to check, or "nothing">
+Pack: content-agent/packs/<week>/05-publication-copy.md on the content-packs branch
+Run: <minutes> minutes · <n> sources verified · checks <x>/<y> · topic switches <n>
+Nothing has been published.
+```
+
+### Testing (`test=...`)
+Only for runs Charlotte or Claude trigger by hand. Tests behave exactly like a real run except for the named scenario:
+- `test=switch`: treat the top-scoring topic as failing the verification gate, so the agent must switch topic and log why
+- `test=no-sources`: treat every page read as failed, so the run must end as NO PACK with a clear reason
+Record the scenario at the top of the run log.
+
+### Failure rules
+- Never stop silently. Any unrecoverable error: log it, save whatever exists, push, and finish with status **FAILED** and the reason in the email summary.
+- Never weaken verification to get a pack out. NO PACK is an acceptable result.
 
 ---
 

@@ -29,6 +29,8 @@ Use word for word. At most one per post, and only where it fits naturally.
 1. Would you like help using AI in your business? Send me a message.
 2. Discover how I can help your business at https://charlottebjuren.com/
 3. Want to save time with AI and automation? Get in touch for a chat.
+4. If you'd like help identifying where AI could save time in your business, get in touch for a chat.
+5. If you'd like help identifying which everyday tasks AI could make easier in your business, send me a message. We can explore where it makes sense to start.
 
 ## Platform guidance
 
