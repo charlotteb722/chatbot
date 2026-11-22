@@ -90,3 +90,12 @@ Check everything before using it. Then list the Word, Excel and Teams tasks you'
 1. **Prices:** should the posts stay price-free, as in W47? My suggestion is yes, with "Try what you already have first" carrying the message.
 2. **Your own account:** if you have a Microsoft 365 business account, signing in to Copilot Chat and trying the three tasks would let you add one genuine line of your own experience. That would make the content noticeably stronger.
 3. **The partner trial (F14):** it's partner-facing, so I'd mention it only lightly ("you may be offered a trial"), or not at all.
+
+## Charlotte's decisions (22 November 2026)
+
+- **Prices:** leave specific prices out of the blog, posts and carousel. Focus on what Copilot Chat can do and on the difference between included and paid features.
+- **Personal experience:** don't invent any. Leave a clearly marked placeholder where Charlotte can add a genuine example.
+- **Trials:** leave trial promotions (F13, F14, B2) out of the main content, so it stays useful beyond December 2026.
+- **Formats:** blog (Blogger, SEO-friendly, with source links), LinkedIn, Facebook, a short X post, an 8-slide carousel with an image suggestion per slide, and a featured image concept.
+
+APPROVED
