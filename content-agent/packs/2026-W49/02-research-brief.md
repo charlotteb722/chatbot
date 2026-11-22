@@ -69,3 +69,21 @@ Create one folder in OneDrive called "Invoices inbox". In Power Automate, build 
 2. **Your own experience:** you work with Power Automate. A placeholder will be left for a genuine example of your own (no invented results).
 3. **Tax wording:** the HMRC facts are for self-employed people. Should the content mention limited companies at all? My suggestion is a single line: "if you run a limited company, check the rules that apply to you".
 4. **The template guide (F7)** dates from 2023. It's only used for the general "start from Templates" point, which Power Automate still offers. Before posting, check that the menu label is still "Templates" in your own account.
+
+## Facts added at Stage 3 (Charlotte's decisions, 22 November 2026)
+
+Opened and read on 22 November 2026. Primary sources.
+
+| ID | Fact | Source | Published / updated | Accessed | Type |
+|---|---|---|---|---|---|
+| F10 | Limited companies: "You must keep records for 6 years from the end of the last company financial year they relate to, or longer if" certain conditions apply. "You can be fined £3,000 by HMRC or disqualified as a company director if you do not keep accounting records." | [GOV.UK: Running a limited company: company and accounting records](https://www.gov.uk/running-a-limited-company/company-and-accounting-records) | not shown | 22 Nov 2026 | primary |
+| F11 | Building a flow from scratch: "Sign in to Power Automate. From the navigation bar on the left, select My flows... Select Create from blank... A single node, Add a trigger, appears." Select Add a trigger, search, choose the trigger, then "select Sign in. The connection is created". To add an action, "Select the plus sign (+)" after the trigger and search for the action. Dynamic content is added with "the lightning bolt". A flow can also be created from a natural-language description with Copilot, if you have access. | [Microsoft Learn: Create a cloud flow in Power Automate](https://learn.microsoft.com/en-us/power-automate/get-started-logic-flow) | updated 25 Sep 2026 | 22 Nov 2026 | primary |
+| F12 | The run history shows the "Start, Duration, and Status" of each flow run. "Repair tips are sent to flow owners via email whenever a cloud flow fails", with a description of what happened and a link to retry. | [Microsoft Learn: Troubleshoot a cloud flow](https://learn.microsoft.com/en-us/power-automate/fix-flow-failures) | not shown | 22 Nov 2026 | primary |
+
+**Decisions recorded:**
+- **Blog:** a full beginner walkthrough, built from scratch (F11), not from Templates.
+- **Posts:** short and focused on the benefits.
+- **Experience:** general experience only, with a placeholder for a genuine example.
+- **Limited companies:** a short note with a GOV.UK link (F10).
+
+APPROVED
