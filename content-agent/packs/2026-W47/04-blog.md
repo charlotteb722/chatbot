@@ -59,16 +59,14 @@ At the time of writing, Google's help documentation says Help me write isn't ava
 
 Google is clear that Gemini "may suggest inaccurate or inappropriate information" and shouldn't be relied on for legal, financial or other professional advice [F9]. Read every summary and draft. Check names, dates, prices and anything you're promising a customer. The AI does the first draft. You make the decisions.
 
-If you'd rather it didn't run at all, you can switch these features off yourself, and Workspace admins can disable them for the whole business [F3].
+If you'd rather not use these AI features, you can switch these features off yourself, and Workspace admins can disable them for the whole business [F3].
 
 ## Your next step
 
 Pick one long email thread this week and try "Summarize this email" on it. If you use Google Workspace, take your most common customer question and draft one reply with Help me write. Keep the version you're happy with.
 
-Email is a good first test because it's frequent, you know what a good result looks like, and you can check everything before it's sent. If you'd like help working out which tasks to start with:
-
-Would you like help using AI in your business? Send me a message.
+Email is a good first test because it's frequent, you know what a good result looks like, and you can check everything before it's sent. If you'd like help identifying which everyday tasks AI could make easier in your business, send me a message. We can explore where it makes sense to start.
 
 ---
 
-**Blog review:** fact IDs checked against the approved brief (F1, F2, F3, F5, F6, F7, F9, F10, F13, F14). The worked example is labelled as an illustration. No prices, no paid Google AI plans. British English apart from Google's button labels. CTA 1 used once at the end. Title shortened as requested. Availability now attributed to Google's help pages with its conditions (language, smart features, Workspace admin), and reminders described as something you may see, not a guaranteed feature. Steps say "on a computer" to match Google's pages. Open issues: complete the account test in `03-content-pack.md` (especially the "Summarize" or "Summarise" button spelling in the UK interface) before publishing. A real example from your own work would be stronger than the illustration.
+**Blog review:** fact IDs checked against the approved brief (F1, F2, F3, F5, F6, F7, F9, F10, F13, F14). The worked example is labelled as an illustration. No prices, no paid Google AI plans. British English apart from Google's button labels. Closing CTA is Charlotte's own wording (22 Nov), replacing CTA 1. Title shortened as requested. Availability now attributed to Google's help pages with its conditions (language, smart features, Workspace admin), and reminders described as something you may see, not a guaranteed feature. Steps say "on a computer" to match Google's pages. Open issues: complete the account test in `03-content-pack.md` (especially the "Summarize" or "Summarise" button spelling in the UK interface) before publishing. A real example from your own work would be stronger than the illustration.

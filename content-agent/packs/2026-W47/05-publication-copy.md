@@ -143,12 +143,10 @@ At the time of writing, Google's help documentation says Help me write isn't ava
 
 Google is clear that Gemini "may suggest inaccurate or inappropriate information" and shouldn't be relied on for legal, financial or other professional advice. Read every summary and draft. Check names, dates, prices and anything you're promising a customer. The AI does the first draft. You make the decisions.
 
-If you'd rather it didn't run at all, you can switch these features off yourself, and Workspace admins can disable them for the whole business.
+If you'd rather not use these AI features, you can switch these features off yourself, and Workspace admins can disable them for the whole business.
 
 ## Your next step
 
 Pick one long email thread this week and try "Summarize this email" on it. If you use Google Workspace, take your most common customer question and draft one reply with Help me write. Keep the version you're happy with.
 
-Email is a good first test because it's frequent, you know what a good result looks like, and you can check everything before it's sent. If you'd like help working out which tasks to start with:
-
-Would you like help using AI in your business? Send me a message.
+Email is a good first test because it's frequent, you know what a good result looks like, and you can check everything before it's sent. If you'd like help identifying which everyday tasks AI could make easier in your business, send me a message. We can explore where it makes sense to start.
