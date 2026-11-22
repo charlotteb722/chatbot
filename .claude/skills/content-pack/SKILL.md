@@ -88,7 +88,8 @@ If the file is missing or the grep finds nothing, stop. Say exactly which line t
    - word counts per piece
    Fix what you can before writing the note. List what you could not fix.
 8. Append one row to `content-agent/packs/log.csv`: week, main topic, override topics, blog (y/n), and leave Charlotte's columns blank.
-9. Commit, then reply with a short summary, the review note's open issues, and a reminder that nothing has been published. Stop.
+9. When Charlotte approves the drafts for publication, build the clean copy with `python3 -I .claude/skills/content-pack/publication_copy.py content-agent/packs/<week>` (it writes `05-publication-copy.md` with fact IDs removed and leaves the sourced files untouched), then write `06-canva-instructions.md`: the live-account checks, Canva sizes, slide layout, image briefs, alt text and posting checklist. Never post anything.
+10. Commit, then reply with a short summary, the review note's open issues, and a reminder that nothing has been published. Stop.
 
 ---
 

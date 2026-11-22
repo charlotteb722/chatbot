@@ -14,23 +14,21 @@ Nothing here has been published.
 
 If you're wondering where AI could help in your business, your inbox is a good place to start.
 
-Repetitive email makes a sensible first test. It happens every week, you already know what a good reply looks like, and you can check the result before anything is sent. That makes it a low-risk way to try AI on real work and see whether it helps, before committing to anything bigger.
+Repetitive email makes a sensible first test. It happens every week, you already know what a good reply looks like, and you can check the result before anything is sent. That makes it a low-risk way to try AI on real work before committing to anything bigger.
 
 Gemini in Gmail is an easy way in, but what you get depends on your account.
 
-On free Gmail, open a long thread and click "Summarize this email" to see the key points [F13]. If it mentions a deadline, click "Remind me" to add it to Google Tasks and Calendar [F14].
+Google's help pages say email summaries work on free Gmail and Google Workspace, as long as smart features are switched on [F10, F13]. Open a long thread and click "Summarize this email". If it spots a task with a due date, you may see "Remind me", which adds it to Google Tasks and Calendar [F14].
 
 On Google Workspace, Help me write can also draft or tidy up a reply [F5, F6]. Google is rolling it out, with summaries, to all Workspace users aged 18 and over [F1, F2]. At the time of writing, Google's help documentation says Help me write isn't available to free personal Gmail accounts in the UK [F5, F10].
 
 Either way, read it before you rely on it. Google says Gemini can get things wrong [F9].
 
-If you'd like a hand working out which everyday tasks to start with:
-
-Want to save time with AI and automation? Get in touch for a chat.
+If you'd like help identifying where AI could save time in your business, get in touch for a chat.
 
 #SmallBusiness #AI #Gmail
 
-**CTA used:** 3. The lead-in links the post's process point ("which tasks to start with") to what you offer, so the CTA follows naturally instead of being bolted on.
+**CTA used:** Charlotte's own closing line (22 Nov), replacing CTA 3 and its lead-in. It's not one of the three in `brand.md`, so consider adding it there.
 
 **Image concept:** A simple "where to start" graphic. Three stacked cards headed "Happens often", "You know what good looks like" and "Easy to check before sending", with a tick beside each and the caption "A good first task for AI". Brand colours, no logos or Gmail screenshots.
 
@@ -42,13 +40,13 @@ Want to save time with AI and automation? Get in touch for a chat.
 
 Do you ever open an email thread and have no idea what was agreed three replies ago?
 
-In Gmail on your computer, open the thread and click "Summarize this email" at the top. Gemini pulls out the key points [F13]. Spot a deadline? Click "Remind me" and it goes into your Google Tasks and Calendar [F14].
+In Gmail on your computer, open the thread and click "Summarize this email" at the top. Gemini pulls out the key points [F13]. If there's a task with a due date, you may see "Remind me", which adds it to your Google Tasks and Calendar [F14].
 
-This works on free Gmail as well as Google Workspace [F13].
+Google's help pages say summaries work on free Gmail as well as Google Workspace, with smart features switched on [F10, F13].
 
-If your business uses Google Workspace, Help me write can draft the reply too [F5]. Google's current help pages say that one isn't available on free personal Gmail accounts in the UK [F10].
+If you use Google Workspace, Help me write can draft the reply too [F5]. Google's current help pages say that one isn't available on free personal Gmail accounts in the UK [F10].
 
-Just read it through before you rely on it [F9]. Plenty of other everyday jobs can be made quicker too.
+Read it through before relying on it [F9]. Plenty of other everyday jobs can be made quicker too.
 
 Would you like help using AI in your business? Send me a message.
 
@@ -64,9 +62,9 @@ Would you like help using AI in your business? Send me a message.
 
 Email eating into your week? Here's a quicker way through long threads.
 
-In Gmail on your computer, open the thread and click "Summarize this email" at the top. Read the key points before you reply [F13]. Deadline in there? Click "Remind me" [F14].
+In Gmail on your computer, open the thread and click "Summarize this email" at the top. Read the key points before you reply [F13]. Task with a due date? You may see "Remind me" too [F14].
 
-That works on free Gmail and Google Workspace [F13].
+Google's help pages say this works on free Gmail and Google Workspace, with smart features switched on [F10, F13].
 
 Using Google Workspace? Help me write can draft the reply as well [F5, F6]. At the time of writing, Google's help pages say it isn't available on free personal Gmail accounts in the UK [F10].
 
@@ -87,9 +85,9 @@ Always check before you send [F9]. Swipe through for the steps.
 | Slide | Headline | Body text |
 |---|---|---|
 | 1 | Email eating into your week? | Three ways Gemini in Gmail can help, and which work on free Gmail or need Google Workspace. |
-| 2 | Free Gmail or Google Workspace? | Some Gemini features work on any Gmail account. Others need Google Workspace. Check which you use first. [F10] |
-| 3 | Everyone: summarise long threads | On your computer, open the thread. Click "Summarize this email" at the top. Read the key points first. [F13] |
-| 4 | Everyone: turn deadlines into reminders | Task with a due date in the summary? Click "Remind me". It appears in Google Tasks and Calendar. [F14] |
+| 2 | Free Gmail or Google Workspace? | Google's help pages say some Gemini features work on free Gmail. Others need Google Workspace. Check which you use. [F10] |
+| 3 | Both accounts: summarise long threads | On your computer, open the thread and click "Summarize this email" at the top. Smart features need to be on in Gmail settings. [F13] |
+| 4 | Both accounts: deadlines into reminders | Task with a due date in the summary? You may see "Remind me". It adds the task to Google Tasks and Calendar. [F14] |
 | 5 | Google Workspace: draft replies | Click Reply. Type your request in the prompt bar at the bottom (or click Help me write), then Create. [F6] |
 | 6 | Make your request specific | Say who it's for, what they asked, what needs to happen and the tone you want. [F7] |
 | 7 | Worth knowing | At the time of writing, Google's help pages say Help me write isn't available on free personal Gmail accounts in the UK. [F5, F10] |
@@ -97,11 +95,13 @@ Always check before you send [F9]. Swipe through for the steps.
 
 **CTA used:** a short version of CTA 2 on slide 8, to keep the slide under 30 words. If you'd rather use CTA 2 word for word ("Discover how I can help your business at https://charlottebjuren.com/"), add a ninth slide just for it.
 
-**Design note:** One consistent layout throughout: headline at the top, body text below, plenty of white space, one simple icon per slide. Mark "Everyone" slides and "Google Workspace" slides with two accent colours so readers can see what applies to them. Slide 7 should look calm, not like a warning. On LinkedIn, upload as a PDF document post.
+**Design note:** One consistent layout throughout: headline at the top, body text below, plenty of white space, one simple icon per slide. Mark "Both accounts" slides and "Google Workspace" slides with two accent colours so readers can see what applies to them. Slide 7 should look calm, not like a warning. On LinkedIn, upload as a PDF document post.
 
 ---
 
 ## Test in a real UK account before posting
+
+This checklist is repeated, with the posting steps, in `06-canva-instructions.md` section 1.
 
 Google's help pages describe these steps for **Gmail on a computer**. I haven't checked them in a live account, and the mobile apps weren't covered by the pages read. Five to ten minutes in each account type should be enough.
 
@@ -129,6 +129,7 @@ Google's help pages describe these steps for **Gmail on a computer**. I haven't 
 |---|---|
 | Pre-draft recheck | Pass. The four Google pages were reopened on 21 November and the two how-to pages again on 22 November. Everything matches the brief, and no page confirms the rollout is complete, so it stays "rolling out". |
 | Step instructions against Google's current wording | Updated. Help me write steps now follow Google's order: prompt bar first, Help me write button as the fallback, then Create. Steps now say "on your computer", because Google's pages describe desktop steps only. |
+| Availability of summaries and reminders (22 Nov) | Rechecked. Google's help pages document summaries for personal and eligible Workspace accounts, globally, provided the language is supported and smart features are on. Workspace admins can switch them off. Reminders aren't listed as a separate feature, only as something a summary "can" suggest. The copy now attributes availability to Google's help pages, states the smart-features condition, says "you may see" for Remind me, and replaces "Everyone" with "Both accounts" in the carousel. A live UK account test is still outstanding (see `06-canva-instructions.md`). |
 | Every claim has a valid fact ID | Pass, checked by script |
 | Business-process point (LinkedIn) | Framed as advice, not fact (A4, A5, A6). No time-saving figures, no invented experience, no customer stories. |
 | Only confirmed features recommended to each group | Pass |
@@ -136,10 +137,10 @@ Google's help pages describe these steps for **Gmail on a computer**. I haven't 
 | No prices or paid Google AI plans | Pass |
 | British English | Pass. Google's button labels keep Google's spelling, pending your check of the UK interface. |
 | No em dashes, semicolons, ellipses or avoid-list phrases | Pass, checked by script |
-| CTA use | LinkedIn CTA 3 and Facebook CTA 1, each with a one-line lead-in linking to your services. Carousel has a shortened CTA 2. Instagram has none. |
+| CTA use | LinkedIn: Charlotte's own closing line. Facebook: CTA 1 with a one-line lead-in. Carousel: shortened CTA 2 on slide 8 (8 slides kept). Instagram: none. |
 | charlotte-style skill loaded | Yes, with the practical-ai-teaching reference |
 
-**Word counts** (approximate, excluding hashtags, notes and fact IDs): LinkedIn 220 (target 120-220) · Facebook 138 (60-140) · Instagram 96 (60-120) · Carousel 8 slides, each under 30 words · Blog 799 (600-800). All checked by script.
+**Word counts** (approximate, excluding hashtags, notes and fact IDs): LinkedIn 220 (target 120-220) · Facebook 140 (60-140) · Instagram 105 (60-120) · Carousel 8 slides, longest 23 words · Blog 799 (600-800).
 
 **Open issues for Charlotte:**
 1. Complete the account test above before posting, especially the "Summarize" or "Summarise" spelling.
