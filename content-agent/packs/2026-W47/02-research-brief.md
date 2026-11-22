@@ -105,7 +105,7 @@ The draft stage reopens these pages and compares them with this brief before wri
 - [Draft emails with Gemini in Gmail](https://support.google.com/mail/answer/13955415?hl=en-GB): Help me write eligibility (F5)
 - [AI Overview conversation summaries](https://support.google.com/mail/answer/16561387?hl=en-GB): "available to all Gmail users globally" (F13)
 
-**Wording rule for timing:** the rollout window ends around 25 November 2026 (F2). If the posts go out after that, say "now available to Workspace users", not "rolling out now".
+**Wording rule for timing:** don't change the wording based on the date alone. At drafting, check Google's current pages. Use "rolling out" unless a current Google page confirms the rollout is complete, and use "available" only for what a current page confirms.
 
 ## Drafting notes
 
@@ -120,7 +120,10 @@ The draft stage reopens these pages and compares them with this brief before wri
 
 **Google Workspace:** pick the enquiry you answer most often. Reply to a real example, click Help me write, and give it a specific prompt: who it's for, what they asked, your actual answer, and "friendly, British English, under 120 words" (F6, F7). Check every detail before sending (F9).
 
-## Things to check
+## Charlotte's decisions (21 November 2026)
 
-1. **A2:** are you comfortable telling free Gmail users that Help me write isn't available to them in the UK, based on Google's help pages?
-2. **A3:** should the posts mention the paid Google AI plan option at all? My suggestion is no, or only in passing.
+- **A2:** Yes. Explain that Google's current help documentation says Help me write isn't available to free personal Gmail accounts in the UK, and make clear this reflects Google's published information at the time of writing.
+- **A3:** Leave paid personal Google AI plans out of this pack entirely. Research separately later.
+- **Timing:** wording must reflect confirmed availability on Google's current pages, not the date.
+
+APPROVED
