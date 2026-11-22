@@ -64,3 +64,5 @@ Then run `/content-pack research` (or tell Claude). You can edit any idea first.
 - **Verification:** the ICO is the most authoritative source possible.
 
 **If you'd prefer a wider audience,** idea 2 (Copilot Chat) probably has broader appeal, and it suits your own Microsoft 365 experience. But it needs more checking on plans and UK terms, and it must avoid sounding like a Microsoft advert.
+
+APPROVED: 2
