@@ -15,7 +15,7 @@ Arguments: `$ARGUMENTS`
 - **Drafts only.** Never publish, post, email, schedule or share anything. Never connect, authorise or call an external service (Canva, Microsoft 365, Google Drive, social platforms, Gmail and so on) even if a connector is available. Public web search and reading public web pages are the only outside access.
 - **Private business only.** Never use, look for or mention employer systems, data, colleagues or accounts (including SSEN).
 - **British English** in every file you write (organise, colour, programme, licence as a noun, £, dates as 21 November 2026).
-- **Stay on the branch.** `auto` runs commit and push to `content-packs` only. Manual commands commit to the current branch. Never merge, open pull requests or push to `main`.
+- **Stay on the branch.** `auto` runs commit and push to `claude/content-packs` only. Manual commands commit to the current branch. Never merge, open pull requests or push to `main`.
 - **No connectors, ever.** Gmail, Drive, Calendar, Canva, Docs and similar tools are blocked in `.claude/settings.json`. Never try to use or work around them.
 - **Manual commands stop at each gate.** `ideas`, `research` and `draft` each do one stage and stop, and never chain into the next stage unless the approval line is already in the file. Only `auto` runs all stages, using the automatic gates below instead of Charlotte's approvals.
 
@@ -49,7 +49,7 @@ Runs every stage in one go. Charlotte reviews only the finished pack. Work unatt
 **Arguments:** `week=...` sets the folder (default `date +%G-W%V`). `test=...` names a test scenario (see Testing below). Tests always use a week name ending in `-test`.
 
 ### A0. Set up
-1. If the repo isn't present, clone `https://github.com/charlotteb722/chatbot.git`. Run `git fetch origin content-packs` and `git checkout content-packs` (track it if new). Work from the repo root.
+1. Work in the repository the run has attached (charlotteb722/chatbot). Run `git fetch origin`, then check out `claude/content-packs` (if it doesn't exist yet, create it from `origin/content-packs`). Work from the repo root. Scheduled routines may only push to `claude/` branches, so never push anywhere else.
 2. Create `content-agent/packs/<week>/` and start `00-run-log.md` from `templates/run-log.md`. Append to the log as you go: time (`TZ=Europe/London date +%H:%M`), stage, what happened.
 3. If `content-agent/packs/<week>/05-publication-copy.md` already exists and this is not a test, stop: log "pack already exists" and finish with status SKIPPED.
 4. Read `content-agent/JOB.md`, `brand.md`, `sources.md`, and the last 4 rows of `content-agent/packs/log.csv` (topics to avoid).
@@ -95,14 +95,14 @@ Run `python3 -I .claude/skills/content-pack/checks.py content-agent/packs/<week>
 ### A7. Save and finish
 1. Finish `00-run-log.md` with the status, topic, timings, sources opened, topic switches, check results and anything for Charlotte.
 2. Append a row to `content-agent/packs/runs.csv`: `date,week,status,topic,minutes,topic_switches,checks_passed,checks_total,notes`. For READY or READY WITH NOTES, also append the usual row to `log.csv`.
-3. `git add content-agent/packs`, commit ("Content pack <week>: <status>"), and `git push origin content-packs`. If the push fails, retry up to 3 times, then record it in your final message.
+3. `git add content-agent/packs`, commit ("Content pack <week>: <status>"), and `git push origin claude/content-packs`. If the push fails, retry up to 3 times, then record it in your final message.
 4. Your **final message is emailed to Charlotte**. Keep it short and plain:
 
 ```
 Monday content pack <week>: <STATUS>
 Topic: <title>  (or: No pack this week, with the reason)
 Before posting: <the 1-3 things she needs to check, or "nothing">
-Pack: content-agent/packs/<week>/05-publication-copy.md on the content-packs branch
+Pack: content-agent/packs/<week>/05-publication-copy.md on the claude/content-packs branch
 Run: <minutes> minutes · <n> sources verified · checks <x>/<y> · topic switches <n>
 Nothing has been published.
 ```

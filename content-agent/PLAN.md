@@ -29,7 +29,7 @@ Status: **proposed, awaiting approval.** Nothing in this plan has been built yet
 MONDAY 08:00 UK  ─ scheduled task "Weekly content pack" fires (CRON_TZ=Europe/London)
 │                  fresh cloud session · environment "chatbot (content research)" · no connectors
 │
-├─ 1. SET UP       check out content-packs branch (create from agent branch if new)
+├─ 1. SET UP       check out claude/content-packs branch (create from agent branch if new)
 │                  work out week (date +%G-W%V), create packs/<week>/, start 00-run-log.md
 │                  read JOB.md, brand.md, sources.md, last 4 rows of log.csv
 │
@@ -58,12 +58,12 @@ MONDAY 08:00 UK  ─ scheduled task "Weekly content pack" fires (CRON_TZ=Europe/
 ├─ 7. PACKAGE      publication_copy.py → 05-publication-copy.md (IDs removed)
 │                  06-canva-instructions.md · status: READY / READY WITH NOTES
 │
-├─ 8. SAVE         commit to content-packs, push · append runs.csv and log.csv
+├─ 8. SAVE         commit to claude/content-packs, push · append runs.csv and log.csv
 │
 └─ 9. NOTIFY       run ends with a summary: status, topic, what to check, file path
                    → built-in email notification to Charlotte's account email
 
-MONDAY 10:00 UK  ─ watchdog task: is packs/<week>/00-run-log.md on content-packs
+MONDAY 10:00 UK  ─ watchdog task: is packs/<week>/00-run-log.md on claude/content-packs
                    with a final status? no → summary "Monday pack missing" → email
 ```
 
@@ -84,7 +84,7 @@ MONDAY 10:00 UK  ─ watchdog task: is packs/<week>/00-run-log.md on content-pac
 | `.claude/skills/content-pack/checks.py` | The consistency checks from 2026-W47, generalised so they work for any week. They exit with a failure code if any check fails. |
 | `.claude/skills/content-pack/publication_copy.py` | Already built. |
 | `.claude/skills/content-pack/watchdog.md` | Instructions for the 10:00 check. |
-| `.claude/settings.json` | Adds narrow allow rules for unattended runs: the two check scripts, git commit and push to `content-packs`, and the page reader (already there). |
+| `.claude/settings.json` | Adds narrow allow rules for unattended runs: the two check scripts, git commit and push to `claude/content-packs`, and the page reader (already there). |
 | `content-agent/packs/runs.csv` | One line per run: date, week, status, topic, minutes, topic switches, check failures. |
 | `content-agent/brand.md` | Adds your two closing lines as approved CTAs. |
 | Scheduled task: "Weekly content pack" | `CRON_TZ=Europe/London 0 8 * * 1`, a fresh session per run, email notifications on, no connectors |
@@ -113,7 +113,7 @@ MONDAY 10:00 UK  ─ watchdog task: is packs/<week>/00-run-log.md on content-pac
 
 - **Option A,** £0 extra, no API key.
 - **Start time:** exactly 08:00 UK, as requested. Allow up to about 40 minutes for the pack to arrive.
-- **Where packs are saved:** a `content-packs` branch. `main` stays untouched until you approve a merge.
+- **Where packs are saved:** a `claude/content-packs` branch. `main` stays untouched until you approve a merge.
 - **Watchdog:** on, at 10:00.
 - **No paid services or stored credentials** without your approval.
 

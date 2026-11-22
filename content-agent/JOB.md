@@ -33,7 +33,7 @@ Personal business project only. Completely separate from my employment. No emplo
 - **Status on every pack:** Ready, Ready with notes (for example, live-account checks I need to do), or No pack.
 
 ## Weekly package
-Saved to `content-agent/packs/YYYY-Www/` on the `content-packs` branch:
+Saved to `content-agent/packs/YYYY-Www/` on the `claude/content-packs` branch:
 - `00-run-log.md`: what happened, sources opened, topic scores, check results, status
 - `01-ideas.md`: candidate topics and scores
 - `02-research-brief.md`: verified facts, assumptions, exclusions
