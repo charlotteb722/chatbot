@@ -107,7 +107,7 @@ Google lists Gemini features differently for each, so check which you use first.
 
 ## What free Gmail and Workspace users can both use: summaries
 
-Google's help pages say AI summaries of email threads are available on both personal and work accounts, including free Gmail in the UK. There are two conditions: you need a supported language such as English, and smart features need to be switched on. On Workspace, your admin can also switch Gemini features off. Open a long thread and you get the key points and replies at the top.
+Google's help pages say AI summaries of email threads are available on both personal and work accounts, including free Gmail in the UK. There are two conditions: you need a supported language such as English, and smart features need to be switched on. On Workspace, your admin can also switch Gemini features off. It then shows the key points and replies at the top of a long thread.
 
 To use it on a computer:
 
@@ -149,6 +149,6 @@ If you'd rather it didn't run at all, you can switch these features off yourself
 
 Pick one long email thread this week and try "Summarize this email" on it. If you use Google Workspace, take your most common customer question and draft one reply with Help me write. Keep the version you're happy with.
 
-Email is a good first test because it's frequent, you know what a good result looks like, and you can check everything before it's sent. If you'd like help working out which ones to start with:
+Email is a good first test because it's frequent, you know what a good result looks like, and you can check everything before it's sent. If you'd like help working out which tasks to start with:
 
 Would you like help using AI in your business? Send me a message.
