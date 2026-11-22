@@ -1,0 +1,63 @@
+# Content ideas: 2026-W49
+
+Generated 22 November 2026 (Stage 1, manual run). Focus requested: practical AI tools, Microsoft 365, automation and digital business support. Topics to avoid (log.csv): Gemini in Gmail (W47), Businesses in ChatGPT (W48-test), Copilot Chat (W48).
+
+## How to approve
+
+Add a line on its own, with no spaces before it:
+
+    APPROVED: 1
+
+Then run `/content-pack research` (or tell Claude). You can edit any idea first.
+
+---
+
+## 1. Stop the back-and-forth: let customers book you online with Microsoft Bookings
+
+- **What it is:** Microsoft Bookings gives you a web booking page linked to your Outlook calendar, so customers can pick a time that suits them. Microsoft says it sends email and SMS notifications to reduce no-shows. It's included in Microsoft 365 Business Basic, Business Standard and Business Premium.
+- **Who it helps:** sole traders and small teams who take appointments or calls: consultants, coaches, tutors, therapists, trades doing quotes, beauty and wellbeing businesses. Especially those already paying for Microsoft 365.
+- **Why it matters:** arranging appointments by email or phone eats time and causes double bookings. Many small businesses pay separately for booking software without realising Microsoft 365 already includes a booking tool.
+- **Why now:** it follows on naturally from last week's "use what you already pay for" Copilot Chat post. It's also a good moment before the January rush, when many businesses get new enquiries.
+- **Angle:** "Set up an online booking page in an afternoon, using a tool you probably already have." The steps: open Bookings, choose personal or shared bookings, add your services and hours, share the link on your website and email signature.
+- **Best platform:** Facebook and Instagram (very practical), LinkedIn, a step-by-step carousel and blog
+- **Type:** evergreen how-to
+- **Lead source (opened 22 November 2026):**
+  - [Microsoft Learn: Microsoft Bookings overview](https://learn.microsoft.com/en-us/microsoft-365/bookings/bookings-overview?view=o365-worldwide), updated 17 August 2026
+- **Check in research:** whether Bookings is switched on by default or needs an admin to enable it, the current setup steps, how SMS notifications work in the UK, and whether bookings can link to Teams meetings.
+
+## 2. Automate a boring job: save email attachments to OneDrive with Power Automate
+
+- **What it is:** Power Automate can run simple "when this happens, do that" automations between Microsoft 365 apps. Microsoft says basic Power Automate is included at no cost for work or school accounts, and the free licence covers creating and running cloud flows with standard connectors.
+- **Who it helps:** small businesses that receive invoices, receipts, orders or forms by email and then file them by hand.
+- **Why it matters:** it's a gentle first step into automation. One small flow can stop documents getting lost in the inbox, and it shows what "automation" means in practice without any coding.
+- **Why now:** evergreen, and well timed for year-end when people tidy up their admin and get ready for tax returns.
+- **Angle:** "Your first automation: never dig through your inbox for an invoice again." A beginner walkthrough using a Microsoft template, plus tips on testing it safely.
+- **Best platform:** LinkedIn, blog (step by step), carousel
+- **Type:** evergreen how-to
+- **Lead source (opened 22 November 2026):**
+  - [Microsoft Learn: Power Automate licence types](https://learn.microsoft.com/en-us/power-platform/admin/power-automate-licensing/types)
+- **Check in research:** that the Outlook and OneDrive connectors count as "standard", the current template name and steps, and any limits for free use. The template gallery isn't on the research allowlist, so steps may need to come from Microsoft Learn instead.
+
+## 3. Customers are using AI to write data requests. What the ICO says small businesses must do
+
+- **What it is:** on 11 November 2026 the ICO published guidance on subject access requests drafted with AI. A request "isn't invalid just because a person used AI to help draft it." AI-written requests can be long, broad or quote the wrong laws, and must still be handled like any other request.
+- **Who it helps:** any UK sole trader or small business that holds customer, client or staff information, especially those without anyone who specialises in data protection.
+- **Why it matters:** these requests can look confusing or even fake, and it's tempting to ignore them. You can't. The ICO also confirms you can ask for clarification and only need a reasonable, proportionate search.
+- **Why now:** the guidance is 11 days old, and AI makes such requests easy for anyone to send.
+- **Angle:** "Got a long, odd-looking data request? It still counts." A simple checklist.
+- **Best platform:** LinkedIn, carousel, blog
+- **Type:** news plus how-to
+- **Lead source (opened 22 November 2026):**
+  - [ICO: Subject access requests generated by artificial intelligence](https://ico.org.uk/about-the-ico/media-centre/news-and-blogs/2026/11/subject-access-requests-generated-by-artificial-intelligence/), published 11 November 2026
+
+---
+
+## Recommendation
+
+**Idea 1: Microsoft Bookings.**
+- **Usefulness:** it solves a daily problem (arranging appointments) for a large share of sole traders and service businesses.
+- **Relevance:** Microsoft lists it in all three Business plans, so many readers already have it. That builds on last week's "try what you already pay for" theme and starts a natural series.
+- **Interest:** practical and visual, with a clear before and after, so it suits carousels and Facebook particularly well.
+- **Verification:** straightforward, from Microsoft Learn and support pages, with no UK availability problems expected. SMS notifications will need checking for the UK.
+
+**Strongest alternative:** idea 3 (ICO guidance) is the most time-sensitive and the most authoritative, and it would add variety after two Microsoft-heavy weeks. Idea 2 is a great "first automation" piece, but the steps are more technical for a non-technical audience, so it might work better as a follow-up to Bookings.
