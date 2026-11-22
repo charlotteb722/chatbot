@@ -61,3 +61,5 @@ Then run `/content-pack research` (or tell Claude). You can edit any idea first.
 - **Verification:** straightforward, from Microsoft Learn and support pages, with no UK availability problems expected. SMS notifications will need checking for the UK.
 
 **Strongest alternative:** idea 3 (ICO guidance) is the most time-sensitive and the most authoritative, and it would add variety after two Microsoft-heavy weeks. Idea 2 is a great "first automation" piece, but the steps are more technical for a non-technical audience, so it might work better as a follow-up to Bookings.
+
+APPROVED: 2
