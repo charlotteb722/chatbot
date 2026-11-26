@@ -27,6 +27,8 @@ for (const file of files) {
   let s = readFileSync(file, 'utf8');
   s = s.replace(/(href|src|action)="(\/[^"\/][^"]*|\/)"/g, (_, a, v) => `${a}="${rel(v)}"`);
   s = s.replace(/url\((\/_astro\/[^)]+)\)/g, (_, v) => `url(${rel(v)})`);
+  // srcset lists several image URLs with sizes, e.g. "/_astro/a.webp 420w, /_astro/b.webp 720w"
+  s = s.replace(/srcset="([^"]*)"/g, (_, list) => `srcset="${list.split(',').map((part) => { const [u, ...d] = part.trim().split(/\s+/); return [u.startsWith('/') ? rel(u) : u, ...d].join(' '); }).join(', ')}"`);
   if (file.endsWith('.html')) s = s.replace('</body>', `${disableForms}</body>`);
   writeFileSync(file, s);
 }
