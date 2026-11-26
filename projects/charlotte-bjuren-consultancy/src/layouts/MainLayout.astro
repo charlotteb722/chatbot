@@ -2,7 +2,7 @@
 // Layout for Charlotte Bjuren's own website pages.
 import BaseLayout from './BaseLayout.astro';
 import SiteHeader from '../components/SiteHeader.astro';
-import { getSite, publicEmail } from '../lib/site';
+import { getSite, publicEmail, telHref } from '../lib/site';
 
 interface Props { title: string; description: string; jsonLd?: object; noindex?: boolean }
 const { title, description, jsonLd, noindex } = Astro.props;
@@ -19,7 +19,7 @@ const year = new Date().getFullYear();
 const email = publicEmail(s);
 ---
 <BaseLayout title={title} description={description} theme="strathearn" siteName={s.name} jsonLd={jsonLd} noindex={noindex}>
-  <SiteHeader slot="header" brand={s.name} sub={s.descriptor} links={links} cta={{ href: '/contact/#book', label: 'Book a free chat' }} />
+  <SiteHeader slot="header" brand={s.name} sub={s.descriptor} links={links} cta={{ href: '/contact/#talk', label: 'Arrange a free consultation' }} />
   <slot />
   <footer slot="footer" class="site-footer">
     <div class="container">
@@ -28,7 +28,10 @@ const email = publicEmail(s);
           <p class="footer-brand">{s.name}</p>
           <p class="footer-line">{s.location}. Working with customers throughout the UK.</p>
         </div>
-        <a class="btn btn-light" href="/contact/">Get in touch</a>
+        <div class="actions">
+          {s.phone && <a class="btn btn-light" href={telHref(s.phone)}>Call {s.phone}</a>}
+          <a class="btn btn-ghost-light" href="/contact/#enquiry">Send an enquiry</a>
+        </div>
       </div>
       <div class="footer-grid">
         <nav aria-label="Services">
@@ -44,9 +47,9 @@ const email = publicEmail(s);
           <h2>Contact</h2>
           <ul>
             <li><a href="/contact/#enquiry">Send an enquiry</a></li>
-            <li><a href="/contact/#book">Book a free chat</a></li>
+            <li><a href="/contact/#talk">Arrange a free consultation</a></li>
             {email && <li><a href={`mailto:${email}`}>{email}</a></li>}
-            {s.phone && <li><a href={`tel:${s.phone.replace(/\s/g, '')}`}>{s.phone}</a></li>}
+            {s.phone && <li><a href={telHref(s.phone)}>Call {s.phone}</a></li>}
             {s.linkedin && <li><a href={s.linkedin} rel="me">LinkedIn</a></li>}
             <li><a href="/faqs/">FAQs</a></li>
           </ul>

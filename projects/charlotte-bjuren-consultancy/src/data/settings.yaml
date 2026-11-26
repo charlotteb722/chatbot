@@ -10,8 +10,7 @@ main:
   # Set to true only after the mailbox is set up and a test email has been received.
   # While false, the address is not shown on the site, and the legal pages show a draft marker.
   emailVerified: false
-  phone: ""   # Leave empty to hide the phone number everywhere.
-  bookingUrl: "[DRAFT: Cal.com booking link]"
+  phone: "07727 208418"   # Shown on the site. Leave empty ("") to hide it everywhere.
   # Postal address for the privacy notice and terms only. Never put a home address here without deciding to.
   address: "[DRAFT: business address or address service, see launch checklist]"
   headshot: "cb-charlotte"   # Photo file name in src/assets/photos (without .jpg). Leave empty ("") to hide it.

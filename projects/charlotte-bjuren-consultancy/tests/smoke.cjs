@@ -57,6 +57,7 @@ const problems = []; const ok = (c, m) => { if (!c) problems.push(m); };
       }
       if (vp.name === 'desktop') {
         (await page.$$eval('a[href^="/"]', (as) => as.map((a) => a.getAttribute('href')))).forEach((h) => links.add(h.split('#')[0].split('?')[0]));
+        await page.evaluate(() => window.scrollTo(0, 0)); await page.waitForTimeout(200);
         await page.addScriptTag({ content: axeSrc });
         const r = await page.evaluate(async () => (await axe.run(document, { runOnly: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'] })).violations
           .map((v) => `${v.impact}: ${v.id} (${v.nodes.length}) ${v.nodes.slice(0, 2).map((n) => n.target.join(' ')).join(', ')}`));
@@ -81,12 +82,25 @@ const problems = []; const ok = (c, m) => { if (!c) problems.push(m); };
 
   // Sticky header must not cover anchored sections
   const hp = await (await browser.newContext({ ...iphone })).newPage();
-  for (const target of ['/contact/#enquiry', '/contact/#book', '/websites/#care', '/websites/#running-costs']) {
+  for (const target of ['/contact/#enquiry', '/contact/#talk', '/websites/#care', '/websites/#running-costs']) {
     await hp.goto('about:blank'); await hp.goto(BASE + target); await hp.waitForTimeout(1500);
     const id = target.split('#')[1];
     const gap = await hp.evaluate((id) => document.getElementById(id).getBoundingClientRect().top - document.querySelector('.site-header').getBoundingClientRect().bottom, id);
     ok(gap >= -1, `${target}: header covers the section by ${Math.round(-gap)}px`);
   }
+
+  // Phone links: every tel: link on the main site must use the international format
+  const tp = await (await browser.newContext({ ...iphone })).newPage();
+  for (const path of ['/', '/contact/', '/websites/', '/about/']) {
+    await tp.goto(BASE + path);
+    const tels = await tp.$$eval('a[href^="tel:"]', (as) => as.map((a) => a.getAttribute('href')));
+    ok(tels.length > 0, `${path} has no phone link`);
+    ok(tels.every((t) => t === 'tel:+447727208418'), `${path} phone links wrong: ${tels.join(', ')}`);
+  }
+  await tp.goto(BASE + '/contact/');
+  ok(await tp.getByRole('link', { name: 'Call me', exact: true }).isVisible(), 'Call me button not visible on contact page');
+  ok(await tp.locator('#talk').getByRole('link', { name: 'Send an enquiry' }).isVisible(), 'Send an enquiry button not visible');
+  ok((await tp.content()).toLowerCase().indexOf('cal.com') === -1, 'Cal.com still mentioned on contact page');
 
   // Mobile menu
   const m = await (await browser.newContext({ viewport: { width: 375, height: 800 } })).newPage();

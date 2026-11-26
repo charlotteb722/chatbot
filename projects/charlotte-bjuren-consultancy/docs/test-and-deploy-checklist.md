@@ -26,7 +26,7 @@ Tick each item. Do not mark anything as passed without actually checking it.
 - [ ] Check the notification email is not in spam
 - [ ] Submit with the hidden honeypot field filled (browser dev tools). It is not delivered
 - [ ] Submit an empty form. Errors appear, nothing is sent
-- [ ] Booking link opens Cal.com and a test booking arrives in the calendar
+- [ ] Tap "Call me" on an iPhone: it offers to call 07727 208418
 - [ ] Every page on a real phone (iPhone Safari and Android Chrome if possible)
 - [ ] Keyboard only: tab through Home and Contact, focus always visible
 - [ ] Response headers include HSTS and Content-Security-Policy

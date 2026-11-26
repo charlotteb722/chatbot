@@ -40,7 +40,7 @@ Direction A, Strathearn. Lichen white `#F2F3EE`, peat `#1E2B26`, loch green `#2F
 
 ## Technical
 
-Astro static site, Netlify Free hosting, Netlify Forms, Cal.com booking link. No database, logins, payments or analytics in release 1.
+Astro static site, Netlify Free hosting, Netlify Forms. Consultations arranged by phone (07727 208418) or the enquiry form; no booking software. No database, logins, payments or analytics in release 1.
 
 ## Demonstration sites
 
@@ -48,4 +48,4 @@ Joiner (Ardvane Joinery), career coach (Clearpath Career Coaching), café (Larch
 
 ## To confirm before publication
 
-Contact email, phone (if any), business address approach, booking link, domain setup, photographs, final review of all copy. Every one of these appears on the site as a highlighted draft placeholder until supplied.
+Contact email, business address approach, domain setup, photographs, final review of all copy. Every one of these appears on the site as a highlighted draft placeholder until supplied.

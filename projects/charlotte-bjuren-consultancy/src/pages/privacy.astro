@@ -5,7 +5,7 @@ import Draft from '../components/Draft.astro';
 import { getSite, legalEmail } from '../lib/site';
 const s = await getSite();
 ---
-<MainLayout title="Privacy notice" description="How Charlotte Bjuren collects, uses and stores personal information from this website, including enquiries and bookings.">
+<MainLayout title="Privacy notice" description="How Charlotte Bjuren collects, uses and stores personal information from this website, including enquiries.">
   <Section narrow>
     <div class="prose">
       <span class="kicker">Privacy notice</span>
@@ -19,7 +19,7 @@ const s = await getSite();
 
       <h2>What I collect</h2>
       <p>When you send an enquiry, I collect what you type into the form: your name, email address, and optionally your phone number, business name, current website, budget range and message.</p>
-      <p>If you book a chat through my booking page, the booking service collects your name, email address and the time you choose.</p>
+      <p>If you phone me, I keep a note of your name, number and what we discussed so I can follow up.</p>
       <p>This website does not use cookies, analytics or advertising trackers. My hosting provider keeps standard server logs (such as IP addresses and pages requested) for security and to keep the site running.</p>
 
       <h2>Why I use it, and the legal basis</h2>
@@ -33,10 +33,9 @@ const s = await getSite();
       <h2>Who else handles it</h2>
       <ul>
         <li><strong>Netlify</strong> hosts this website and receives and stores enquiry form submissions. Netlify is based in the United States.</li>
-        <li><strong>Cal.com</strong> handles bookings if you use the booking link.</li>
         <li><strong>My email provider</strong> receives a copy of each enquiry: <Draft value="[DRAFT: name of your email provider]" />.</li>
       </ul>
-      <p>Where your information is handled outside the UK, I rely on these providers' data processing terms and the safeguards they offer under UK data protection law. <mark class="draft">[DRAFT: confirm Netlify and Cal.com transfer safeguards]</mark></p>
+      <p>Where your information is handled outside the UK, I rely on these providers' data processing terms and the safeguards they offer under UK data protection law. <mark class="draft">[DRAFT: confirm Netlify transfer safeguards]</mark></p>
 
       <h2>How long I keep it</h2>
       <ul>

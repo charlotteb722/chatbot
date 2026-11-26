@@ -9,7 +9,7 @@ import Testimonials from '../components/Testimonials.astro';
 import Headshot from '../components/Headshot.astro';
 import Photo from '../components/Photo.astro';
 import WorkCard from '../components/WorkCard.astro';
-import { getSite, gbp } from '../lib/site';
+import { getSite, gbp, telHref } from '../lib/site';
 
 const s = await getSite();
 const hasPhoto = !!s.headshot;
@@ -36,6 +36,7 @@ const jsonLd = {
   areaServed: ['Crieff', 'Perthshire', 'Scotland', 'United Kingdom'],
   address: { '@type': 'PostalAddress', addressLocality: 'Crieff', addressRegion: 'Perthshire', addressCountry: 'GB' },
   priceRange: `From ${from}`,
+  ...(s.phone ? { telephone: telHref(s.phone).replace('tel:', '') } : {}),
 };
 ---
 <MainLayout
@@ -50,7 +51,7 @@ const jsonLd = {
         <h1>Websites for small businesses, built around how you actually work</h1>
         <p class="lead">I design and build professional websites that bring in enquiries, cost little to run and belong entirely to you. Then I help you get more from the technology you already have.</p>
         <div class="actions">
-          <a class="btn btn-primary" href="/contact/#book">Book a free 30-minute chat</a>
+          <a class="btn btn-primary" href="/contact/#talk">Arrange a free consultation</a>
           <a class="btn btn-secondary" href="/portfolio/">See example websites</a>
         </div>
         <ul class="chips"><li>Fixed prices from {from}</li><li>You own everything</li><li>No long contracts</li></ul>
@@ -89,7 +90,7 @@ const jsonLd = {
           <li>Paying for hosting or SEO without knowing what you get</li>
           <li>Curious about AI, but short of time to work it out</li>
         </ul>
-        <p><a class="btn btn-secondary" href="/contact/#book">Talk it through for free</a></p>
+        <p><a class="btn btn-secondary" href="/contact/#talk">Talk it through for free</a></p>
       </div>
     </div>
   </section>
@@ -155,7 +156,7 @@ const jsonLd = {
       <h2 id="cta-title">Not sure what you need? That's what the free chat is for.</h2>
       <p>Thirty minutes, no obligation. You'll come away with a clearer idea either way.</p>
       <div class="actions">
-        <a class="btn btn-light" href="/contact/#book">Book a free chat</a>
+        <a class="btn btn-light" href="/contact/#talk">Arrange a free consultation</a>
         <a class="btn btn-ghost-light" href="/contact/">Send a message</a>
       </div>
     </div>
