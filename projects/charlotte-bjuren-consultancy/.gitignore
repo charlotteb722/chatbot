@@ -4,3 +4,6 @@ dist/
 .env
 .env.*
 .netlify/
+
+# The repository root ignores lib/ (Python template); this project needs src/lib
+!src/lib/
