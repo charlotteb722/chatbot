@@ -40,12 +40,15 @@ const care = await getCollection('care');
   <Section id="packages" kicker="Packages" title="Website packages" intro="Prices are starting points for a typical project. Your quote is fixed once we've agreed what you need.">
     <PriceCards items={packages} cta={{ href: '/contact/', label: 'Ask about this package' }} />
 
+    <p class="hint" style="margin-top:1rem">Delivery times start once I have your content and approvals.</p>
+
     <h3 style="margin-top:3rem; margin-bottom:1rem">Side by side</h3>
     <div class="table-wrap" tabindex="0" role="region" aria-label="Package comparison table">
       <table>
         <thead><tr><th scope="col">What's included</th>{packages.map((p) => <th scope="col">{p.data.name}</th>)}</tr></thead>
         <tbody>
           <tr><th scope="row">Starting price</th>{packages.map((p) => <td class="num">{gbp(p.data.price)}</td>)}</tr>
+          <tr><th scope="row">Typical delivery</th>{packages.map((p) => <td>{p.data.delivery}</td>)}</tr>
           <tr><th scope="row">Pages</th><td>1 to 3</td><td>Up to 6</td><td>Up to 10</td></tr>
           <tr><th scope="row">Copywriting</th><td>Light editing of your text</td><td>Written with you</td><td>Written with you</td></tr>
           <tr><th scope="row">Enquiry form</th><td>Yes</td><td>Yes, with quote options</td><td>Yes, with quote options</td></tr>

@@ -13,7 +13,7 @@ interface Props {
 }
 const { name, tagline, theme, title, description, home, links, cta } = Astro.props;
 ---
-<BaseLayout title={title} description={description} theme={theme} siteName={name} noindex bodyClass="has-demo-banner">
+<BaseLayout title={title} description={description} theme={theme} siteName={name} noindex bodyClass="has-demo-banner" ogImage={`/og-${theme}.png`}>
   <DemoBanner slot="before-header" name={name} />
   <SiteHeader slot="header" brand={name} sub={tagline} home={home} links={links} cta={cta} />
   <slot />

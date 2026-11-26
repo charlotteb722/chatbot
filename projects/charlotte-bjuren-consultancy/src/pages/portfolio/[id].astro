@@ -28,10 +28,22 @@ const p = entry.data;
         <h2>What's on it</h2>
         <ul class="ticks">{p.features.map((f) => <li>{f}</li>)}</ul>
       </div>
+      <div class="stack">
+      <div class="card">
+        <h3>Share this demonstration</h3>
+        <p class="muted">Send this link to anyone who'd like to see an example.</p>
+        <p><code class="share-url" data-path={p.url} style="word-break:break-all">{p.url}</code></p>
+        <div class="actions">
+          <button class="btn btn-secondary share-copy" type="button" data-path={p.url}>Copy link</button>
+          <a class="btn btn-primary" href={p.url}>Open it</a>
+        </div>
+        <p class="hint share-status" role="status" aria-live="polite"></p>
+      </div>
       <div class="card">
         <h3>Colours</h3>
         <div class="swatch-row" aria-hidden="true">{p.colours.map((c) => <span style={`background:${c}`}></span>)}</div>
         <p class="muted">Each demonstration has its own identity, built from the same reusable parts as every site I make.</p>
+      </div>
       </div>
     </div>
   </Section>
@@ -39,3 +51,20 @@ const p = entry.data;
     <a class="btn btn-light" href="/contact/#book">Book a free chat</a>
   </CtaBand>
 </MainLayout>
+
+<script>
+  // Show the full link for whichever address the site is on, and copy it on request.
+  document.querySelectorAll<HTMLElement>('.share-url').forEach((el) => { el.textContent = location.origin + el.dataset.path; });
+  document.querySelectorAll<HTMLButtonElement>('.share-copy').forEach((btn) => btn.addEventListener('click', async () => {
+    const url = location.origin + btn.dataset.path;
+    const status = btn.closest('.card')?.querySelector('.share-status');
+    try {
+      if (navigator.share) { await navigator.share({ title: document.title, url }); return; }
+      await navigator.clipboard.writeText(url);
+      if (status) status.textContent = 'Link copied.';
+    } catch (e) {
+      if ((e as Error).name === 'AbortError') return;
+      if (status) status.textContent = 'Copy the link shown above.';
+    }
+  }));
+</script>

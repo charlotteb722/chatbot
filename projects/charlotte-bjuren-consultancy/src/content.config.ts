@@ -6,14 +6,14 @@ const settings = defineCollection({
   schema: z.object({
     name: z.string(), descriptor: z.string(), location: z.string(), areas: z.string(),
     email: z.string(), phone: z.string().optional().default(''), bookingUrl: z.string(),
-    address: z.string(), hours: z.string(), linkedin: z.string().optional().default(''),
+    address: z.string(), headshot: z.string().optional().default(''), hours: z.string(), linkedin: z.string().optional().default(''),
   }),
 });
 const packages = defineCollection({
   loader: file('src/data/packages.yaml'),
   schema: z.object({
     name: z.string(), price: z.number(), introPrice: z.number().optional(), featured: z.boolean().optional(),
-    summary: z.string(), bestFor: z.string(), features: z.array(z.string()),
+    summary: z.string(), bestFor: z.string(), delivery: z.string(), features: z.array(z.string()),
   }),
 });
 const care = defineCollection({

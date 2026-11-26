@@ -17,6 +17,8 @@ interface Props {
   noindex?: boolean; ogImage?: string; bodyClass?: string; jsonLd?: object;
 }
 const { title, description, theme, siteName, noindex = false, ogImage = '/og-image.png', bodyClass = '', jsonLd } = Astro.props;
+const preview = process.env.SITE_MODE !== 'live';
+const hide = noindex || preview;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
 const image = new URL(ogImage, Astro.site);
@@ -29,7 +31,7 @@ const image = new URL(ogImage, Astro.site);
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {hide && <meta name="robots" content="noindex, nofollow" />}
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_GB" />
     <meta property="og:site_name" content={siteName} />

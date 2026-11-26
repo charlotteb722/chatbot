@@ -1,5 +1,7 @@
 # Website packages. Change a price here and it updates everywhere.
+# Delivery times start once the client's content and approvals are in.
 - id: essentials
+  delivery: "5 to 7 working days"
   name: "Website Essentials"
   price: 395
   introPrice: 299
@@ -13,6 +15,7 @@
     - "Set up on accounts in your name"
     - "One round of changes"
 - id: business
+  delivery: "7 to 14 working days"
   name: "Business Website"
   price: 795
   introPrice: 599
@@ -27,6 +30,7 @@
     - "Google Business Profile check"
     - "Two rounds of changes"
 - id: plus
+  delivery: "Agreed individually"
   name: "Business Website Plus"
   price: 1295
   introPrice: 999

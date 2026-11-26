@@ -3,19 +3,22 @@ import MainLayout from '../layouts/MainLayout.astro';
 import Hero from '../components/Hero.astro';
 import Section from '../components/Section.astro';
 import CtaBand from '../components/CtaBand.astro';
+import Headshot from '../components/Headshot.astro';
+import { getSite as getSiteForPhoto } from '../lib/site';
+const hasPhoto = !!(await getSiteForPhoto()).headshot;
 ---
 <MainLayout
   title="About Charlotte Bjuren"
   description="Charlotte Bjuren is a Business Analyst in Crieff, Perthshire, who builds websites and helps small businesses use AI and automation in plain English."
 >
-  <Hero kicker="About" title="Hello, I'm Charlotte" lead="I'm a Business Analyst based in Crieff. I help small businesses get websites that work and use technology without being overwhelmed by it." />
+  <Hero kicker="About" title="Hello, I'm Charlotte" lead="I'm a Business Analyst based in Crieff, Perthshire, working with small businesses throughout the UK. I help them get websites that work and use technology without being overwhelmed by it." />
 
   <Section id="story" tone="surface">
-    <div class="grid-2">
+    <div class:list={[hasPhoto ? 'grid-2' : 'narrow']}>
       <div class="prose">
         <h2>Why I do this</h2>
-        <p><mark class="draft">[DRAFT: a sentence or two, in your own words, about why you started the business]</mark></p>
-        <p>Technology should make running a small business easier, not more complicated. Too many business owners end up with websites they can't change, subscriptions they don't need and advice full of jargon. I want to make the useful parts of technology accessible, explained plainly and set up so you stay in control.</p>
+        <p>I started this business because I believe small businesses should have access to professional websites and useful digital technology without facing unnecessary complexity or unaffordable costs. My background in business analysis, IT and artificial intelligence allows me to combine practical business understanding with modern technical solutions.</p>
+        <p>Too many business owners end up with websites they can't change, subscriptions they don't need and advice full of jargon. I want to make the useful parts of technology accessible, explained plainly and set up so you stay in control.</p>
         <h2>What I believe</h2>
         <ul>
           <li>Understand the business first, then build.</li>
@@ -25,9 +28,7 @@ import CtaBand from '../components/CtaBand.astro';
           <li>Recommend the simple option when the simple option will do.</li>
         </ul>
       </div>
-      <figure class="card" style="margin:0; text-align:center; aspect-ratio: 4/5; place-content:center; background: var(--c-bg)">
-        <mark class="draft">[DRAFT: headshot photo]</mark>
-      </figure>
+      <Headshot />
     </div>
   </Section>
 

@@ -1,7 +1,13 @@
 # Netlify settings. Set "Base directory" to projects/charlotte-bjuren-consultancy in the Netlify UI.
 [build]
-  command = "npm run build"
+  command = "npm run build:netlify"
   publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Keep "preview" until every draft is resolved and Charlotte approves launch.
+  # Changing this to "live" makes the build fail if any [DRAFT ...] placeholder remains.
+  SITE_MODE = "preview"
 
 [[headers]]
   for = "/*"

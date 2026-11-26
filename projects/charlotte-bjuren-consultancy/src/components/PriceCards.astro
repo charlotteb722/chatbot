@@ -1,6 +1,6 @@
 ---
 import { gbp } from '../lib/site';
-interface Pkg { id: string; data: { name: string; price: number; introPrice?: number; featured?: boolean; summary: string; bestFor: string; features: string[] } }
+interface Pkg { id: string; data: { name: string; price: number; introPrice?: number; featured?: boolean; summary: string; bestFor: string; delivery: string; features: string[] } }
 interface Props { items: Pkg[]; cta?: { href: string; label: string }; compact?: boolean }
 const { items, cta = { href: '/contact/', label: 'Ask about this package' }, compact = false } = Astro.props;
 ---
@@ -11,6 +11,7 @@ const { items, cta = { href: '/contact/', label: 'Ask about this package' }, com
       <h3 id={`pkg-${id}`}>{p.name}</h3>
       <p class="price"><span class="price-from">from </span>{gbp(p.price)}</p>
       <p class="muted">{p.summary}</p>
+      <p class="price-from"><strong>Typical delivery:</strong> {p.delivery}</p>
       {compact ? <p><strong>Good for:</strong> {p.bestFor}</p> : <ul class="ticks">{p.features.map((f) => <li>{f}</li>)}</ul>}
       <a class:list={['btn', p.featured ? 'btn-primary' : 'btn-secondary']} href={`${cta.href}?type=${encodeURIComponent(p.name)}#enquiry`}>{cta.label}</a>
     </article>

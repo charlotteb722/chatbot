@@ -1,7 +1,7 @@
 # Project status
 
 **Updated:** 26 November 2026
-**Stage:** 1 and 2 built, stage 3 tests passing. Waiting for Charlotte's review (stage 4).
+**Stage:** Ready for deployment to a temporary Netlify address. Waiting for Charlotte to connect Netlify.
 
 ## Done
 
@@ -19,6 +19,14 @@
 - **Demo business names.** Not yet checked against real businesses.
 - Safari and Firefox not tested (Chromium only in this environment).
 - Existing websites still not reviewed (network blocked here).
+
+## Added for deployment
+
+- Delivery times, About story and Crieff, Perthshire, Scotland location added
+- Preview/live safeguard: preview builds are hidden from search engines; live builds fail while drafts remain
+- Demo sharing: copy-link box on each portfolio project page, social preview image per demo, contact link in each demo banner
+- Headshot shows automatically once a photo path is set in settings.yaml
+- Reuse guide: `docs/reusing-templates.md`
 
 ## Waiting for Charlotte
 

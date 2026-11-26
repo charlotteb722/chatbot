@@ -1,5 +1,5 @@
 // Browser smoke and accessibility test. Usage: start `npm run preview`, then `node tests/smoke.cjs [baseUrl]`
-const { chromium } = require('playwright');
+const { chromium, devices } = require('playwright');
 const fs = require('fs');
 const axeSrc = fs.readFileSync(require.resolve('axe-core/axe.min.js'), 'utf8');
 const BASE = process.argv[2] || 'http://localhost:4321';
@@ -11,8 +11,8 @@ const problems = []; const ok = (c, m) => { if (!c) problems.push(m); };
 (async () => {
   const browser = await chromium.launch();
   const links = new Set();
-  for (const vp of [{ name: 'mobile', width: 375, height: 800 }, { name: 'desktop', width: 1280, height: 800 }]) {
-    const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height } });
+  for (const vp of [{ name: 'iphone', device: devices['iPhone 13'] }, { name: 'desktop', width: 1280, height: 800 }]) {
+    const ctx = await browser.newContext(vp.device ? { ...vp.device } : { viewport: { width: vp.width, height: vp.height } });
     for (const path of pages) {
       const page = await ctx.newPage(); const errs = [];
       page.on('console', (m) => m.type() === 'error' && errs.push(m.text()));
@@ -42,6 +42,11 @@ const problems = []; const ok = (c, m) => { if (!c) problems.push(m); };
   // Internal links
   const ctx = await browser.newContext(); const req = ctx.request;
   for (const l of links) { const r = await req.get(BASE + l); ok(r.status() === 200, `broken link ${l} -> ${r.status()}`); }
+
+  // Share box shows a full, working link
+  const sh = await (await browser.newContext()).newPage();
+  await sh.goto(BASE + '/portfolio/joiner/');
+  ok((await sh.locator('.share-url').textContent()) === BASE + '/demo/joiner/', 'share link not shown in full');
 
   // Mobile menu
   const m = await (await browser.newContext({ viewport: { width: 375, height: 800 } })).newPage();

@@ -9,6 +9,9 @@ import PriceCards from '../components/PriceCards.astro';
 import FaqList from '../components/FaqList.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Testimonials from '../components/Testimonials.astro';
+import Headshot from '../components/Headshot.astro';
+import { getSite as getSiteForPhoto } from '../lib/site';
+const hasPhoto = !!(await getSiteForPhoto()).headshot;
 import { getSite } from '../lib/site';
 
 const s = await getSite();
@@ -98,16 +101,13 @@ const jsonLd = {
   </Section>
 
   <Section id="about" kicker="About me" title="A business analyst who builds websites">
-    <div class="grid-2">
+    <div class:list={[hasPhoto ? 'grid-2' : 'narrow']}>
       <div class="prose">
         <p>I'm Charlotte, and I work as a Business Analyst. Most of my working life is spent understanding how organisations actually run, then using data, automation and good design to make things easier for the people involved.</p>
         <p>I bring the same approach to small business websites. Before thinking about colours or fonts, I want to understand what you do, who your customers are and what you need them to do next. The website comes out of that.</p>
         <p><a href="/about/">More about me and how I work</a></p>
       </div>
-      <figure class="card" style="margin:0; text-align:center; aspect-ratio: 4/3; place-content:center; background: var(--c-surface)">
-        <mark class="draft">[DRAFT: headshot photo]</mark>
-        <figcaption class="muted">A friendly, natural-light photo works best.</figcaption>
-      </figure>
+      <Headshot />
     </div>
   </Section>
 

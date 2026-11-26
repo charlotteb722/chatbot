@@ -13,7 +13,7 @@
   a: "Yes. Your domain, hosting account and website files are in your name. If you ever want to move to someone else, you can take everything with you."
 - id: timescale
   q: "How long does it take?"
-  a: "[DRAFT: confirm typical timescale] Most Essentials and Business websites take two to four weeks from our first chat. The biggest factor is usually how quickly text, photos and feedback come back, and I'll give you a realistic date in your quote."
+  a: "A Website Essentials site usually takes 5 to 7 working days and a Business Website 7 to 14 working days. Timescales for Business Website Plus are agreed individually. All of these start once I have the content and approvals I need from you, and your quote gives a realistic date."
 - id: tech
   home: true
   q: "I'm not very technical. Is that a problem?"
