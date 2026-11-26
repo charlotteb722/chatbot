@@ -1,0 +1,52 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Section from '../components/Section.astro';
+import Draft from '../components/Draft.astro';
+import { getSite } from '../lib/site';
+const s = await getSite();
+---
+<MainLayout title="Privacy notice" description="How Charlotte Bjuren collects, uses and stores personal information from this website, including enquiries and bookings.">
+  <Section narrow>
+    <div class="prose">
+      <span class="kicker">Privacy notice</span>
+      <h1>Privacy notice</h1>
+      <p class="note"><mark class="draft">[DRAFT: review before publishing]</mark> This notice describes how this website actually works. It should be checked against your own arrangements, and it is not legal advice. The ICO's free privacy notice generator for small businesses is a useful cross-check.</p>
+      <p><strong>Last updated:</strong> <Draft value="[DRAFT: date of publication]" /></p>
+
+      <h2>Who I am</h2>
+      <p>This website is run by Charlotte Bjuren, a sole trader trading as {s.name} {s.descriptor}, based in {s.location}. I'm responsible for any personal information you give me through this website.</p>
+      <p>Contact: <Draft value={s.email} />. Postal address: <Draft value={s.address} />.</p>
+
+      <h2>What I collect</h2>
+      <p>When you send an enquiry, I collect what you type into the form: your name, email address, and optionally your phone number, business name, current website, budget range and message.</p>
+      <p>If you book a chat through my booking page, the booking service collects your name, email address and the time you choose.</p>
+      <p>This website does not use cookies, analytics or advertising trackers. My hosting provider keeps standard server logs (such as IP addresses and pages requested) for security and to keep the site running.</p>
+
+      <h2>Why I use it, and the legal basis</h2>
+      <ul>
+        <li><strong>To reply to your enquiry and prepare a quote.</strong> This is necessary to take steps you've asked for before entering into a contract, or is in my legitimate interest in responding to business enquiries.</li>
+        <li><strong>To deliver work you've agreed to.</strong> Necessary for our contract.</li>
+        <li><strong>To keep business and tax records.</strong> A legal obligation.</li>
+      </ul>
+      <p>I won't add you to a mailing list or send you marketing without asking first.</p>
+
+      <h2>Who else handles it</h2>
+      <ul>
+        <li><strong>Netlify</strong> hosts this website and receives and stores enquiry form submissions. Netlify is based in the United States.</li>
+        <li><strong>Cal.com</strong> handles bookings if you use the booking link.</li>
+        <li><strong>My email provider</strong> receives a copy of each enquiry: <Draft value="[DRAFT: name of your email provider]" />.</li>
+      </ul>
+      <p>Where your information is handled outside the UK, I rely on these providers' data processing terms and the safeguards they offer under UK data protection law. <mark class="draft">[DRAFT: confirm Netlify and Cal.com transfer safeguards]</mark></p>
+
+      <h2>How long I keep it</h2>
+      <ul>
+        <li>Enquiries that don't lead to work: deleted after <Draft value="[DRAFT: 12 months]" />.</li>
+        <li>Client records: kept as long as tax law requires, usually six years after the end of the tax year.</li>
+      </ul>
+
+      <h2>Your rights</h2>
+      <p>You can ask to see the personal information I hold about you, ask me to correct or delete it, object to how I use it, or ask me to restrict its use. Email me and I'll respond within one month.</p>
+      <p>If you're unhappy with how I've handled your information, please tell me first. You also have the right to complain to the Information Commissioner's Office: ico.org.uk or 0303 123 1113.</p>
+    </div>
+  </Section>
+</MainLayout>

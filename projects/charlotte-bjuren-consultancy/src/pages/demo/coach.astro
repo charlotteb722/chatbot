@@ -1,0 +1,94 @@
+---
+import DemoLayout from '../../layouts/DemoLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Section from '../../components/Section.astro';
+import Steps from '../../components/Steps.astro';
+import FaqList from '../../components/FaqList.astro';
+import EnquiryForm from '../../components/EnquiryForm.astro';
+---
+<DemoLayout
+  name="Clearpath Career Coaching"
+  tagline="One-to-one career coaching"
+  theme="coach"
+  title="Career coaching for people ready for a change"
+  description="Demonstration website for a fictional career coach."
+  home="/demo/coach/"
+  links={[{ href: '#who', label: 'Who it\'s for' }, { href: '#programmes', label: 'Programmes' }, { href: '#about', label: 'About' }, { href: '#faqs', label: 'FAQs' }]}
+  cta={{ href: '#book', label: 'Book a discovery call' }}
+>
+  <Hero
+    tone="surface"
+    kicker="Online across the UK"
+    title="Feeling stuck in your career? Let's work out what's next."
+    lead="One-to-one coaching for mid-career professionals who know something needs to change but aren't sure what, or how to get there."
+  >
+    <Fragment slot="actions">
+      <a class="btn btn-primary" href="#book">Book a free discovery call</a>
+      <a class="btn btn-secondary" href="#programmes">See programmes</a>
+    </Fragment>
+    <div slot="art" class="card" style="background:var(--c-primary);color:var(--c-on-primary);border:0;padding:2rem;gap:1rem">
+      <p style="font-family:var(--font-head);font-size:1.6rem;line-height:1.25">"What would you do next if you knew it would work out?"</p>
+      <p style="opacity:.85">The question we start with.</p>
+    </div>
+  </Hero>
+
+  <Section id="who" kicker="Who it's for" title="Coaching might be right for you if">
+    <div class="grid">
+      <div class="card"><h3>You've outgrown your role</h3><p class="muted">You're good at your job, but it no longer fits who you are or where you want to be.</p></div>
+      <div class="card"><h3>You're thinking of a big change</h3><p class="muted">A new field, going freelance, or stepping back. You want to think it through properly first.</p></div>
+      <div class="card"><h3>You're returning to work</h3><p class="muted">After a break for family, health or study, and want to go back with confidence.</p></div>
+    </div>
+  </Section>
+
+  <Section id="programmes" tone="surface" kicker="Programmes" title="Ways to work together">
+    <div class="price-grid">
+      <article class="price-card" style="grid-template-rows:auto auto 1fr auto"><h3>Single session</h3><p class="price">£85</p><ul class="ticks"><li>75 minutes by video</li><li>Focused on one decision</li><li>Written summary afterwards</li></ul><a class="btn btn-secondary" href="#book">Ask about this</a></article>
+      <article class="price-card featured" style="grid-template-rows:auto auto auto 1fr auto"><span class="badge">Most chosen</span><h3>Six-week programme</h3><p class="price">£450</p><ul class="ticks"><li>Six weekly sessions</li><li>Strengths and values work</li><li>CV and LinkedIn review</li><li>Email support between sessions</li></ul><a class="btn btn-primary" href="#book">Ask about this</a></article>
+      <article class="price-card" style="grid-template-rows:auto auto 1fr auto"><h3>Interview preparation</h3><p class="price">£120</p><ul class="ticks"><li>Two sessions</li><li>Practice questions for your role</li><li>Feedback you can act on</li></ul><a class="btn btn-secondary" href="#book">Ask about this</a></article>
+    </div>
+    <p class="hint" style="margin-top:1rem">Example prices for demonstration only.</p>
+  </Section>
+
+  <Section id="process" kicker="How it works" title="What to expect">
+    <Steps items={[
+      { title: 'Discovery call', text: 'Twenty minutes, free, to see if coaching is right for you.' },
+      { title: 'Choose a programme', text: 'Pick the option that fits. No pressure and no long commitment.' },
+      { title: 'Make progress', text: 'Clear actions after every session, at a pace that suits you.' },
+    ]} />
+  </Section>
+
+  <Section id="about" tone="surface" kicker="About" title="About your coach" narrow>
+    <div class="prose">
+      <p>On a real website, this section introduces the coach in their own words: their background, qualifications and why they coach. It's often the most-read page on a coaching site, so it's worth writing carefully.</p>
+    </div>
+  </Section>
+
+  <Section id="testimonials" kicker="Client stories" title="What clients say" narrow>
+    <div class="card"><p class="muted">Genuine testimonials, shared with permission, would appear here. Demonstration sites never show invented quotes.</p></div>
+  </Section>
+
+  <Section id="faqs" tone="surface" title="Questions" narrow>
+    <FaqList items={[
+      { q: 'Is coaching the same as therapy?', a: 'No. Coaching looks forward at goals and decisions. If something deeper comes up, a coach will suggest other support.' },
+      { q: 'Do sessions happen online?', a: 'Yes, by video call, so you can join from anywhere in the UK.' },
+      { q: 'What if I don’t know what I want yet?', a: 'That’s the most common starting point, and exactly what the first sessions are for.' },
+    ]} />
+  </Section>
+
+  <Section id="book" kicker="Free discovery call" title="Book a discovery call">
+    <div class="grid-2">
+      <EnquiryForm mode="demo" formName="coach-call" submitLabel="Request a call" fields={[
+        { id: 'name', label: 'Your name', required: true, half: true },
+        { id: 'email', label: 'Email address', type: 'email', required: true, half: true },
+        { id: 'interest', label: 'What are you interested in?', type: 'select', options: ['Single session', 'Six-week programme', 'Interview preparation', 'Not sure yet'] },
+        { id: 'note', label: 'Anything you’d like me to know?', type: 'textarea' },
+      ]} />
+      <div class="card"><h3>Or pick a time</h3><p class="muted">On a real website, this button would open the coach's booking calendar.</p><p><a class="btn btn-primary" href="#book" aria-disabled="true">See available times (demo)</a></p></div>
+    </div>
+  </Section>
+
+  <Fragment slot="footer">
+    <div><h2>Clearpath Career Coaching</h2><p>One-to-one coaching, online across the UK.</p></div>
+    <div><h2>Contact</h2><p>hello@clearpath-coaching.example</p></div>
+  </Fragment>
+</DemoLayout>

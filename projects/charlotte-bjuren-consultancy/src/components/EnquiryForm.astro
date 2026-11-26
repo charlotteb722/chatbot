@@ -1,0 +1,99 @@
+---
+/*
+  Reusable enquiry form.
+  mode="live": a Netlify Form. Netlify detects it at deploy time, stores each submission
+               and emails a notification. Honeypot field filters bots.
+  mode="demo": for demonstration sites. Fields have no name attributes and the form
+               has no action, so nothing can be sent anywhere, even with JavaScript off.
+*/
+interface Field {
+  id: string; label: string; type?: 'text' | 'email' | 'tel' | 'select' | 'textarea' | 'date' | 'number';
+  required?: boolean; options?: string[]; hint?: string; autocomplete?: string; half?: boolean;
+}
+interface Props { mode: 'live' | 'demo'; formName: string; fields: Field[]; submitLabel?: string; privacyNote?: boolean; preselect?: string }
+const { mode, formName, fields, submitLabel = 'Send enquiry', privacyNote = true } = Astro.props;
+const live = mode === 'live';
+const n = (id: string) => (live ? id : undefined);
+const fid = (id: string) => `${formName}-${id}`;
+---
+<form
+  class="form"
+  id={formName}
+  name={live ? formName : undefined}
+  method={live ? 'POST' : undefined}
+  action={live ? '/contact/thanks/' : undefined}
+  data-netlify={live ? 'true' : undefined}
+  netlify-honeypot={live ? 'bot-field' : undefined}
+  data-mode={mode}
+  novalidate
+>
+  {live && <input type="hidden" name="form-name" value={formName} />}
+  {live && (
+    <p class="honey" aria-hidden="true">
+      <label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+    </p>
+  )}
+  <p class="hint">Fields marked * are required.</p>
+  <div class="field-row">
+    {fields.map((f) => {
+      const describedBy = [f.hint ? `${fid(f.id)}-hint` : null, `${fid(f.id)}-error`].filter(Boolean).join(' ');
+      const common = { id: fid(f.id), name: n(f.id), required: f.required, 'aria-describedby': describedBy, autocomplete: f.autocomplete };
+      return (
+        <div class="field" style={f.half ? undefined : 'grid-column: 1 / -1'}>
+          <label for={fid(f.id)}>{f.label}{f.required && ' *'}</label>
+          {f.hint && <span class="hint" id={`${fid(f.id)}-hint`}>{f.hint}</span>}
+          {f.type === 'textarea' ? (
+            <textarea {...common} maxlength="3000"></textarea>
+          ) : f.type === 'select' ? (
+            <select {...common}>
+              <option value="">Please choose</option>
+              {f.options?.map((o) => <option value={o}>{o}</option>)}
+            </select>
+          ) : (
+            <input {...common} type={f.type ?? 'text'} maxlength="200" />
+          )}
+          <span class="field-error" id={`${fid(f.id)}-error`} hidden></span>
+        </div>
+      );
+    })}
+  </div>
+  {privacyNote && live && (
+    <p class="hint">I'll use your details only to reply to your enquiry. See the <a href="/privacy/">privacy notice</a> for how they're stored and for how long.</p>
+  )}
+  <div><button class="btn btn-primary" type="submit">{submitLabel}</button></div>
+  <div class="form-status" role="status" aria-live="polite" hidden></div>
+</form>
+
+<script>
+  // Progressive enhancement: friendly inline errors. Netlify still receives the form without JavaScript.
+  const messages: Record<string, string> = {
+    valueMissing: 'Please fill this in.',
+    typeMismatch: 'Please check the format, for example name@example.co.uk.',
+    tooLong: 'That is a little too long.',
+  };
+  document.querySelectorAll<HTMLFormElement>('form[data-mode]').forEach((form) => {
+    const status = form.querySelector<HTMLElement>('.form-status');
+    const fields = Array.from(form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input:not([type=hidden]):not([tabindex="-1"]), select, textarea'));
+    const check = (el: (typeof fields)[number]) => {
+      const err = document.getElementById(`${el.id}-error`);
+      if (!err) return true;
+      const v = el.validity;
+      const key = (Object.keys(messages) as (keyof ValidityState)[]).find((k) => v[k]);
+      if (key) { err.textContent = messages[key as string]; err.hidden = false; el.setAttribute('aria-invalid', 'true'); return false; }
+      err.hidden = true; el.removeAttribute('aria-invalid'); return true;
+    };
+    fields.forEach((el) => el.addEventListener('blur', () => { if (el.value) check(el); }));
+    form.addEventListener('submit', (e) => {
+      const bad = fields.filter((el) => !check(el));
+      if (bad.length) { e.preventDefault(); bad[0].focus(); if (status) { status.hidden = false; status.textContent = `Please correct ${bad.length === 1 ? 'the highlighted field' : `the ${bad.length} highlighted fields`}.`; } return; }
+      if (form.dataset.mode === 'demo') {
+        e.preventDefault();
+        if (status) { status.hidden = false; status.textContent = 'This is a demonstration form, so nothing has been sent. On a real website, this enquiry would go straight to the business owner.'; }
+      }
+    });
+  });
+  // Preselect an option from ?package= or ?type= in the address (for example from the pricing page).
+  const params = new URLSearchParams(location.search);
+  const want = params.get('type');
+  if (want) document.querySelectorAll<HTMLSelectElement>('select').forEach((s) => { const o = Array.from(s.options).find((x) => x.value.toLowerCase().includes(want.toLowerCase())); if (o) s.value = o.value; });
+</script>

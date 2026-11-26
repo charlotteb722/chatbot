@@ -1,0 +1,10 @@
+---
+interface Props { name: string }
+const { name } = Astro.props;
+---
+<aside class="demo-banner" aria-label="Demonstration notice">
+  <div class="container">
+    <span><strong>Demonstration website.</strong> {name} is a fictional business. Nothing on this page is a real offer.</span>
+    <a href="/portfolio/">Back to Charlotte Bjuren's portfolio</a>
+  </div>
+</aside>

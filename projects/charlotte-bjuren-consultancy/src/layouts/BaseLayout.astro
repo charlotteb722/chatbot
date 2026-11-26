@@ -1,0 +1,52 @@
+---
+/*
+  Base page shell used by every site, including demos.
+  Handles: language, theme, SEO metadata, social previews, canonical URL, fonts, skip link.
+*/
+import '@fontsource/young-serif/400.css';
+import '@fontsource-variable/figtree';
+import '@fontsource-variable/archivo';
+import '@fontsource-variable/outfit';
+import '@fontsource-variable/lora';
+import '@fontsource/caveat/600.css';
+import '../styles/themes.css';
+import '../styles/global.css';
+
+interface Props {
+  title: string; description: string; theme: string; siteName: string;
+  noindex?: boolean; ogImage?: string; bodyClass?: string; jsonLd?: object;
+}
+const { title, description, theme, siteName, noindex = false, ogImage = '/og-image.png', bodyClass = '', jsonLd } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
+const image = new URL(ogImage, Astro.site);
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body class:list={[`theme-${theme}`, bodyClass]}>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot name="before-header" />
+    <slot name="header" />
+    <main id="main" tabindex="-1"><slot /></main>
+    <slot name="footer" />
+  </body>
+</html>

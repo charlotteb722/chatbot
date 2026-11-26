@@ -1,0 +1,66 @@
+---
+// Layout for Charlotte Bjuren's own website pages.
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Draft from '../components/Draft.astro';
+import { getSite, isDraft } from '../lib/site';
+
+interface Props { title: string; description: string; jsonLd?: object; noindex?: boolean }
+const { title, description, jsonLd, noindex } = Astro.props;
+const s = await getSite();
+const links = [
+  { href: '/websites/', label: 'Websites & pricing' },
+  { href: '/ai-and-automation/', label: 'AI & automation' },
+  { href: '/portfolio/', label: 'Portfolio' },
+  { href: '/about/', label: 'About' },
+  { href: '/faqs/', label: 'FAQs' },
+  { href: '/contact/', label: 'Contact' },
+];
+const year = new Date().getFullYear();
+---
+<BaseLayout title={title} description={description} theme="strathearn" siteName={s.name} jsonLd={jsonLd} noindex={noindex}>
+  <SiteHeader slot="header" brand={s.name} sub={s.descriptor} links={links} cta={{ href: '/contact/#book', label: 'Book a free chat' }} />
+  <slot />
+  <footer slot="footer" class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="stack" style="gap:.5rem">
+          <h2>{s.name}</h2>
+          <p>{s.descriptor}</p>
+          <p>{s.location}. {s.areas}.</p>
+        </div>
+        <div>
+          <h2>Services</h2>
+          <ul>
+            <li><a href="/websites/">Websites and pricing</a></li>
+            <li><a href="/websites/#care">Website care</a></li>
+            <li><a href="/ai-and-automation/">AI coaching and automation</a></li>
+            <li><a href="/portfolio/">Portfolio</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Get in touch</h2>
+          <ul>
+            <li>{isDraft(s.email) ? <Draft value={s.email} /> : <a href={`mailto:${s.email}`}>{s.email}</a>}</li>
+            {s.phone && <li><a href={`tel:${s.phone.replace(/\s/g, '')}`}>{s.phone}</a></li>}
+            <li><a href="/contact/">Send an enquiry</a></li>
+            <li><a href="/contact/#book">Book a free 30-minute chat</a></li>
+            {s.linkedin && <li><a href={s.linkedin} rel="me">LinkedIn</a></li>}
+          </ul>
+        </div>
+        <div>
+          <h2>The small print</h2>
+          <ul>
+            <li><a href="/privacy/">Privacy notice</a></li>
+            <li><a href="/terms/">Business terms</a></li>
+            <li><a href="/accessibility/">Accessibility</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-base">
+        <p>© {year} {s.name}, sole trader. <Draft value={s.address} /></p>
+        <p>This website sets no cookies and uses no tracking.</p>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>

@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import FaqList from '../components/FaqList.astro';
+import CtaBand from '../components/CtaBand.astro';
+const faqs = (await getCollection('faqs')).map((f) => f.data);
+---
+<MainLayout title="Frequently asked questions" description="Answers about website costs, running costs, timescales, ownership, Google, and working with Charlotte Bjuren in Crieff, Perthshire.">
+  <Hero kicker="FAQs" title="Frequently asked questions" lead="If your question isn't here, send me a message and I'll answer it." />
+  <Section narrow>
+    <FaqList items={faqs} schema />
+  </Section>
+  <CtaBand title="Still have a question?">
+    <a class="btn btn-light" href="/contact/">Ask me directly</a>
+  </CtaBand>
+</MainLayout>

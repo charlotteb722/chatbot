@@ -1,0 +1,27 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Section from '../components/Section.astro';
+import Draft from '../components/Draft.astro';
+import { getSite } from '../lib/site';
+const s = await getSite();
+---
+<MainLayout title="Accessibility" description="Accessibility statement for the Charlotte Bjuren website.">
+  <Section narrow>
+    <div class="prose">
+      <span class="kicker">Accessibility</span>
+      <h1>Accessibility statement</h1>
+      <p>I want this website to be usable by as many people as possible. It aims to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA.</p>
+      <p>You should be able to:</p>
+      <ul>
+        <li>use every page with a keyboard alone</li>
+        <li>zoom to 200% without losing content</li>
+        <li>use a screen reader, with headings, labels and descriptions in place</li>
+        <li>read text with good colour contrast</li>
+      </ul>
+      <h2>Known issues</h2>
+      <p>The booking service is run by a third party, Cal.com, and its accessibility is outside my control. If it gives you any difficulty, use the enquiry form or email me and I'll arrange a time with you directly.</p>
+      <h2>Tell me about a problem</h2>
+      <p>If something doesn't work for you, please email <Draft value={s.email} /> and I'll fix it or get you the information another way.</p>
+    </div>
+  </Section>
+</MainLayout>

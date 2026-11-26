@@ -1,0 +1,29 @@
+# Frequently asked questions. "home: true" also shows it on the homepage.
+- id: cost
+  home: true
+  q: "How much does a website cost?"
+  a: "Websites start at £395 for one to three pages, £795 for a business website of up to six pages, and £1,295 for a larger site. After our free chat you get a written, fixed quote, so you know the full cost before anything starts."
+- id: running-costs
+  home: true
+  q: "Are there any ongoing costs?"
+  a: "Your domain name renewal, which you pay to the registrar directly and is usually around £10 to £20 a year. Most small sites can be hosted on a free plan. Website Care at £29 a month is optional. If anything else would cost money, I tell you before you decide."
+- id: ownership
+  home: true
+  q: "Will I own my website?"
+  a: "Yes. Your domain, hosting account and website files are in your name. If you ever want to move to someone else, you can take everything with you."
+- id: timescale
+  q: "How long does it take?"
+  a: "[DRAFT: confirm typical timescale] Most Essentials and Business websites take two to four weeks from our first chat. The biggest factor is usually how quickly text, photos and feedback come back, and I'll give you a realistic date in your quote."
+- id: tech
+  home: true
+  q: "I'm not very technical. Is that a problem?"
+  a: "Not at all. I explain things in plain English, and you only need to make decisions about your business, not the technology. I'll show you how to make simple changes yourself, or I can do them for you."
+- id: google
+  q: "Will my website appear on Google?"
+  a: "Nobody can honestly guarantee rankings. What I can do is build your site so Google can understand it, set up the basics properly, and help you with your Google Business Profile, which matters a lot for local searches."
+- id: area
+  q: "Do you only work with businesses in Perthshire?"
+  a: "No. I meet people in person around Crieff and Perthshire, and work with businesses anywhere in the UK over video call."
+- id: diy
+  q: "Why not use Wix or Squarespace myself?"
+  a: "For some people that's the right choice, and I'll say so if it is. The trade-off is a monthly fee for as long as you have the site, and it's harder to move later. I build sites you own outright with little or nothing to pay each month."

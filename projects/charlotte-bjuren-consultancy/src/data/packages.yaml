@@ -1,0 +1,41 @@
+# Website packages. Change a price here and it updates everywhere.
+- id: essentials
+  name: "Website Essentials"
+  price: 395
+  introPrice: 299
+  summary: "A clear, professional site for a new or small business."
+  bestFor: "Start-ups, sole traders and anyone who just needs to be findable."
+  features:
+    - "One to three pages"
+    - "Works properly on phones, tablets and computers"
+    - "Enquiry form sent straight to your inbox"
+    - "Basic Google setup: page titles, descriptions, sitemap"
+    - "Set up on accounts in your name"
+    - "One round of changes"
+- id: business
+  name: "Business Website"
+  price: 795
+  introPrice: 599
+  featured: true
+  summary: "Everything most small businesses need to win enquiries online."
+  bestFor: "Established businesses, trades, coaches and local services."
+  features:
+    - "Up to six pages"
+    - "Copy written with you, in your words"
+    - "Enquiry or quote form, and a booking link if you need one"
+    - "SEO foundations for the areas you cover"
+    - "Google Business Profile check"
+    - "Two rounds of changes"
+- id: plus
+  name: "Business Website Plus"
+  price: 1295
+  introPrice: 999
+  summary: "A larger site with more design work and room to show what you do."
+  bestFor: "Cafés, accommodation, retailers and businesses with a lot to show."
+  features:
+    - "Up to ten pages"
+    - "Gallery, menu or portfolio section"
+    - "More bespoke design"
+    - "Everything in the Business Website"
+    - "Two rounds of changes"
+    - "A 30-minute call to show you how to update it"

@@ -1,0 +1,16 @@
+---
+interface Props { kicker?: string; title: string; lead?: string; tone?: 'plain' | 'surface' | 'dark' }
+const { kicker, title, lead, tone = 'plain' } = Astro.props;
+const hasArt = Astro.slots.has('art');
+---
+<section class:list={['hero', { 'section-surface': tone === 'surface', 'section-dark': tone === 'dark' }]}>
+  <div class:list={['container', { 'hero-grid': hasArt }]}>
+    <div>
+      {kicker && <span class="kicker">{kicker}</span>}
+      <h1>{title}</h1>
+      {lead && <p class="lead">{lead}</p>}
+      <div class="actions"><slot name="actions" /></div>
+    </div>
+    {hasArt && <div class="hero-art"><slot name="art" /></div>}
+  </div>
+</section>

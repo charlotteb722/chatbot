@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /demo/
+Disallow: /contact/thanks/
+
+Sitemap: https://charlottebjuren.com/sitemap-index.xml

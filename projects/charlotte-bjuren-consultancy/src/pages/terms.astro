@@ -1,0 +1,51 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Section from '../components/Section.astro';
+import Draft from '../components/Draft.astro';
+import { getSite } from '../lib/site';
+const s = await getSite();
+---
+<MainLayout title="Business terms" description="How quotes, payments, changes, ownership and website care plans work when you work with Charlotte Bjuren.">
+  <Section narrow>
+    <div class="prose">
+      <span class="kicker">Business terms</span>
+      <h1>How working together works</h1>
+      <p class="note"><mark class="draft">[DRAFT: review before publishing]</mark> A plain-English summary of the main terms. Each project also gets a written quote. A professional review is recommended before relying on these terms.</p>
+
+      <h2>About me</h2>
+      <p>Charlotte Bjuren, sole trader, trading as {s.name} {s.descriptor}. <Draft value={s.address} />. Email: <Draft value={s.email} />.</p>
+
+      <h2>Quotes</h2>
+      <p>After our free chat I send a written quote listing what's included, the price and an estimated date. Prices on this website are starting points; your quote is the price you pay unless we agree changes in writing. Quotes are valid for 30 days.</p>
+
+      <h2>Payment</h2>
+      <ul>
+        <li>Websites: 50% deposit to start, 50% before the website goes live.</li>
+        <li>AI coaching sessions: paid when booked. <Draft value="[DRAFT: confirm cancellation policy, for example free rescheduling with 24 hours' notice]" /></li>
+        <li>Website care: billed monthly in advance.</li>
+        <li>Invoices are due within 14 days.</li>
+        <li><Draft value="[DRAFT: confirm VAT position, for example 'I am not VAT registered, so no VAT is added']" /></li>
+      </ul>
+
+      <h2>What I need from you</h2>
+      <p>Text, photos and feedback in good time. I'll tell you what's needed and when. If content is delayed, the launch date moves with it.</p>
+
+      <h2>Changes</h2>
+      <p>Each package includes a set number of rounds of changes. Extra changes or new features beyond the quote are priced and agreed before I do them.</p>
+
+      <h2>Ownership</h2>
+      <p>Your domain and hosting accounts are in your name from the start. Once the final payment is made, the website, its design and its code are yours to keep, change or move. I may show the finished site in my portfolio unless you ask me not to.</p>
+
+      <h2>Website care plans</h2>
+      <p>Month to month, with no minimum term. Cancel with 30 days' notice. Unused time doesn't roll over.</p>
+
+      <h2>Other services</h2>
+      <p>Some websites rely on services run by other companies, such as hosting, booking or email. I'll tell you which ones your site uses and what they cost. I'm not responsible for their outages or price changes, but I'll help you deal with them.</p>
+
+      <h2>Limits</h2>
+      <p>I can't guarantee search engine rankings or a particular number of enquiries. <Draft value="[DRAFT: liability limit wording, for professional review]" /></p>
+
+      <p>These terms are governed by the law of Scotland.</p>
+    </div>
+  </Section>
+</MainLayout>

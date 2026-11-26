@@ -1,0 +1,40 @@
+# Portfolio items. Demonstration projects must keep "demo: true".
+- id: joiner
+  demo: true
+  name: "Ardvane Joinery"
+  sector: "Local trade"
+  summary: "A one-page site for a joiner that turns visitors into quote requests."
+  url: "/demo/joiner/"
+  goal: "Phone calls and quote requests from the right area"
+  features:
+    - "Services and areas covered, clear on a phone"
+    - "Project gallery"
+    - "Quote request form with job type and postcode"
+    - "Tap-to-call button"
+  colours: ["#2B3238", "#8A4B22", "#D8B27A"]
+- id: coach
+  demo: true
+  name: "Clearpath Career Coaching"
+  sector: "Coach or consultant"
+  summary: "A calm, credible site for a coach that gets discovery calls booked."
+  url: "/demo/coach/"
+  goal: "Discovery call bookings from people who understand the offer"
+  features:
+    - "Who it's for, in the visitor's words"
+    - "Programmes with prices"
+    - "Booking button for a free discovery call"
+    - "Space for genuine testimonials"
+  colours: ["#1D2340", "#2D4A8A", "#B4442F"]
+- id: cafe
+  demo: true
+  name: "Larchfield Bakehouse"
+  sector: "Café and hospitality"
+  summary: "A warm site for a village café, built around the menu and opening hours."
+  url: "/demo/cafe/"
+  goal: "Visits, table enquiries and fewer 'are you open?' messages"
+  features:
+    - "Opening hours that are easy to update"
+    - "Menu section"
+    - "Find us, with directions"
+    - "Table and group enquiry form"
+  colours: ["#3A2A20", "#A23B54", "#6F8F6A"]

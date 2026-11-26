@@ -1,0 +1,17 @@
+---
+interface Props { id?: string; kicker?: string; title?: string; intro?: string; tone?: 'plain' | 'surface' | 'dark'; narrow?: boolean }
+const { id, kicker, title, intro, tone = 'plain', narrow = false } = Astro.props;
+const headingId = id ? `${id}-title` : undefined;
+---
+<section id={id} class:list={['section', { 'section-surface': tone === 'surface', 'section-dark': tone === 'dark' }]} aria-labelledby={title ? headingId : undefined}>
+  <div class:list={['container', { narrow }]}>
+    {(title || kicker) && (
+      <div class="section-head">
+        {kicker && <span class="kicker">{kicker}</span>}
+        {title && <h2 id={headingId}>{title}</h2>}
+        {intro && <p class="lead">{intro}</p>}
+      </div>
+    )}
+    <slot />
+  </div>
+</section>

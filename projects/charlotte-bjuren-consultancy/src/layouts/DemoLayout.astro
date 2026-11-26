@@ -1,0 +1,29 @@
+---
+/*
+  Layout for demonstration sites and the starting point for client sites.
+  For a real client: remove DemoBanner, set noindex to false, and use EnquiryForm mode="live".
+*/
+import BaseLayout from './BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import DemoBanner from '../components/DemoBanner.astro';
+
+interface Props {
+  name: string; tagline: string; theme: string; title: string; description: string; home: string;
+  links: { href: string; label: string }[]; cta: { href: string; label: string };
+}
+const { name, tagline, theme, title, description, home, links, cta } = Astro.props;
+---
+<BaseLayout title={title} description={description} theme={theme} siteName={name} noindex bodyClass="has-demo-banner">
+  <DemoBanner slot="before-header" name={name} />
+  <SiteHeader slot="header" brand={name} sub={tagline} home={home} links={links} cta={cta} />
+  <slot />
+  <footer slot="footer" class="site-footer">
+    <div class="container">
+      <div class="footer-grid"><slot name="footer" /></div>
+      <div class="footer-base">
+        <p>{name} is a fictional business created as a demonstration.</p>
+        <p>Website by <a href="/">Charlotte Bjuren</a></p>
+      </div>
+    </div>
+  </footer>
+</BaseLayout>

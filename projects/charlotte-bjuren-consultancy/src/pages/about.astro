@@ -1,0 +1,66 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+<MainLayout
+  title="About Charlotte Bjuren"
+  description="Charlotte Bjuren is a Business Analyst in Crieff, Perthshire, who builds websites and helps small businesses use AI and automation in plain English."
+>
+  <Hero kicker="About" title="Hello, I'm Charlotte" lead="I'm a Business Analyst based in Crieff. I help small businesses get websites that work and use technology without being overwhelmed by it." />
+
+  <Section id="story" tone="surface">
+    <div class="grid-2">
+      <div class="prose">
+        <h2>Why I do this</h2>
+        <p><mark class="draft">[DRAFT: a sentence or two, in your own words, about why you started the business]</mark></p>
+        <p>Technology should make running a small business easier, not more complicated. Too many business owners end up with websites they can't change, subscriptions they don't need and advice full of jargon. I want to make the useful parts of technology accessible, explained plainly and set up so you stay in control.</p>
+        <h2>What I believe</h2>
+        <ul>
+          <li>Understand the business first, then build.</li>
+          <li>Be honest about costs, including running costs.</li>
+          <li>The client should own everything.</li>
+          <li>Plain English is a sign of respect, not of dumbing down.</li>
+          <li>Recommend the simple option when the simple option will do.</li>
+        </ul>
+      </div>
+      <figure class="card" style="margin:0; text-align:center; aspect-ratio: 4/5; place-content:center; background: var(--c-bg)">
+        <mark class="draft">[DRAFT: headshot photo]</mark>
+      </figure>
+    </div>
+  </Section>
+
+  <Section id="background" title="My background">
+    <div class="grid-2">
+      <div class="prose">
+        <p>I work as a Business Analyst, with a background in information technology, data analytics, artificial intelligence and business process improvement. My day-to-day work is gathering requirements, untangling processes, building reports and apps, and turning what people need into something practical.</p>
+        <p>I came to this through study in psychology, cognitive science, artificial intelligence, philosophy and computer science, so I'm as interested in how people use technology as in the technology itself.</p>
+        <p>This consultancy is my own independent business.</p>
+      </div>
+      <div class="card">
+        <h3>Tools and skills I use</h3>
+        <ul class="ticks">
+          <li>Business requirements and process analysis</li>
+          <li>Website design and development</li>
+          <li>Microsoft Power BI, Power Apps and Power Automate</li>
+          <li>SharePoint and SQL</li>
+          <li>AI-assisted development and practical AI tools</li>
+          <li>Business process automation</li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="how-i-help" tone="surface" title="How I work with you" narrow>
+    <div class="prose">
+      <p>Every project starts with a conversation about your business, your customers and what you need them to do. I ask a lot of questions, because the answers decide what the website should say and how it should work.</p>
+      <p>After that you get a fixed price, a clear plan and a website you can check before it goes live. I keep you informed in plain English, and I tell you straight away if something would change the cost or the timescale.</p>
+    </div>
+  </Section>
+
+  <CtaBand title="Let's have a chat" text="Thirty minutes, free, by video or in person around Crieff.">
+    <a class="btn btn-light" href="/contact/#book">Book a free chat</a>
+    <a class="btn btn-secondary" style="color:var(--c-on-dark);border-color:var(--c-on-dark)" href="/contact/">Send a message</a>
+  </CtaBand>
+</MainLayout>

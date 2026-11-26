@@ -1,0 +1,11 @@
+---
+interface Props { title: string; text?: string }
+const { title, text } = Astro.props;
+---
+<section class="section section-dark" aria-labelledby="cta-title">
+  <div class="container narrow stack" style="text-align:center; justify-items:center;">
+    <h2 id="cta-title">{title}</h2>
+    {text && <p class="lead" style="margin-inline:auto">{text}</p>}
+    <div class="actions" style="justify-content:center"><slot /></div>
+  </div>
+</section>

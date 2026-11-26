@@ -1,0 +1,20 @@
+---
+// Renders nothing until genuine testimonials exist in src/data/testimonials.yaml
+import { getCollection } from 'astro:content';
+const items = await getCollection('testimonials');
+---
+{items.length > 0 && (
+  <section class="section section-surface" aria-labelledby="testimonials-title">
+    <div class="container">
+      <div class="section-head"><h2 id="testimonials-title">What clients say</h2></div>
+      <div class="grid">
+        {items.map(({ data: t }) => (
+          <figure class="card" style="margin:0">
+            <blockquote style="margin:0"><p>“{t.quote}”</p></blockquote>
+            <figcaption class="muted"><strong>{t.name}</strong>, {t.business}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

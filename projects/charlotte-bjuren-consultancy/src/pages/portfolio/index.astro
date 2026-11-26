@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Section from '../../components/Section.astro';
+import CtaBand from '../../components/CtaBand.astro';
+const items = await getCollection('portfolio');
+---
+<MainLayout title="Portfolio" description="Demonstration websites for a joiner, a career coach and a village café, showing the kind of website Charlotte Bjuren builds for small businesses.">
+  <Hero kicker="Portfolio" title="See what your website could look like" lead="Real client projects will appear here as they launch. In the meantime, these demonstration websites show how I'd approach three different kinds of business." />
+  <Section>
+    <p class="note" style="margin-bottom:2rem"><strong>Please note:</strong> the businesses below are fictional. They're demonstrations, not paying clients, and their forms don't send anything.</p>
+    <div class="grid">
+      {items.map(({ id, data: p }) => (
+        <article class="card">
+          <div class="swatch-row" aria-hidden="true">{p.colours.map((c) => <span style={`background:${c}`}></span>)}</div>
+          <span class="tag">{p.demo ? 'Demonstration' : 'Client project'} · {p.sector}</span>
+          <h2 style="font-size:1.4rem">{p.name}</h2>
+          <p class="muted">{p.summary}</p>
+          <div class="actions">
+            <a class="btn btn-primary" href={`/portfolio/${id}/`}>About this project</a>
+            <a class="btn btn-secondary" href={p.url}>Open the website</a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </Section>
+  <CtaBand title="Want something like this for your business?">
+    <a class="btn btn-light" href="/contact/#book">Book a free chat</a>
+  </CtaBand>
+</MainLayout>

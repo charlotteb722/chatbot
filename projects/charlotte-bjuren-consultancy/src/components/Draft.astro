@@ -1,0 +1,7 @@
+---
+// Shows a highlighted placeholder if the value starts with [DRAFT, otherwise the plain value.
+import { isDraft } from '../lib/site';
+interface Props { value?: string }
+const { value = '' } = Astro.props;
+---
+{isDraft(value) ? <mark class="draft">{value}</mark> : value}

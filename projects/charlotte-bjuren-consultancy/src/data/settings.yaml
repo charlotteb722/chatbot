@@ -1,0 +1,14 @@
+# Business details used across the whole site.
+# Anything starting with [DRAFT shows as a yellow highlighted placeholder
+# and must be replaced before publishing. Run: npm run check:drafts
+main:
+  name: "Charlotte Bjuren"
+  descriptor: "Website Development & Digital Consultancy"
+  location: "Crieff, Perthshire"
+  areas: "Perthshire in person, and anywhere in the UK online"
+  email: "[DRAFT: business email address]"
+  phone: ""   # Leave empty to hide the phone number everywhere.
+  bookingUrl: "[DRAFT: Cal.com booking link]"
+  address: "[DRAFT: business address or address service for the footer]"
+  hours: "Evenings and Saturdays. I reply to enquiries within two working days."
+  linkedin: ""   # Optional full URL to your LinkedIn profile.

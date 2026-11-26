@@ -1,0 +1,160 @@
+<title>Three Design Directions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;600&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;600&family=Sora:wght@500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+/* Layout: one column of three proposal boards, each a self-contained mini homepage in its own fixed palette, framed by neutral page chrome. */
+:root{
+  --bg:#F5F5F3; --fg:#1C1F22; --muted:#5A6067; --card:#FFFFFF; --line:#DADCD8; --mark:#2F5D50;
+  --ui:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#15181A;--fg:#E9EAE7;--muted:#A3A8AD;--card:#1F2326;--line:#33383C;--mark:#8FC2B2;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#15181A;--fg:#E9EAE7;--muted:#A3A8AD;--card:#1F2326;--line:#33383C;--mark:#8FC2B2;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--ui);font-size:16px;line-height:1.55}
+.wrap{max-width:980px;margin:0 auto;padding-block:2.5rem 4rem;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.intro{display:grid;gap:.5rem;margin-bottom:2rem}
+.eyebrow{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+h1{font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.15;margin:0;text-wrap:balance;font-weight:600}
+.intro p{margin:0;color:var(--muted);max-width:62ch}
+.boards{display:grid;gap:2.5rem}
+.board{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.board-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem 1rem;padding:1rem 1.25rem;border-bottom:1px solid var(--line)}
+.board-head h2{margin:0;font-size:1.25rem}
+.board-head .tag{font-size:.8rem;color:var(--muted)}
+.rec{font-size:.75rem;font-weight:600;color:var(--mark);border:1px solid currentColor;border-radius:99px;padding:.1rem .6rem}
+.mock{padding:2rem 1.5rem 2.25rem;position:relative;overflow:hidden}
+.mock nav{display:flex;flex-wrap:wrap;gap:.4rem 1.1rem;align-items:center;font-size:.85rem;margin-bottom:2rem}
+.mock nav .brand{font-weight:600;margin-right:auto}
+.mock h3{margin:0 0 .75rem;line-height:1.12;text-wrap:balance;max-width:20ch}
+.mock p{margin:0 0 1.4rem;max-width:46ch}
+.btns{display:flex;flex-wrap:wrap;gap:.75rem}
+.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 1.1rem;border-radius:6px;font-weight:600;font-size:.95rem;text-decoration:none}
+.sample{font-size:.72rem;opacity:.75;margin-top:1.25rem}
+.details{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;padding:1.25rem}
+.details > div{min-width:0}
+.details h4{margin:0 0 .5rem;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.sw{display:grid;grid-template-columns:28px 1fr auto;gap:.35rem .6rem;align-items:center;font-size:.85rem}
+.chip{width:28px;height:28px;border-radius:5px;border:1px solid var(--line)}
+.sw code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;color:var(--muted)}
+.details ul{margin:0;padding-left:1.1rem;font-size:.9rem}
+.details li+li{margin-top:.25rem}
+footer{margin-top:2.5rem;font-size:.85rem;color:var(--muted);max-width:62ch}
+
+/* A: Strathearn */
+.a .mock{background:#F2F3EE;color:#1E2B26;font-family:'Figtree',system-ui,sans-serif}
+.a .mock h3{font-family:'Young Serif',Georgia,serif;font-weight:400;font-size:clamp(1.8rem,4.5vw,2.6rem)}
+.a .mock nav a{color:#1E2B26}
+.a .mock .brand{font-family:'Young Serif',Georgia,serif;font-weight:400;font-size:1rem}
+.a .btn.p{background:#2F5D50;color:#fff}.a .btn.s{color:#2F5D50;box-shadow:inset 0 0 0 2px #2F5D50}
+.a .stripe{position:absolute;left:0;right:0;bottom:0;height:10px;background:repeating-linear-gradient(90deg,#2F5D50 0 14px,#7B4B6A 14px 18px,#C9B79C 18px 22px)}
+.a .kicker{color:#7B4B6A;font-weight:600;font-size:.85rem;margin-bottom:.6rem;display:block}
+
+/* B: Slate and Copper */
+.b .mock{background:#222C36;color:#EEF0F2;font-family:'IBM Plex Sans',system-ui,sans-serif;
+  background-image:linear-gradient(rgba(201,211,220,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(201,211,220,.07) 1px,transparent 1px);background-size:32px 32px}
+.b .mock h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:700;font-size:clamp(1.8rem,4.5vw,2.7rem);letter-spacing:-.01em}
+.b .mock nav a{color:#EEF0F2}
+.b .mock .brand{font-family:'Bricolage Grotesque',system-ui,sans-serif}
+.b .btn.p{background:#A0522D;color:#fff}.b .btn.s{color:#E8A77F;box-shadow:inset 0 0 0 2px #E8A77F}
+.b .coord{position:absolute;right:1.25rem;top:1.1rem;font-family:ui-monospace,Menlo,monospace;font-size:.7rem;color:#C9D3DC;opacity:.7}
+.b .kicker{color:#E8A77F;font-weight:600;font-size:.85rem;margin-bottom:.6rem;display:block}
+
+/* C: Highland Morning */
+.c .mock{background:#E6EEF2;color:#1B2A41;font-family:'Source Serif 4',Georgia,serif}
+.c .mock h3{font-family:'Sora',system-ui,sans-serif;font-weight:700;font-size:clamp(1.7rem,4.3vw,2.5rem);letter-spacing:-.015em}
+.c .mock nav{font-family:'Sora',system-ui,sans-serif}
+.c .mock nav a{color:#1B2A41}
+.c .btn{font-family:'Sora',system-ui,sans-serif}
+.c .btn.p{background:#E0A526;color:#1B2A41}.c .btn.s{color:#1F6F78;box-shadow:inset 0 0 0 2px #1F6F78;background:#fff}
+.c .contours{position:absolute;inset:auto -10% -55% 30%;height:120%;pointer-events:none;opacity:.55}
+.c .kicker{color:#1F6F78;font-weight:600;font-size:.85rem;margin-bottom:.6rem;display:block;font-family:'Sora',system-ui,sans-serif}
+.c .mock > *:not(.contours){position:relative}
+
+.mock nav a{text-decoration:none}
+a:focus-visible,.btn:focus-visible{outline:3px solid #E0A526;outline-offset:2px}
+</style>
+
+<div class="wrap">
+  <header class="intro">
+    <span class="eyebrow">Approval Gate 1 · Design</span>
+    <h1>Three design directions for charlottebjuren.com</h1>
+    <p>Each panel shows the same homepage opening in a different identity. The wording is sample text to show the style, not approved copy. Pick one, or tell me what to borrow from another.</p>
+  </header>
+
+  <div class="boards">
+
+    <section class="board a" aria-labelledby="ha">
+      <div class="board-head"><h2 id="ha">A. Strathearn</h2><span class="tag">Calm, editorial, grounded</span><span class="rec">Recommended</span></div>
+      <div class="mock">
+        <nav aria-label="Sample navigation"><span class="brand">Charlotte Bjuren</span><a href="#ha">Websites</a><a href="#ha">Pricing</a><a href="#ha">Portfolio</a><a href="#ha">AI &amp; Automation</a></nav>
+        <span class="kicker">Crieff, Perthshire · Websites, AI and automation</span>
+        <h3>Websites for small businesses, built around how you actually work</h3>
+        <p>I help sole traders and small businesses across Perthshire get a website that brings in enquiries, costs little to run and belongs entirely to you.</p>
+        <div class="btns"><a class="btn p" href="#ha">Book a free chat</a><a class="btn s" href="#ha">See prices</a></div>
+        <p class="sample">Sample wording only</p>
+        <div class="stripe" aria-hidden="true"></div>
+      </div>
+      <div class="details">
+        <div><h4>Palette</h4>
+          <div class="sw"><span class="chip" style="background:#F2F3EE"></span>Lichen white<code>#F2F3EE</code>
+          <span class="chip" style="background:#1E2B26"></span>Peat (text)<code>13.2:1</code>
+          <span class="chip" style="background:#2F5D50"></span>Loch green<code>6.7:1</code>
+          <span class="chip" style="background:#7B4B6A"></span>Heather<code>6.2:1</code>
+          <span class="chip" style="background:#C9B79C"></span>Bracken<code>decor</code></div></div>
+        <div><h4>Type and detail</h4><ul><li>Young Serif headings, Figtree body</li><li>Tweed-style stripe as a section divider</li><li>Natural-light photos of Strathearn and you at work</li></ul></div>
+        <div><h4>Trade-off</h4><ul><li>Warm, local, trustworthy</li><li>Leaves room for demo sites to look different</li><li>Needs good photography or it can look plain</li></ul></div>
+      </div>
+    </section>
+
+    <section class="board b" aria-labelledby="hb">
+      <div class="board-head"><h2 id="hb">B. Slate and Copper</h2><span class="tag">Confident, modern, structured</span></div>
+      <div class="mock">
+        <span class="coord" aria-hidden="true">56.37° N · 3.84° W</span>
+        <nav aria-label="Sample navigation"><span class="brand">Charlotte Bjuren</span><a href="#hb">Websites</a><a href="#hb">Pricing</a><a href="#hb">Portfolio</a><a href="#hb">AI &amp; Automation</a></nav>
+        <span class="kicker">Websites · AI coaching · Automation</span>
+        <h3>A website that works as hard as you do</h3>
+        <p>Business analysis first, then a fast, clear website you own outright. Based in Crieff, working with small businesses across the UK.</p>
+        <div class="btns"><a class="btn p" href="#hb">Book a free chat</a><a class="btn s" href="#hb">See prices</a></div>
+        <p class="sample">Sample wording only</p>
+      </div>
+      <div class="details">
+        <div><h4>Palette</h4>
+          <div class="sw"><span class="chip" style="background:#EEF0F2"></span>Cool stone<code>#EEF0F2</code>
+          <span class="chip" style="background:#222C36"></span>Slate<code>12.4:1</code>
+          <span class="chip" style="background:#A0522D"></span>Copper<code>4.9:1</code>
+          <span class="chip" style="background:#E8A77F"></span>Light copper<code>6.9:1 on slate</code>
+          <span class="chip" style="background:#C9D3DC"></span>Mist<code>decor</code></div></div>
+        <div><h4>Type and detail</h4><ul><li>Bricolage Grotesque headings, IBM Plex Sans body</li><li>Faint survey-map grid and Crieff coordinates</li><li>Stone, slate roofs, clean portraits</li></ul></div>
+        <div><h4>Trade-off</h4><ul><li>Strongest for consultancy and AI work</li><li>Most "professional" at first glance</li><li>Edges toward corporate unless copy stays warm</li></ul></div>
+      </div>
+    </section>
+
+    <section class="board c" aria-labelledby="hc">
+      <div class="board-head"><h2 id="hc">C. Highland Morning</h2><span class="tag">Bright, friendly, approachable</span></div>
+      <div class="mock">
+        <svg class="contours" viewBox="0 0 400 300" aria-hidden="true" fill="none" stroke="#1F6F78" stroke-width="1.2">
+          <ellipse cx="220" cy="190" rx="200" ry="120"/><ellipse cx="230" cy="190" rx="165" ry="96"/><ellipse cx="240" cy="192" rx="130" ry="74"/><ellipse cx="248" cy="195" rx="95" ry="52"/><ellipse cx="255" cy="198" rx="60" ry="32"/><ellipse cx="260" cy="200" rx="28" ry="14"/>
+        </svg>
+        <nav aria-label="Sample navigation"><span class="brand">Charlotte Bjuren</span><a href="#hc">Websites</a><a href="#hc">Pricing</a><a href="#hc">Portfolio</a><a href="#hc">AI &amp; Automation</a></nav>
+        <span class="kicker">Friendly web help from Crieff</span>
+        <h3>Your business, online and easy to find</h3>
+        <p>Plain-English help with websites, AI and the bits of admin that eat your evenings. No jargon, no long contracts, no surprise bills.</p>
+        <div class="btns"><a class="btn p" href="#hc">Book a free chat</a><a class="btn s" href="#hc">See prices</a></div>
+        <p class="sample">Sample wording only</p>
+      </div>
+      <div class="details">
+        <div><h4>Palette</h4>
+          <div class="sw"><span class="chip" style="background:#FFFFFF"></span>White<code>#FFFFFF</code>
+          <span class="chip" style="background:#E6EEF2"></span>Mist blue<code>band</code>
+          <span class="chip" style="background:#1B2A41"></span>Ink navy<code>14.4:1</code>
+          <span class="chip" style="background:#E0A526"></span>Gorse<code>navy text 6.6:1</code>
+          <span class="chip" style="background:#1F6F78"></span>Loch teal<code>5.8:1</code></div></div>
+        <div><h4>Type and detail</h4><ul><li>Sora headings, Source Serif 4 body</li><li>Walking-map contour lines behind the hero</li><li>Morning light, people in real small businesses</li></ul></div>
+        <div><h4>Trade-off</h4><ul><li>Most welcoming for nervous first-timers</li><li>Yellow buttons must always carry navy text</li><li>Looks less premium if spacing slips</li></ul></div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>Contrast ratios are WCAG 2.2 figures against each direction's main background. "Decor" colours are for lines and shapes only, never text. Fonts will be self-hosted on the real site.</footer>
+</div>

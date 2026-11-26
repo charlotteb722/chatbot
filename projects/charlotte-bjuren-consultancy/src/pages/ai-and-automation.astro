@@ -1,0 +1,71 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import Steps from '../components/Steps.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+<MainLayout
+  title="AI coaching and automation for small businesses"
+  description="Practical one-to-one AI coaching for small business owners, starting with a real task from your business, plus simple automation for repetitive admin. Based in Crieff, online across the UK."
+>
+  <Hero
+    kicker="AI coaching and automation"
+    title="Less time on admin, more confidence with AI"
+    lead="Practical help using AI tools and simple automations for real tasks in your business. No jargon and no hype, just something useful you can keep using."
+  >
+    <Fragment slot="actions">
+      <a class="btn btn-primary" href="/contact/?type=AI%20coaching#enquiry">Ask about a session</a>
+      <a class="btn btn-secondary" href="/contact/#book">Book a free chat</a>
+    </Fragment>
+  </Hero>
+
+  <Section id="coaching" tone="surface" kicker="AI coaching" title="One-to-one AI sessions, built around your own work">
+    <div class="grid-2">
+      <div class="prose">
+        <p>We start with one task from your business that takes longer than it should. It might be replying to similar enquiries, writing a few social posts, or turning a page of notes into a quote or a policy.</p>
+        <p>We look at what you need, work through an example together and check the result. You have time to ask questions and try it yourself. The aim is to leave with a useful piece of work and a method you can repeat.</p>
+        <p>I'll also talk you through the sensible limits: checking what AI produces, and keeping customer personal information out of tools that aren't set up for it.</p>
+      </div>
+      <article class="price-card" aria-labelledby="ai-price" style="grid-template-rows:auto auto 1fr auto">
+        <h3 id="ai-price">AI coaching session</h3>
+        <p class="price">£95<small> for 90 minutes</small></p>
+        <ul class="ticks">
+          <li>Online, or in person around Crieff and Perthshire</li>
+          <li>Built around a real task you bring</li>
+          <li>Written notes and the prompts we used, to keep</li>
+          <li>Works with the tools you already use</li>
+        </ul>
+        <a class="btn btn-primary" href="/contact/?type=AI%20coaching#enquiry">Ask about a session</a>
+      </article>
+    </div>
+  </Section>
+
+  <Section id="automation" kicker="Automation" title="Simple automations for repetitive admin" intro="If you copy the same information between the same places every week, there is often a simpler way.">
+    <div class="grid-4">
+      <div class="card"><h3>Enquiries into a tracker</h3><p class="muted">Website enquiries saved automatically to a spreadsheet, so nothing gets lost in your inbox.</p></div>
+      <div class="card"><h3>Reminders that send themselves</h3><p class="muted">Appointment reminders, follow-up emails or payment reminders, sent at the right time.</p></div>
+      <div class="card"><h3>Less copying and pasting</h3><p class="muted">Information moved between forms, spreadsheets and email without you retyping it.</p></div>
+      <div class="card"><h3>Templates that fill themselves in</h3><p class="muted">Quotes, confirmations and standard letters created from details you already have.</p></div>
+    </div>
+    <p class="note" style="margin-top:1.5rem"><strong>Price:</strong> automations are quoted after a free scoping chat. Small jobs start from £150. Where possible I use tools you already pay for, so there's nothing new to subscribe to.</p>
+  </Section>
+
+  <Section id="how" tone="surface" kicker="How it works" title="How we'd work together">
+    <Steps items={[
+      { title: 'Tell me the task', text: 'Send a short message describing one job you would like to make easier.' },
+      { title: 'A quick chat', text: 'We talk it through for free, and I suggest whether a coaching session or an automation fits better.' },
+      { title: 'Do it together', text: 'We work on it, test it with your real work and make sure you are comfortable using it.' },
+    ]} />
+  </Section>
+
+  <Section id="free-help" title="Is free help a better place to start?" narrow>
+    <div class="prose">
+      <p>Possibly. If you're in Scotland and completely new to AI, Business Gateway and Scottish Enterprise offer free introductory support, and it's worth knowing about. Where I can help is the next step: working through your own tasks, one to one, at your pace.</p>
+    </div>
+  </Section>
+
+  <CtaBand title="Got a task that takes too long?" text="Tell me what it is. I'll tell you honestly whether AI or an automation would help.">
+    <a class="btn btn-light" href="/contact/?type=AI%20coaching#enquiry">Send me the task</a>
+  </CtaBand>
+</MainLayout>

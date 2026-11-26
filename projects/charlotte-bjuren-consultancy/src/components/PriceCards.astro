@@ -1,0 +1,18 @@
+---
+import { gbp } from '../lib/site';
+interface Pkg { id: string; data: { name: string; price: number; introPrice?: number; featured?: boolean; summary: string; bestFor: string; features: string[] } }
+interface Props { items: Pkg[]; cta?: { href: string; label: string }; compact?: boolean }
+const { items, cta = { href: '/contact/', label: 'Ask about this package' }, compact = false } = Astro.props;
+---
+<div class="price-grid">
+  {items.map(({ id, data: p }) => (
+    <article class:list={['price-card', { featured: p.featured }]} aria-labelledby={`pkg-${id}`}>
+      {p.featured && <span class="badge">Most popular choice</span>}
+      <h3 id={`pkg-${id}`}>{p.name}</h3>
+      <p class="price"><span class="price-from">from </span>{gbp(p.price)}</p>
+      <p class="muted">{p.summary}</p>
+      {compact ? <p><strong>Good for:</strong> {p.bestFor}</p> : <ul class="ticks">{p.features.map((f) => <li>{f}</li>)}</ul>}
+      <a class:list={['btn', p.featured ? 'btn-primary' : 'btn-secondary']} href={`${cta.href}?type=${encodeURIComponent(p.name)}#enquiry`}>{cta.label}</a>
+    </article>
+  ))}
+</div>

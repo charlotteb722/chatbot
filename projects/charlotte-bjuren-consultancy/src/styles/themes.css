@@ -1,0 +1,94 @@
+/*
+  Site themes. Every component reads these variables, so a new client site
+  only needs a new theme block here (copy one, change the values).
+  Check text colours reach 4.5:1 contrast before using them.
+*/
+
+/* Charlotte Bjuren: Direction A, Strathearn */
+.theme-strathearn {
+  --c-bg: #F2F3EE;          /* lichen white */
+  --c-surface: #E4E8DF;     /* soft moss band */
+  --c-card: #FFFFFF;
+  --c-ink: #1E2B26;         /* peat */
+  --c-muted: #4A5852;
+  --c-primary: #2F5D50;     /* loch green */
+  --c-on-primary: #FFFFFF;
+  --c-accent: #7B4B6A;      /* heather */
+  --c-line: #C9CFC4;
+  --c-decor: #C9B79C;       /* bracken, decoration only */
+  --c-dark: #1E2B26;
+  --c-on-dark: #F2F3EE;
+  --c-on-dark-accent: #C9B79C;
+  --c-focus: #7B4B6A;
+  --font-head: 'Young Serif', Georgia, 'Times New Roman', serif;
+  --font-body: 'Figtree Variable', 'Segoe UI', system-ui, sans-serif;
+  --head-weight: 400;
+  --radius: 6px;
+}
+
+/* Demo: Ardvane Joinery (timber and slate) */
+.theme-joiner {
+  --c-bg: #FFFFFF;
+  --c-surface: #F1EEEA;
+  --c-card: #FFFFFF;
+  --c-ink: #23292E;
+  --c-muted: #4D565D;
+  --c-primary: #8A4B22;     /* timber */
+  --c-on-primary: #FFFFFF;
+  --c-accent: #8A4B22;
+  --c-line: #D9D4CE;
+  --c-decor: #D8B27A;       /* sawdust */
+  --c-dark: #2B3238;        /* slate */
+  --c-on-dark: #FFFFFF;
+  --c-on-dark-accent: #D8B27A;
+  --c-focus: #8A4B22;
+  --font-head: 'Archivo Variable', 'Arial Narrow', Arial, sans-serif;
+  --font-body: 'Archivo Variable', Arial, sans-serif;
+  --head-weight: 800;
+  --radius: 2px;
+}
+
+/* Demo: Clearpath Career Coaching (dusk blue and coral) */
+.theme-coach {
+  --c-bg: #FBFBFD;
+  --c-surface: #EEF1F8;
+  --c-card: #FFFFFF;
+  --c-ink: #1D2340;
+  --c-muted: #4B5272;
+  --c-primary: #2D4A8A;
+  --c-on-primary: #FFFFFF;
+  --c-accent: #B4442F;      /* coral */
+  --c-line: #D6DBEA;
+  --c-decor: #F0B9A8;
+  --c-dark: #1D2340;
+  --c-on-dark: #FBFBFD;
+  --c-on-dark-accent: #F0B9A8;
+  --c-focus: #B4442F;
+  --font-head: 'Outfit Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Outfit Variable', 'Segoe UI', system-ui, sans-serif;
+  --head-weight: 600;
+  --radius: 14px;
+}
+
+/* Demo: Larchfield Bakehouse (espresso, raspberry, sage) */
+.theme-cafe {
+  --c-bg: #FCF7F1;
+  --c-surface: #F4E9DC;
+  --c-card: #FFFDFB;
+  --c-ink: #3A2A20;
+  --c-muted: #6A5546;
+  --c-primary: #A23B54;     /* raspberry */
+  --c-on-primary: #FFFFFF;
+  --c-accent: #A23B54;
+  --c-line: #E3D3C2;
+  --c-decor: #6F8F6A;       /* sage, decoration only */
+  --c-dark: #3A2A20;
+  --c-on-dark: #FCF7F1;
+  --c-on-dark-accent: #E9C9A8;
+  --c-focus: #A23B54;
+  --font-head: 'Lora Variable', Georgia, serif;
+  --font-body: 'Lora Variable', Georgia, serif;
+  --font-script: 'Caveat', 'Comic Sans MS', cursive;
+  --head-weight: 600;
+  --radius: 10px;
+}

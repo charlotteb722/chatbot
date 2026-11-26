@@ -1,0 +1,33 @@
+---
+interface Link { href: string; label: string }
+interface Props { brand: string; sub?: string; home?: string; links: Link[]; cta?: Link }
+const { brand, sub, home = '/', links, cta } = Astro.props;
+const path = Astro.url.pathname;
+const current = (href: string) => (href === home ? path === href : path.startsWith(href)) ? 'page' : undefined;
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href={home}>{brand}{sub && <small>{sub}</small>}</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <ul>
+        {links.map((l) => <li><a href={l.href} aria-current={current(l.href)}>{l.label}</a></li>)}
+        {cta && <li><a class="btn btn-primary" href={cta.href}>{cta.label}</a></li>}
+      </ul>
+    </nav>
+  </div>
+</header>
+<script>
+  document.documentElement.classList.add('js');
+  const btn = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const nav = document.getElementById('site-nav');
+  btn?.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    btn.textContent = open ? 'Menu' : 'Close';
+    nav?.classList.toggle('open', !open);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && btn?.getAttribute('aria-expanded') === 'true') { btn.click(); btn.focus(); }
+  });
+</script>

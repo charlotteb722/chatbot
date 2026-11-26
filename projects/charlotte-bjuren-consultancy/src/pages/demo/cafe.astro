@@ -1,0 +1,111 @@
+---
+import DemoLayout from '../../layouts/DemoLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Section from '../../components/Section.astro';
+import Gallery from '../../components/Gallery.astro';
+import EnquiryForm from '../../components/EnquiryForm.astro';
+
+// On a client site these lists would live in a data file the owner can edit.
+const hours = [
+  ['Monday', 'Closed'], ['Tuesday', '9am to 4pm'], ['Wednesday', '9am to 4pm'], ['Thursday', '9am to 4pm'],
+  ['Friday', '9am to 4pm'], ['Saturday', '9am to 5pm'], ['Sunday', '10am to 4pm'],
+];
+const menu = [
+  { section: 'Breakfast', items: [['Bacon roll on a fresh bap', '£4.50'], ['Porridge with berries and honey', '£5.00'], ['Eggs on sourdough', '£6.50']] },
+  { section: 'Lunch', items: [['Soup of the day with bread', '£5.50'], ['Cheese and chutney toastie', '£6.75'], ['Seasonal salad bowl', '£8.50']] },
+  { section: 'From the bakery', items: [['Cheese scone', '£2.80'], ['Millionaire’s shortbread', '£3.00'], ['Cake of the day', '£3.60']] },
+];
+---
+<DemoLayout
+  name="Larchfield Bakehouse"
+  tagline="Café and bakery"
+  theme="cafe"
+  title="Village café and bakery"
+  description="Demonstration website for a fictional village café."
+  home="/demo/cafe/"
+  links={[{ href: '#menu', label: 'Menu' }, { href: '#hours', label: 'Opening hours' }, { href: '#find', label: 'Find us' }, { href: '#groups', label: 'Groups' }]}
+  cta={{ href: '#hours', label: 'Are we open?' }}
+>
+  <Hero
+    tone="surface"
+    kicker="Fresh every morning"
+    title="Home baking, good coffee and a warm seat by the window"
+    lead="A small village café baking on site every day. Walkers, dogs and muddy boots welcome."
+  >
+    <Fragment slot="actions">
+      <a class="btn btn-primary" href="#menu">See the menu</a>
+      <a class="btn btn-secondary" href="#find">How to find us</a>
+    </Fragment>
+    <div slot="art" class="card" style="background:var(--c-card);text-align:center;padding:2rem;gap:.5rem">
+      <p style="font-family:var(--font-script);font-size:2.2rem;color:var(--c-primary);line-height:1.1">Today's bake</p>
+      <p style="font-size:1.25rem;font-weight:600">Raspberry and white chocolate scones</p>
+      <p class="muted">Updated each morning</p>
+    </div>
+  </Hero>
+
+  <Section id="notice" narrow>
+    <p class="note"><strong>Winter hours:</strong> from November to February we close at 3pm on weekdays. Thanks for your patience.</p>
+  </Section>
+
+  <Section id="menu" kicker="Menu" title="What's on the menu">
+    <div class="grid">
+      {menu.map((m) => (
+        <div class="card">
+          <h3>{m.section}</h3>
+          <table style="min-width:0">
+            <caption class="visually-hidden">{m.section} menu</caption>
+            <tbody>{m.items.map(([n, p]) => <tr><td style="padding-left:0">{n}</td><td class="num" style="text-align:right;padding-right:0">{p}</td></tr>)}</tbody>
+          </table>
+        </div>
+      ))}
+    </div>
+    <p class="hint" style="margin-top:1rem">Please tell us about any allergies when you order. Example menu for demonstration only.</p>
+  </Section>
+
+  <Section id="gallery" tone="surface" kicker="Inside" title="Come in and see us">
+    <Gallery items={[
+      { label: 'The counter', bg: 'linear-gradient(135deg,#A23B54,#6E2638)' },
+      { label: 'Fresh from the oven', bg: 'linear-gradient(135deg,#C08552,#8E5A33)' },
+      { label: 'The window seats', bg: 'linear-gradient(135deg,#6F8F6A,#4A6446)' },
+    ]} />
+  </Section>
+
+  <Section id="hours" kicker="Opening hours" title="When we're open">
+    <div class="grid-2">
+      <div class="table-wrap">
+        <table style="min-width:0">
+          <caption class="visually-hidden">Opening hours</caption>
+          <tbody>{hours.map(([d, h]) => <tr><th scope="row">{d}</th><td>{h}</td></tr>)}</tbody>
+        </table>
+      </div>
+      <div class="card" id="find">
+        <h3>Find us</h3>
+        <p>Main Street, Larchfield (a fictional village in Perthshire).</p>
+        <p class="muted">Free parking beside the village hall. On a real website, a link to directions in Google Maps goes here.</p>
+        <p><a class="btn btn-secondary" href="#find" aria-disabled="true">Get directions (demo)</a></p>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="groups" tone="surface" kicker="Groups and occasions" title="Bringing a group?">
+    <div class="grid-2">
+      <div class="prose">
+        <p>We can seat walking groups, birthday teas and small gatherings of up to 16. Let us know a few days ahead and we'll have the big table ready.</p>
+        <p>We don't take bookings for tables of two to four. Just come along.</p>
+      </div>
+      <EnquiryForm mode="demo" formName="cafe-groups" submitLabel="Send group enquiry" fields={[
+        { id: 'name', label: 'Your name', required: true, half: true },
+        { id: 'email', label: 'Email address', type: 'email', required: true, half: true },
+        { id: 'date', label: 'Date', type: 'date', required: true, half: true },
+        { id: 'people', label: 'Number of people', type: 'number', required: true, half: true },
+        { id: 'note', label: 'Anything else?', type: 'textarea', hint: 'For example dietary needs or a celebration' },
+      ]} />
+    </div>
+  </Section>
+
+  <Fragment slot="footer">
+    <div><h2>Larchfield Bakehouse</h2><p>Main Street, Larchfield, Perthshire</p></div>
+    <div><h2>Contact</h2><p>01632 960733<br />hello@larchfield-bakehouse.example</p></div>
+    <div><h2>Opening hours</h2><p>Tuesday to Sunday. Closed Mondays.</p></div>
+  </Fragment>
+</DemoLayout>

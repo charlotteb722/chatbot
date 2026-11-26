@@ -1,0 +1,8 @@
+# Genuine testimonials only, with the person's permission.
+# The testimonials section stays hidden until at least one is added.
+# Example:
+# - id: first-client
+#   quote: "What they said."
+#   name: "Name"
+#   business: "Business, Town"
+[]

@@ -1,0 +1,102 @@
+---
+import DemoLayout from '../../layouts/DemoLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Section from '../../components/Section.astro';
+import Steps from '../../components/Steps.astro';
+import Gallery from '../../components/Gallery.astro';
+import FaqList from '../../components/FaqList.astro';
+import EnquiryForm from '../../components/EnquiryForm.astro';
+
+// Fictional details. 01632 960 numbers are reserved by Ofcom for drama and examples.
+const phone = '01632 960418';
+const areas = ['Crieff', 'Comrie', 'Muthill', 'Auchterarder', 'Methven', 'Gilmerton', 'St Fillans', 'Braco'];
+---
+<DemoLayout
+  name="Ardvane Joinery"
+  tagline="Joinery and carpentry in Strathearn"
+  theme="joiner"
+  title="Joiner in Crieff and Strathearn"
+  description="Demonstration website for a fictional joinery business."
+  home="/demo/joiner/"
+  links={[{ href: '#services', label: 'Services' }, { href: '#work', label: 'Recent work' }, { href: '#areas', label: 'Areas' }, { href: '#quote', label: 'Get a quote' }]}
+  cta={{ href: `tel:${phone.replace(/\s/g, '')}`, label: `Call ${phone}` }}
+>
+  <Hero
+    tone="dark"
+    kicker="Strathearn · Fully insured · Free quotes"
+    title="Doors, kitchens, decking and repairs, done properly"
+    lead="A local joiner covering Crieff and the villages around it. Tell us what you need and we'll come and look, usually within the week."
+  >
+    <Fragment slot="actions">
+      <a class="btn btn-light" href="#quote">Ask for a free quote</a>
+      <a class="btn btn-secondary" style="color:#fff;border-color:#fff" href={`tel:${phone.replace(/\s/g, '')}`}>Call {phone}</a>
+    </Fragment>
+  </Hero>
+
+  <Section id="services" kicker="What we do" title="Joinery for homes across Strathearn">
+    <div class="grid-4">
+      <div class="card"><h3>Internal doors and skirting</h3><p class="muted">Supplied and fitted, hung square, with new handles and finishing.</p></div>
+      <div class="card"><h3>Kitchen fitting</h3><p class="muted">Flat-pack or made to measure, with worktops cut and fitted on site.</p></div>
+      <div class="card"><h3>Decking and garden rooms</h3><p class="muted">Timber decks, pergolas and small garden buildings built to last a Scottish winter.</p></div>
+      <div class="card"><h3>Repairs and small jobs</h3><p class="muted">Sticking doors, rotten window sills, broken stairs. No job too small.</p></div>
+    </div>
+  </Section>
+
+  <Section id="work" tone="surface" kicker="Recent work" title="A few recent jobs">
+    <Gallery items={[
+      { label: 'Oak internal doors, Comrie', bg: 'linear-gradient(135deg,#8A4B22,#5C3216)' },
+      { label: 'Kitchen fit, Crieff', bg: 'linear-gradient(135deg,#2B3238,#4D565D)' },
+      { label: 'Larch decking, Muthill', bg: 'linear-gradient(135deg,#B07A45,#8A4B22)' },
+      { label: 'Staircase repair, Auchterarder', bg: 'linear-gradient(135deg,#4D565D,#23292E)' },
+    ]} />
+    <p class="hint" style="margin-top:1rem">On a real website these would be the business's own photos.</p>
+  </Section>
+
+  <Section id="how" kicker="How quotes work" title="Simple, with no surprises">
+    <Steps items={[
+      { title: 'Tell us about the job', text: 'Use the form or call. A photo helps.' },
+      { title: 'We visit and measure', text: 'Usually within a week, at a time that suits you.' },
+      { title: 'Written quote', text: 'A fixed price in writing within two days of the visit.' },
+    ]} />
+  </Section>
+
+  <Section id="areas" tone="surface" kicker="Where we work" title="Areas we cover">
+    <p class="lead" style="margin-bottom:1.25rem">Based near Crieff, covering roughly 15 miles around.</p>
+    <ul class="ticks" style="columns: 2 12rem; display:block">{areas.map((a) => <li style="margin-bottom:.5rem">{a}</li>)}</ul>
+  </Section>
+
+  <Section id="reviews" kicker="Reviews" title="What customers say">
+    <div class="card"><p class="muted">On a real website, genuine customer reviews (with permission) or a link to Google reviews would go here. Demonstration sites never show invented reviews.</p></div>
+  </Section>
+
+  <Section id="faqs" tone="surface" title="Questions" narrow>
+    <FaqList items={[
+      { q: 'Do you charge for quotes?', a: 'No. Quotes and visits are free and there is no obligation.' },
+      { q: 'Are you insured?', a: 'Yes, with public liability insurance. We are happy to show the certificate.' },
+      { q: 'How soon can you start?', a: 'Small jobs are often fitted in within a couple of weeks. Larger work is booked further ahead, and we will give you a date with the quote.' },
+    ]} />
+  </Section>
+
+  <Section id="quote" kicker="Free quote" title="Ask for a quote">
+    <div class="grid-2">
+      <EnquiryForm mode="demo" formName="joiner-quote" submitLabel="Send quote request" fields={[
+        { id: 'name', label: 'Your name', required: true, half: true },
+        { id: 'phone', label: 'Phone number', type: 'tel', required: true, half: true },
+        { id: 'postcode', label: 'Postcode', required: true, hint: 'So we can check we cover your area', half: true },
+        { id: 'job', label: 'Type of job', type: 'select', required: true, options: ['Doors', 'Kitchen', 'Decking or garden', 'Repair', 'Something else'], half: true },
+        { id: 'details', label: 'Tell us about the job', type: 'textarea', required: true },
+      ]} />
+      <div class="card">
+        <h3>Prefer to call?</h3>
+        <p><a class="btn btn-primary" href={`tel:${phone.replace(/\s/g, '')}`}>Call {phone}</a></p>
+        <p class="muted">Monday to Friday, 8am to 5pm. Leave a message and we'll call back the same day.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Fragment slot="footer">
+    <div><h2>Ardvane Joinery</h2><p>Joinery and carpentry across Strathearn.</p></div>
+    <div><h2>Contact</h2><p>{phone}<br />hello@ardvane-joinery.example</p></div>
+    <div><h2>Hours</h2><p>Monday to Friday, 8am to 5pm</p></div>
+  </Fragment>
+</DemoLayout>

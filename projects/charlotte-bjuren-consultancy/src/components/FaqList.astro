@@ -1,0 +1,21 @@
+---
+// Accessible FAQ list. Pass items with q and a. Set schema to output FAQPage structured data.
+import { isDraft } from '../lib/site';
+interface Props { items: { q: string; a: string }[]; schema?: boolean }
+const { items, schema = false } = Astro.props;
+const strip = (s: string) => s.replace(/^\[DRAFT[^\]]*\]\s*/, '');
+const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: items.map((i) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: strip(i.a) } })) };
+const parts = (a: string) => { const m = a.match(/^(\[DRAFT[^\]]*\])\s*(.*)$/s); return m ? [m[1], m[2]] : [null, a]; };
+---
+<div class="faq">
+  {items.map((i) => {
+    const [d, text] = parts(i.a);
+    return (
+      <details>
+        <summary>{i.q}</summary>
+        <div class="answer">{d && <><mark class="draft">{d}</mark> </>}{text}</div>
+      </details>
+    );
+  })}
+</div>
+{schema && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}

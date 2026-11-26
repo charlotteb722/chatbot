@@ -1,0 +1,123 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '../layouts/MainLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import Steps from '../components/Steps.astro';
+import PriceCards from '../components/PriceCards.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { gbp } from '../lib/site';
+
+const packages = await getCollection('packages');
+const care = await getCollection('care');
+---
+<MainLayout
+  title="Websites and pricing"
+  description="Website design and redesigns for small businesses in Perthshire and the UK. Fixed prices from £395, website care from £29 a month, and no long contracts."
+>
+  <Hero
+    kicker="Websites and pricing"
+    title="A website that explains what you do and makes it easy to get in touch"
+    lead="New websites, redesigns, copywriting and the Google basics, all at fixed prices. You see the full cost, including running costs, before anything starts."
+  >
+    <Fragment slot="actions">
+      <a class="btn btn-primary" href="/contact/#book">Book a free chat</a>
+      <a class="btn btn-secondary" href="#packages">Compare packages</a>
+    </Fragment>
+  </Hero>
+
+  <Section id="included" tone="surface" kicker="In every website" title="What you get, whichever package you choose">
+    <div class="grid">
+      <div class="card"><h3>Works on every screen</h3><p class="muted">Designed for phones first, because that's where most of your customers will see it.</p></div>
+      <div class="card"><h3>Enquiries to your inbox</h3><p class="muted">A working enquiry form that sends messages straight to you, with spam filtering built in.</p></div>
+      <div class="card"><h3>Google basics done properly</h3><p class="muted">Page titles, descriptions, a sitemap and the structure Google needs to understand your site.</p></div>
+      <div class="card"><h3>Accessible and fast</h3><p class="muted">Readable text, good contrast and pages that load quickly, built to recognised accessibility guidelines.</p></div>
+      <div class="card"><h3>Yours from day one</h3><p class="muted">Domain, hosting and files in your name. No lock-in, no hidden ownership.</p></div>
+      <div class="card"><h3>No cookie banners</h3><p class="muted">I don't add tracking you don't need, so your visitors aren't greeted by a pop-up.</p></div>
+    </div>
+  </Section>
+
+  <Section id="packages" kicker="Packages" title="Website packages" intro="Prices are starting points for a typical project. Your quote is fixed once we've agreed what you need.">
+    <PriceCards items={packages} cta={{ href: '/contact/', label: 'Ask about this package' }} />
+
+    <h3 style="margin-top:3rem; margin-bottom:1rem">Side by side</h3>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Package comparison table">
+      <table>
+        <thead><tr><th scope="col">What's included</th>{packages.map((p) => <th scope="col">{p.data.name}</th>)}</tr></thead>
+        <tbody>
+          <tr><th scope="row">Starting price</th>{packages.map((p) => <td class="num">{gbp(p.data.price)}</td>)}</tr>
+          <tr><th scope="row">Pages</th><td>1 to 3</td><td>Up to 6</td><td>Up to 10</td></tr>
+          <tr><th scope="row">Copywriting</th><td>Light editing of your text</td><td>Written with you</td><td>Written with you</td></tr>
+          <tr><th scope="row">Enquiry form</th><td>Yes</td><td>Yes, with quote options</td><td>Yes, with quote options</td></tr>
+          <tr><th scope="row">Booking link</th><td>On request</td><td>Yes</td><td>Yes</td></tr>
+          <tr><th scope="row">SEO foundations</th><td>Basic</td><td>Local SEO for your areas</td><td>Local SEO for your areas</td></tr>
+          <tr><th scope="row">Google Business Profile</th><td>No</td><td>Checked and tidied</td><td>Checked and tidied</td></tr>
+          <tr><th scope="row">Gallery, menu or portfolio</th><td>No</td><td>Simple</td><td>Yes</td></tr>
+          <tr><th scope="row">Rounds of changes</th><td>1</td><td>2</td><td>2</td></tr>
+          <tr><th scope="row">Training call</th><td>Written guide</td><td>Written guide</td><td>30-minute call and guide</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </Section>
+
+  <Section id="offer" tone="surface" kicker="Introductory offer" title="Introductory prices for my first three website clients" narrow>
+    <div class="prose">
+      <p>I'm building my portfolio of real client work, so my first three website clients pay less:</p>
+      <ul>
+        {packages.map((p) => <li><strong>{p.data.name}:</strong> {gbp(p.data.introPrice ?? p.data.price)} instead of {gbp(p.data.price)}</li>)}
+      </ul>
+      <p>In return, I ask for permission to write up your project as a case study for this website, and for an honest review once it's live. That's the whole catch. If you'd rather not be featured, the standard prices apply.</p>
+    </div>
+  </Section>
+
+  <Section id="care" kicker="Website care" title="Website care plans" intro="Optional. For when you'd rather someone else kept an eye on things.">
+    <div class="price-grid">
+      {care.map(({ id, data: c }) => (
+        <article class="price-card" aria-labelledby={`care-${id}`} style="grid-template-rows:auto auto 1fr auto">
+          <h3 id={`care-${id}`}>{c.name}</h3>
+          <p class="price">{gbp(c.price)}<small> a month</small></p>
+          <ul class="ticks">{c.features.map((f) => <li>{f}</li>)}</ul>
+          <a class="btn btn-secondary" href={`/contact/?type=${encodeURIComponent('Website care')}#enquiry`}>Ask about care</a>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <Section id="running-costs" tone="surface" kicker="Running costs" title="What your website costs to run each year" narrow>
+    <div class="prose">
+      <p>This is the bit people are most often caught out by, so here it is plainly.</p>
+      <div class="table-wrap">
+        <table style="min-width:0">
+          <thead><tr><th scope="col">Item</th><th scope="col">Typical cost</th><th scope="col">Paid to</th></tr></thead>
+          <tbody>
+            <tr><td>Domain name (yourbusiness.co.uk)</td><td class="num">about £10 to £20 a year</td><td>Your domain registrar, directly</td></tr>
+            <tr><td>Hosting</td><td class="num">£0 for most small sites</td><td>A free hosting plan in your name</td></tr>
+            <tr><td>Email on your domain</td><td class="num">Optional, varies</td><td>Your chosen email provider</td></tr>
+            <tr><td>Website care</td><td class="num">Optional, £29 or £49 a month</td><td>Me</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>If your site needs something that costs money, like online payments or a paid booking system, I'll tell you what it costs and why before you decide.</p>
+    </div>
+  </Section>
+
+  <Section id="process" kicker="How it works" title="What happens, step by step">
+    <Steps items={[
+      { title: 'Free chat', text: 'We talk about your business, your customers and what the website needs to do.' },
+      { title: 'Quote and plan', text: 'A fixed written quote, what is included, running costs and a realistic date.' },
+      { title: 'Content and design', text: 'I write or edit the words with you and design the pages. A 50% deposit starts the work.' },
+      { title: 'Review and launch', text: 'You check everything before it goes live. The balance is due before launch.' },
+    ]} />
+  </Section>
+
+  <Section id="redesign" tone="surface" kicker="Already have a website?" title="Redesigns and rescues" narrow>
+    <div class="prose">
+      <p>If your current website is out of date, slow on phones or not bringing in enquiries, I can rebuild it, keeping what works. If you're not sure who controls your domain or hosting, I'll help you find out and get the accounts back into your name.</p>
+      <p><a href="/contact/?type=Redesign#enquiry">Ask about a redesign</a></p>
+    </div>
+  </Section>
+
+  <CtaBand title="Let's talk about your website" text="A free 30-minute chat. You'll get honest advice, even if that's to keep what you've got.">
+    <a class="btn btn-light" href="/contact/#book">Book a free chat</a>
+  </CtaBand>
+</MainLayout>

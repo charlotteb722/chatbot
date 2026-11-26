@@ -1,0 +1,17 @@
+# Monthly website care plans.
+- id: care
+  name: "Website Care"
+  price: 29
+  features:
+    - "Monthly check that the site and form are working"
+    - "Updates kept current"
+    - "Up to 30 minutes of small changes each month"
+    - "No minimum term. Cancel with 30 days' notice"
+- id: care-plus
+  name: "Website Care Plus"
+  price: 49
+  features:
+    - "Everything in Website Care"
+    - "Up to 90 minutes of changes each month"
+    - "A quarterly look at your enquiries and Google performance"
+    - "No minimum term. Cancel with 30 days' notice"

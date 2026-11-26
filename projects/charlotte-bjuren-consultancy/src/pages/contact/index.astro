@@ -1,0 +1,73 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Section from '../../components/Section.astro';
+import EnquiryForm from '../../components/EnquiryForm.astro';
+import Draft from '../../components/Draft.astro';
+import { getSite, isDraft } from '../../lib/site';
+const s = await getSite();
+const bookingReady = !isDraft(s.bookingUrl) && s.bookingUrl.startsWith('http');
+---
+<MainLayout title="Contact and free consultation" description="Book a free 30-minute chat or send an enquiry to Charlotte Bjuren about a website, website care, AI coaching or automation. Based in Crieff, Perthshire.">
+  <Hero kicker="Contact" title="Let's talk about your business" lead="Book a free 30-minute chat, or send a message and I'll reply within two working days." />
+
+  <Section id="book" tone="surface" kicker="Free consultation" title="Book a free 30-minute chat">
+    <div class="grid-2">
+      <div class="prose">
+        <p>We'll talk about your business, your customers and what you need. You'll get honest advice on whether a new website, a redesign or something else entirely would help most. There's no obligation and no sales pitch.</p>
+        <p>Chats are by video call, or in person around Crieff and Perthshire.</p>
+      </div>
+      <div class="card">
+        <h3>Choose a time</h3>
+        {bookingReady ? (
+          <>
+            <p class="muted">Pick a slot that suits you. You'll get a confirmation email straight away.</p>
+            <a class="btn btn-primary" href={s.bookingUrl} rel="noopener">See available times</a>
+            <p class="hint">Booking opens on Cal.com, a separate scheduling service.</p>
+          </>
+        ) : (
+          <>
+            <p><Draft value={s.bookingUrl} /></p>
+            <p class="muted">Until online booking is set up, ask for a chat using the form below and I'll suggest some times.</p>
+            <a class="btn btn-primary" href="#enquiry">Request a time</a>
+          </>
+        )}
+      </div>
+    </div>
+  </Section>
+
+  <Section id="enquiry" kicker="Send a message" title="Send an enquiry or ask for a quote">
+    <div class="grid-2">
+      <EnquiryForm
+        mode="live"
+        formName="enquiry"
+        submitLabel="Send my enquiry"
+        fields={[
+          { id: 'name', label: 'Your name', required: true, autocomplete: 'name', half: true },
+          { id: 'email', label: 'Email address', type: 'email', required: true, autocomplete: 'email', half: true },
+          { id: 'phone', label: 'Phone number', type: 'tel', autocomplete: 'tel', hint: 'Optional. Only if you would like a call back.', half: true },
+          { id: 'business', label: 'Business name', autocomplete: 'organization', hint: 'Optional', half: true },
+          { id: 'type', label: 'What can I help with?', type: 'select', required: true, options: ['A new website (not sure which package)', 'Website Essentials', 'Business Website', 'Business Website Plus', 'Redesign of an existing website', 'Website care', 'AI coaching', 'Automation', 'Something else'] },
+          { id: 'chat', label: 'Would you like a free 30-minute chat?', type: 'select', options: ['Yes, by video call', 'Yes, in person near Crieff', 'No, just reply by email'] },
+          { id: 'website', label: 'Current website, if you have one', hint: 'For example www.yourbusiness.co.uk', half: true },
+          { id: 'budget', label: 'Rough budget', type: 'select', options: ['Under £500', '£500 to £1,000', '£1,000 to £1,500', 'Over £1,500', 'Not sure yet'], half: true },
+          { id: 'message', label: 'Tell me a little about your business and what you need', type: 'textarea', required: true },
+        ]}
+      />
+      <aside class="stack" aria-label="Other ways to get in touch">
+        <div class="card">
+          <h3>Other ways to get in touch</h3>
+          <p><strong>Email:</strong> {isDraft(s.email) ? <Draft value={s.email} /> : <a href={`mailto:${s.email}`}>{s.email}</a>}</p>
+          {s.phone && <p><strong>Phone:</strong> <a href={`tel:${s.phone.replace(/\s/g, '')}`}>{s.phone}</a></p>}
+          <p><strong>Based in:</strong> {s.location}</p>
+          <p><strong>Areas:</strong> {s.areas}</p>
+          <p><strong>When:</strong> {s.hours}</p>
+        </div>
+        <div class="card">
+          <h3>What happens next</h3>
+          <p class="muted">I read every enquiry myself and reply within two working days. If a chat would help, I'll suggest a few times. Your details are only used to reply to you.</p>
+        </div>
+      </aside>
+    </div>
+  </Section>
+</MainLayout>
