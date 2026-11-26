@@ -18,7 +18,7 @@ const fid = (id: string) => `${formName}-${id}`;
 ---
 <form
   class="form"
-  id={formName}
+  id={`${formName}-form`}
   name={live ? formName : undefined}
   method={live ? 'POST' : undefined}
   action={live ? '/contact/thanks/' : undefined}

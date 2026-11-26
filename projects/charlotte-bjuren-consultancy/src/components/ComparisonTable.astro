@@ -1,0 +1,24 @@
+---
+/*
+  Feature comparison across options (packages, plans, programmes).
+  Wide screens: a normal table. Phones: one compact card per option, so nothing is cut off.
+  columns: option names. rows: [{ label, values: one per column }]
+*/
+interface Props { columns: string[]; rows: { label: string; values: string[] }[]; caption: string }
+const { columns, rows, caption } = Astro.props;
+---
+<div class="compare">
+  <table class="compare-table">
+    <caption class="visually-hidden">{caption}</caption>
+    <thead><tr><th scope="col">What's included</th>{columns.map((c) => <th scope="col">{c}</th>)}</tr></thead>
+    <tbody>{rows.map((r) => <tr><th scope="row">{r.label}</th>{r.values.map((v) => <td>{v}</td>)}</tr>)}</tbody>
+  </table>
+  <div class="compare-cards">
+    {columns.map((c, ci) => (
+      <section class="compare-card" aria-label={c}>
+        <h4>{c}</h4>
+        <dl>{rows.map((r) => <><dt>{r.label}</dt><dd>{r.values[ci]}</dd></>)}</dl>
+      </section>
+    ))}
+  </div>
+</div>

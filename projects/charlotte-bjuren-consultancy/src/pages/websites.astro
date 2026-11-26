@@ -6,6 +6,8 @@ import Section from '../components/Section.astro';
 import Steps from '../components/Steps.astro';
 import PriceCards from '../components/PriceCards.astro';
 import CtaBand from '../components/CtaBand.astro';
+import CostList from '../components/CostList.astro';
+import ComparisonTable from '../components/ComparisonTable.astro';
 import { gbp } from '../lib/site';
 
 const packages = await getCollection('packages');
@@ -42,25 +44,24 @@ const care = await getCollection('care');
 
     <p class="hint" style="margin-top:1rem">Delivery times start once I have your content and approvals.</p>
 
-    <h3 style="margin-top:3rem; margin-bottom:1rem">Side by side</h3>
-    <div class="table-wrap" tabindex="0" role="region" aria-label="Package comparison table">
-      <table>
-        <thead><tr><th scope="col">What's included</th>{packages.map((p) => <th scope="col">{p.data.name}</th>)}</tr></thead>
-        <tbody>
-          <tr><th scope="row">Starting price</th>{packages.map((p) => <td class="num">{gbp(p.data.price)}</td>)}</tr>
-          <tr><th scope="row">Typical delivery</th>{packages.map((p) => <td>{p.data.delivery}</td>)}</tr>
-          <tr><th scope="row">Pages</th><td>1 to 3</td><td>Up to 6</td><td>Up to 10</td></tr>
-          <tr><th scope="row">Copywriting</th><td>Light editing of your text</td><td>Written with you</td><td>Written with you</td></tr>
-          <tr><th scope="row">Enquiry form</th><td>Yes</td><td>Yes, with quote options</td><td>Yes, with quote options</td></tr>
-          <tr><th scope="row">Booking link</th><td>On request</td><td>Yes</td><td>Yes</td></tr>
-          <tr><th scope="row">SEO foundations</th><td>Basic</td><td>Local SEO for your areas</td><td>Local SEO for your areas</td></tr>
-          <tr><th scope="row">Google Business Profile</th><td>No</td><td>Checked and tidied</td><td>Checked and tidied</td></tr>
-          <tr><th scope="row">Gallery, menu or portfolio</th><td>No</td><td>Simple</td><td>Yes</td></tr>
-          <tr><th scope="row">Rounds of changes</th><td>1</td><td>2</td><td>2</td></tr>
-          <tr><th scope="row">Training call</th><td>Written guide</td><td>Written guide</td><td>30-minute call and guide</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <h3 style="margin-top:2.5rem; margin-bottom:1rem">Side by side</h3>
+    <ComparisonTable
+      caption="Website packages compared"
+      columns={packages.map((p) => p.data.name)}
+      rows={[
+        { label: 'Starting price', values: packages.map((p) => gbp(p.data.price)) },
+        { label: 'Typical delivery', values: packages.map((p) => p.data.delivery) },
+        { label: 'Pages', values: ['1 to 3', 'Up to 6', 'Up to 10'] },
+        { label: 'Copywriting', values: ['Light editing of your text', 'Written with you', 'Written with you'] },
+        { label: 'Enquiry form', values: ['Yes', 'Yes, with quote options', 'Yes, with quote options'] },
+        { label: 'Booking link', values: ['On request', 'Yes', 'Yes'] },
+        { label: 'SEO foundations', values: ['Basic', 'Local SEO for your areas', 'Local SEO for your areas'] },
+        { label: 'Google Business Profile', values: ['No', 'Checked and tidied', 'Checked and tidied'] },
+        { label: 'Gallery, menu or portfolio', values: ['No', 'Simple', 'Yes'] },
+        { label: 'Rounds of changes', values: ['1', '2', '2'] },
+        { label: 'Training', values: ['Written guide', 'Written guide', '30-minute call and guide'] },
+      ]}
+    />
   </Section>
 
   <Section id="offer" tone="surface" kicker="Introductory offer" title="Introductory prices for my first three website clients" narrow>
@@ -89,18 +90,13 @@ const care = await getCollection('care');
   <Section id="running-costs" tone="surface" kicker="Running costs" title="What your website costs to run each year" narrow>
     <div class="prose">
       <p>This is the bit people are most often caught out by, so here it is plainly.</p>
-      <div class="table-wrap">
-        <table style="min-width:0">
-          <thead><tr><th scope="col">Item</th><th scope="col">Typical cost</th><th scope="col">Paid to</th></tr></thead>
-          <tbody>
-            <tr><td>Domain name (yourbusiness.co.uk)</td><td class="num">about £10 to £20 a year</td><td>Your domain registrar, directly</td></tr>
-            <tr><td>Hosting</td><td class="num">£0 for most small sites</td><td>A free hosting plan in your name</td></tr>
-            <tr><td>Email on your domain</td><td class="num">Optional, varies</td><td>Your chosen email provider</td></tr>
-            <tr><td>Website care</td><td class="num">Optional, £29 or £49 a month</td><td>Me</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p>If your site needs something that costs money, like online payments or a paid booking system, I'll tell you what it costs and why before you decide.</p>
+      <CostList caption="Typical yearly running costs" items={[
+        { item: 'Domain name', cost: 'About £10 to £20 a year', note: 'Paid directly to your domain registrar.' },
+        { item: 'Website hosting', cost: 'From £0 where suitable', note: 'Free plans have usage limits set by the provider and can change, so I check which plan suits your site.' },
+        { item: 'Professional email', cost: 'Optional', note: 'Cost depends on the provider you choose.' },
+        { item: 'Website care', cost: 'Optional, £29 or £49 a month', note: 'Paid to me. No minimum term.' },
+      ]} />
+      <p>Any additional costs, such as online payments or a paid booking system, are discussed and agreed with you before work begins.</p>
     </div>
   </Section>
 

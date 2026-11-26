@@ -1,0 +1,22 @@
+---
+/*
+  Responsive cost or price list. A table on wider screens, compact stacked cards on phones.
+  items: [{ item, cost, note? }]. Use for running costs, price lists, simple two or three column data.
+*/
+interface Props { items: { item: string; cost: string; note?: string }[]; caption: string; costLabel?: string; noteLabel?: string }
+const { items, caption, costLabel = 'Typical cost', noteLabel = 'Notes' } = Astro.props;
+const hasNote = items.some((i) => i.note);
+---
+<table class="stack-table">
+  <caption class="visually-hidden">{caption}</caption>
+  <thead class="sr-only-mobile"><tr><th scope="col">Item</th><th scope="col">{costLabel}</th>{hasNote && <th scope="col">{noteLabel}</th>}</tr></thead>
+  <tbody>
+    {items.map((i) => (
+      <tr>
+        <th scope="row">{i.item}</th>
+        <td data-label={costLabel}><strong>{i.cost}</strong></td>
+        {hasNote && <td data-label={noteLabel}>{i.note}</td>}
+      </tr>
+    ))}
+  </tbody>
+</table>

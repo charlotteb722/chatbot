@@ -6,7 +6,7 @@
 - id: running-costs
   home: true
   q: "Are there any ongoing costs?"
-  a: "Your domain name renewal, which you pay to the registrar directly and is usually around £10 to £20 a year. Most small sites can be hosted on a free plan. Website Care at £29 a month is optional. If anything else would cost money, I tell you before you decide."
+  a: "Your domain name renewal, which you pay to the registrar directly and is usually around £10 to £20 a year. Hosting can start from £0 on a suitable free plan, within the provider's usage limits. Website Care at £29 or £49 a month is optional. Any additional costs are discussed and agreed before work begins."
 - id: ownership
   home: true
   q: "Will I own my website?"

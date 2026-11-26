@@ -5,7 +5,7 @@ const settings = defineCollection({
   loader: file('src/data/settings.yaml'),
   schema: z.object({
     name: z.string(), descriptor: z.string(), location: z.string(), areas: z.string(),
-    email: z.string(), phone: z.string().optional().default(''), bookingUrl: z.string(),
+    email: z.string(), emailVerified: z.boolean().optional().default(false), phone: z.string().optional().default(''), bookingUrl: z.string(),
     address: z.string(), headshot: z.string().optional().default(''), hours: z.string(), linkedin: z.string().optional().default(''),
   }),
 });

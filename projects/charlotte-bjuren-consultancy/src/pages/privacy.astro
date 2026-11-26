@@ -2,7 +2,7 @@
 import MainLayout from '../layouts/MainLayout.astro';
 import Section from '../components/Section.astro';
 import Draft from '../components/Draft.astro';
-import { getSite } from '../lib/site';
+import { getSite, legalEmail } from '../lib/site';
 const s = await getSite();
 ---
 <MainLayout title="Privacy notice" description="How Charlotte Bjuren collects, uses and stores personal information from this website, including enquiries and bookings.">
@@ -15,7 +15,7 @@ const s = await getSite();
 
       <h2>Who I am</h2>
       <p>This website is run by Charlotte Bjuren, a sole trader trading as {s.name} {s.descriptor}, based in {s.location}. I'm responsible for any personal information you give me through this website.</p>
-      <p>Contact: <Draft value={s.email} />. Postal address: <Draft value={s.address} />.</p>
+      <p>Contact: <Draft value={legalEmail(s)} />. Postal address: <Draft value={s.address} />.</p>
 
       <h2>What I collect</h2>
       <p>When you send an enquiry, I collect what you type into the form: your name, email address, and optionally your phone number, business name, current website, budget range and message.</p>

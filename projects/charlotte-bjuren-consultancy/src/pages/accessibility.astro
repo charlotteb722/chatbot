@@ -1,7 +1,6 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import Section from '../components/Section.astro';
-import Draft from '../components/Draft.astro';
 import { getSite } from '../lib/site';
 const s = await getSite();
 ---
@@ -21,7 +20,7 @@ const s = await getSite();
       <h2>Known issues</h2>
       <p>The booking service is run by a third party, Cal.com, and its accessibility is outside my control. If it gives you any difficulty, use the enquiry form or email me and I'll arrange a time with you directly.</p>
       <h2>Tell me about a problem</h2>
-      <p>If something doesn't work for you, please email <Draft value={s.email} /> and I'll fix it or get you the information another way.</p>
+      <p>If something doesn't work for you, please tell me through the <a href="/contact/">contact form</a> and I'll fix it or get you the information another way.</p>
     </div>
   </Section>
 </MainLayout>

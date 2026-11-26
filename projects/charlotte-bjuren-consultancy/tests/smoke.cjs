@@ -11,8 +11,12 @@ const problems = []; const ok = (c, m) => { if (!c) problems.push(m); };
 (async () => {
   const browser = await chromium.launch();
   const links = new Set();
-  for (const vp of [{ name: 'iphone', device: devices['iPhone 13'] }, { name: 'desktop', width: 1280, height: 800 }]) {
-    const ctx = await browser.newContext(vp.device ? { ...vp.device } : { viewport: { width: vp.width, height: vp.height } });
+  const iphone = devices['iPhone 13'];
+  const viewports = [320, 375, 390, 430].map((w) => ({ name: `phone-${w}`, phone: true, width: w, height: 800 })).concat([{ name: 'desktop', width: 1280, height: 800 }]);
+  for (const vp of viewports) {
+    const ctx = await browser.newContext(vp.phone
+      ? { ...iphone, viewport: { width: vp.width, height: vp.height }, screen: { width: vp.width, height: vp.height } }
+      : { viewport: { width: vp.width, height: vp.height } });
     for (const path of pages) {
       const page = await ctx.newPage(); const errs = [];
       page.on('console', (m) => m.type() === 'error' && errs.push(m.text()));
@@ -22,6 +26,23 @@ const problems = []; const ok = (c, m) => { if (!c) problems.push(m); };
       ok(!errs.length, `${path} [${vp.name}] console errors: ${errs.join(' | ')}`);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       ok(overflow <= 0, `${path} [${vp.name}] horizontal overflow ${overflow}px`);
+      // Anything sticking out of the screen, or clipped / scrolling inside its own box
+      const clipped = await page.evaluate(() => {
+        const W = document.documentElement.clientWidth; const out = [];
+        const name = (el) => el.tagName.toLowerCase() + (el.id ? '#' + el.id : '') + (el.className && typeof el.className === 'string' ? '.' + el.className.trim().split(/\s+/).join('.') : '');
+        for (const el of document.querySelectorAll('body *')) {
+          if (el.closest('.visually-hidden, .sr-only-mobile, .honey, .skip-link, [hidden], caption, script, style')) continue;
+          const cs = getComputedStyle(el);
+          if (cs.display === 'none' || cs.visibility === 'hidden') continue;
+          const r = el.getBoundingClientRect();
+          if (!r.width || !r.height) continue;
+          if (el.closest('svg') && el.tagName.toLowerCase() !== 'svg') continue;
+          if (r.right > W + 1 || r.left < -1) out.push(`${name(el)} extends past screen edge`);
+          else if (['hidden', 'auto', 'scroll', 'clip'].includes(cs.overflowX) && el.scrollWidth > el.clientWidth + 1 && !el.closest('svg')) out.push(`${name(el)} content clipped by ${el.scrollWidth - el.clientWidth}px`);
+        }
+        return [...new Set(out)].slice(0, 4);
+      });
+      clipped.forEach((c) => problems.push(`${path} [${vp.name}] ${c}`));
       const h1 = await page.locator('h1').count(); ok(h1 === 1, `${path} has ${h1} h1 elements`);
       if (path.startsWith('/demo/')) ok(await page.locator('.demo-banner').isVisible(), `${path} demo banner not visible`);
       if (vp.name === 'desktop') {
@@ -31,7 +52,7 @@ const problems = []; const ok = (c, m) => { if (!c) problems.push(m); };
           .map((v) => `${v.impact}: ${v.id} (${v.nodes.length}) ${v.nodes.slice(0, 2).map((n) => n.target.join(' ')).join(', ')}`));
         r.forEach((v) => problems.push(`${path} axe ${v}`));
       }
-      if (SHOTS && ['/', '/websites/', '/contact/', '/demo/joiner/', '/demo/coach/', '/demo/cafe/'].includes(path)) {
+      if (SHOTS && (vp.name === 'phone-320' || vp.name === 'phone-430' || vp.name === 'desktop') && ['/', '/websites/', '/about/', '/contact/', '/demo/joiner/', '/demo/coach/', '/demo/cafe/'].includes(path)) {
         await page.screenshot({ path: `${SHOTS}/${vp.name}${path.replace(/\//g, '_') || '_home'}.png`, fullPage: true });
       }
       await page.close();
@@ -48,6 +69,15 @@ const problems = []; const ok = (c, m) => { if (!c) problems.push(m); };
   await sh.goto(BASE + '/portfolio/joiner/');
   ok((await sh.locator('.share-url').textContent()) === BASE + '/demo/joiner/', 'share link not shown in full');
 
+  // Sticky header must not cover anchored sections
+  const hp = await (await browser.newContext({ ...iphone })).newPage();
+  for (const target of ['/contact/#enquiry', '/contact/#book', '/websites/#care', '/websites/#running-costs']) {
+    await hp.goto('about:blank'); await hp.goto(BASE + target); await hp.waitForTimeout(1500);
+    const id = target.split('#')[1];
+    const gap = await hp.evaluate((id) => document.getElementById(id).getBoundingClientRect().top - document.querySelector('.site-header').getBoundingClientRect().bottom, id);
+    ok(gap >= -1, `${target}: header covers the section by ${Math.round(-gap)}px`);
+  }
+
   // Mobile menu
   const m = await (await browser.newContext({ viewport: { width: 375, height: 800 } })).newPage();
   await m.goto(BASE + '/'); const btn = m.locator('.nav-toggle');
@@ -61,33 +91,33 @@ const problems = []; const ok = (c, m) => { if (!c) problems.push(m); };
   const f = await (await browser.newContext()).newPage();
   await f.goto(BASE + '/contact/?type=Business%20Website#enquiry');
   ok((await f.locator('#enquiry-type').inputValue()) === 'Business Website', 'package preselect failed');
-  const form = f.locator('form#enquiry');
+  const form = f.locator('form#enquiry-form');
   ok((await form.getAttribute('data-netlify')) === 'true', 'live form missing data-netlify');
   ok((await form.getAttribute('netlify-honeypot')) === 'bot-field', 'live form missing honeypot');
   ok((await f.locator('input[name=form-name]').getAttribute('value')) === 'enquiry', 'form-name hidden input missing');
-  await f.click('form#enquiry button[type=submit]');
+  await f.click('form#enquiry-form button[type=submit]');
   ok(f.url().includes('/contact/'), 'empty form navigated away');
   ok(await f.locator('#enquiry-name-error').isVisible(), 'no error for missing name');
   ok((await f.evaluate(() => document.activeElement.id)) === 'enquiry-name', 'focus not moved to first invalid field');
-  await f.fill('#enquiry-email', 'not-an-email'); await f.click('form#enquiry button[type=submit]');
+  await f.fill('#enquiry-email', 'not-an-email'); await f.click('form#enquiry-form button[type=submit]');
   ok((await f.locator('#enquiry-email-error').textContent()).includes('format'), 'no email format error');
 
   // Demo forms send nothing
   for (const [path, id] of [['/demo/joiner/', 'joiner-quote'], ['/demo/coach/', 'coach-call'], ['/demo/cafe/', 'cafe-groups']]) {
     const d = await (await browser.newContext()).newPage(); await d.goto(BASE + path);
-    ok((await d.locator(`form#${id} [name]`).count()) === 0, `${path} demo form has named fields`);
-    ok((await d.locator(`form#${id}`).getAttribute('action')) === null, `${path} demo form has an action`);
+    ok((await d.locator(`form#${id}-form [name]`).count()) === 0, `${path} demo form has named fields`);
+    ok((await d.locator(`form#${id}-form`).getAttribute('action')) === null, `${path} demo form has an action`);
     const sent = []; d.on('request', (r) => sent.push(r.url()));
-    for (const inp of await d.locator(`form#${id} input, form#${id} textarea`).all()) {
+    for (const inp of await d.locator(`form#${id}-form input, form#${id}-form textarea`).all()) {
       const t = await inp.getAttribute('type');
       await inp.fill(t === 'email' ? 'test@example.com' : t === 'date' ? '2027-01-15' : t === 'number' ? '6' : t === 'tel' ? '01632960000' : 'Test');
     }
-    for (const s of await d.locator(`form#${id} select`).all()) await s.selectOption({ index: 1 });
-    await d.click(`form#${id} button[type=submit]`); await d.waitForTimeout(300);
+    for (const s of await d.locator(`form#${id}-form select`).all()) await s.selectOption({ index: 1 });
+    await d.click(`form#${id}-form button[type=submit]`); await d.waitForTimeout(300);
     ok(sent.length === 0, `${path} demo form made requests: ${sent.join(', ')}`);
-    ok((await d.locator(`form#${id} .form-status`).textContent()).includes('demonstration'), `${path} demo message not shown`);
+    ok((await d.locator(`form#${id}-form .form-status`).textContent()).includes('demonstration'), `${path} demo message not shown`);
   }
   await browser.close();
-  console.log(problems.length ? `FAIL: ${problems.length} problem(s)\n - ${problems.join('\n - ')}` : `PASS: ${pages.length} pages x 2 viewports, ${links.size} internal links, menu, forms, cookies, axe`);
+  console.log(problems.length ? `FAIL: ${problems.length} problem(s)\n - ${problems.join('\n - ')}` : `PASS: ${pages.length} pages x ${viewports.length} viewports (320, 375, 390, 430, desktop), no clipping, ${links.size} internal links, menu, forms, cookies, axe`);
   process.exit(problems.length ? 1 : 0);
 })();

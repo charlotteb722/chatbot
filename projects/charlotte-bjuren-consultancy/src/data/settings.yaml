@@ -6,7 +6,10 @@ main:
   descriptor: "Website Development & Digital Consultancy"
   location: "Crieff, Perthshire, Scotland"
   areas: "Working with customers throughout the UK, and in person around Perthshire"
-  email: "[DRAFT: business email address]"
+  email: "hello@charlottebjuren.com"
+  # Set to true only after the mailbox is set up and a test email has been received.
+  # While false, the address is not shown on the site, and the legal pages show a draft marker.
+  emailVerified: false
   phone: ""   # Leave empty to hide the phone number everywhere.
   bookingUrl: "[DRAFT: Cal.com booking link]"
   # Postal address for the privacy notice and terms only. Never put a home address here without deciding to.

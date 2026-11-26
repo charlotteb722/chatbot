@@ -4,8 +4,9 @@ import Hero from '../../components/Hero.astro';
 import Section from '../../components/Section.astro';
 import EnquiryForm from '../../components/EnquiryForm.astro';
 import Draft from '../../components/Draft.astro';
-import { getSite, isDraft } from '../../lib/site';
+import { getSite, isDraft, publicEmail } from '../../lib/site';
 const s = await getSite();
+const email = publicEmail(s);
 const bookingReady = !isDraft(s.bookingUrl) && s.bookingUrl.startsWith('http');
 ---
 <MainLayout title="Contact and free consultation" description="Book a free 30-minute chat or send an enquiry to Charlotte Bjuren about a website, website care, AI coaching or automation. Based in Crieff, Perthshire.">
@@ -57,7 +58,7 @@ const bookingReady = !isDraft(s.bookingUrl) && s.bookingUrl.startsWith('http');
       <aside class="stack" aria-label="Other ways to get in touch">
         <div class="card">
           <h3>Other ways to get in touch</h3>
-          <p><strong>Email:</strong> {isDraft(s.email) ? <Draft value={s.email} /> : <a href={`mailto:${s.email}`}>{s.email}</a>}</p>
+          {email && <p><strong>Email:</strong> <a href={`mailto:${email}`}>{email}</a></p>}
           {s.phone && <p><strong>Phone:</strong> <a href={`tel:${s.phone.replace(/\s/g, '')}`}>{s.phone}</a></p>}
           <p><strong>Based in:</strong> {s.location}</p>
           <p><strong>Areas:</strong> {s.areas}</p>

@@ -40,7 +40,7 @@ Anything starting `[DRAFT:` shows as yellow highlighted text. `npm run check:dra
 
 ```
 src/data/        editable content (YAML)
-src/components/  reusable parts: header, hero, sections, pricing, FAQs, forms, gallery
+src/components/  reusable parts: header, hero, sections, pricing, CostList and ComparisonTable (stack into cards on phones), FAQs, forms, gallery
 src/layouts/     MainLayout (this site), DemoLayout (demo and client sites), BaseLayout (shared)
 src/styles/      global.css (components) and themes.css (one block of colours and fonts per site)
 src/pages/       pages; demo/ holds the three demonstration websites

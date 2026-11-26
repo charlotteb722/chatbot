@@ -18,6 +18,7 @@ Read `docs/project-status.md` first.
 1. `npm run build`
 2. `npm run preview` in the background, then `npm test` (must PASS)
 3. `npm run check:drafts` (lists what Charlotte still needs to supply)
+4. Look at real screenshots at 320px and 430px wide (pricing, tables, About, footer). Passing tests alone have missed layout problems before.
 
 ## Building a client site from these templates
 
