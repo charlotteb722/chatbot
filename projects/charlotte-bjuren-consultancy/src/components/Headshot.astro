@@ -2,11 +2,11 @@
 // Shows Charlotte's photo once settings.yaml has a headshot path. Renders nothing until then.
 import { getSite } from '../lib/site';
 interface Props { ratio?: string }
-const { ratio = '4 / 5' } = Astro.props;
+const { ratio = '1 / 1' } = Astro.props;
 const s = await getSite();
 ---
 {s.headshot && (
-  <figure class="card" style="margin:0;padding:0;overflow:hidden">
-    <img src={s.headshot} alt={`${s.name}, website developer and digital consultant`} width="800" height="1000" loading="lazy" style={`aspect-ratio:${ratio};object-fit:cover;width:100%`} />
+  <figure class="card headshot">
+    <img src={s.headshot} alt={`${s.name}, website developer and digital consultant`} width="800" height="800" loading="lazy" style={`aspect-ratio:${ratio};object-fit:cover;width:100%`} />
   </figure>
 )}

@@ -172,3 +172,5 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
 @media print { .site-header, .demo-banner, .nav-toggle { display: none; } }
 .grid-4 { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); }
 @media (min-width: 640px) and (max-width: 1023px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+.headshot { margin: 0; padding: 0; overflow: hidden; width: 100%; max-width: 420px; justify-self: center; }
+@media (max-width: 760px) { .headshot { order: -1; max-width: 240px; justify-self: start; } }

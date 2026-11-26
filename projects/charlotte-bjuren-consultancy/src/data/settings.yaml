@@ -11,6 +11,6 @@ main:
   bookingUrl: "[DRAFT: Cal.com booking link]"
   # Postal address for the privacy notice and terms only. Never put a home address here without deciding to.
   address: "[DRAFT: business address or address service, see launch checklist]"
-  headshot: ""   # e.g. "/images/charlotte.jpg" once the photo is in public/images/. Hidden while empty.
+  headshot: "/images/charlotte-bjuren.jpg"   # Leave empty ("") to hide the photo.
   hours: "Evenings and Saturdays. I reply to enquiries within two working days."
   linkedin: ""   # Optional full URL to your LinkedIn profile.
