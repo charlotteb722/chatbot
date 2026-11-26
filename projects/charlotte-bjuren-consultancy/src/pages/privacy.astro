@@ -1,8 +1,7 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import Section from '../components/Section.astro';
-import Draft from '../components/Draft.astro';
-import { getSite, legalEmail } from '../lib/site';
+import { getSite, publicEmail, telHref } from '../lib/site';
 const s = await getSite();
 ---
 <MainLayout title="Privacy notice" description="How Charlotte Bjuren collects, uses and stores personal information from this website, including enquiries.">
@@ -10,12 +9,11 @@ const s = await getSite();
     <div class="prose">
       <span class="kicker">Privacy notice</span>
       <h1>Privacy notice</h1>
-      <p class="note"><mark class="draft">[DRAFT: review before publishing]</mark> This notice describes how this website actually works. It should be checked against your own arrangements, and it is not legal advice. The ICO's free privacy notice generator for small businesses is a useful cross-check.</p>
-      <p><strong>Last updated:</strong> <Draft value="[DRAFT: date of publication]" /></p>
+      <p><strong>Last updated:</strong> November 2026</p>
 
       <h2>Who I am</h2>
       <p>This website is run by Charlotte Bjuren, a sole trader trading as {s.name} {s.descriptor}, based in {s.location}. I'm responsible for any personal information you give me through this website.</p>
-      <p>Contact: <Draft value={legalEmail(s)} />. Postal address: <Draft value={s.address} />.</p>
+      <p>To contact me about your information, call <a href={telHref(s.phone)}>{s.phone}</a>{publicEmail(s) && <>, email <a href={`mailto:${publicEmail(s)}`}>{publicEmail(s)}</a></>} or use the <a href="/contact/#enquiry">enquiry form</a>.</p>
 
       <h2>What I collect</h2>
       <p>When you send an enquiry, I collect what you type into the form: your name, email address, and optionally your phone number, business name, current website, budget range and message.</p>
@@ -33,13 +31,13 @@ const s = await getSite();
       <h2>Who else handles it</h2>
       <ul>
         <li><strong>Netlify</strong> hosts this website and receives and stores enquiry form submissions. Netlify is based in the United States.</li>
-        <li><strong>My email provider</strong> receives a copy of each enquiry: <Draft value="[DRAFT: name of your email provider]" />.</li>
+        <li><strong>My email provider</strong> receives a copy of each enquiry as a notification.</li>
       </ul>
-      <p>Where your information is handled outside the UK, I rely on these providers' data processing terms and the safeguards they offer under UK data protection law. <mark class="draft">[DRAFT: confirm Netlify transfer safeguards]</mark></p>
+      <p>Where your information is handled outside the UK, I rely on these providers' data processing terms and the safeguards they offer under UK data protection law.</p>
 
       <h2>How long I keep it</h2>
       <ul>
-        <li>Enquiries that don't lead to work: deleted after <Draft value="[DRAFT: 12 months]" />.</li>
+        <li>Enquiries that don't lead to work: deleted after 12 months.</li>
         <li>Client records: kept as long as tax law requires, usually six years after the end of the tax year.</li>
       </ul>
 

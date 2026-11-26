@@ -12,7 +12,7 @@ main:
   emailVerified: false
   phone: "07727 208418"   # Shown on the site. Leave empty ("") to hide it everywhere.
   # Postal address for the privacy notice and terms only. Never put a home address here without deciding to.
-  address: "[DRAFT: business address or address service, see launch checklist]"
+  address: "Crieff, Perthshire, Scotland"   # Before commercial launch: decide on a full geographic business address (see checklist).
   headshot: "cb-charlotte"   # Photo file name in src/assets/photos (without .jpg). Leave empty ("") to hide it.
   hours: "Evenings and Saturdays. I reply to enquiries within two working days."
   linkedin: ""   # Optional full URL to your LinkedIn profile.

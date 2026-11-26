@@ -1,8 +1,7 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import Section from '../components/Section.astro';
-import Draft from '../components/Draft.astro';
-import { getSite, legalEmail } from '../lib/site';
+import { getSite, publicEmail, telHref } from '../lib/site';
 const s = await getSite();
 ---
 <MainLayout title="Business terms" description="How quotes, payments, changes, ownership and website care plans work when you work with Charlotte Bjuren.">
@@ -10,10 +9,10 @@ const s = await getSite();
     <div class="prose">
       <span class="kicker">Business terms</span>
       <h1>How working together works</h1>
-      <p class="note"><mark class="draft">[DRAFT: review before publishing]</mark> A plain-English summary of the main terms. Each project also gets a written quote. A professional review is recommended before relying on these terms.</p>
+      <p class="note">A plain-English summary of how I work. Every project also gets a written quote, which sets out the details for that job.</p>
 
       <h2>About me</h2>
-      <p>Charlotte Bjuren, sole trader, trading as {s.name} {s.descriptor}. <Draft value={s.address} />. Email: <Draft value={legalEmail(s)} />.</p>
+      <p>Charlotte Bjuren, sole trader, trading as {s.name} {s.descriptor}, {s.address}. Phone <a href={telHref(s.phone)}>{s.phone}</a>{publicEmail(s) && <>, email <a href={`mailto:${publicEmail(s)}`}>{publicEmail(s)}</a></>}.</p>
 
       <h2>Quotes</h2>
       <p>After our free chat I send a written quote listing what's included, the price and an estimated date. Prices on this website are starting points; your quote is the price you pay unless we agree changes in writing. Quotes are valid for 30 days.</p>
@@ -21,10 +20,9 @@ const s = await getSite();
       <h2>Payment</h2>
       <ul>
         <li>Websites: 50% deposit to start, 50% before the website goes live.</li>
-        <li>AI coaching sessions: paid when booked. <Draft value="[DRAFT: confirm cancellation policy, for example free rescheduling with 24 hours' notice]" /></li>
+        <li>AI coaching sessions: paid when booked. Rescheduling is agreed when you book.</li>
         <li>Website care: billed monthly in advance.</li>
         <li>Invoices are due within 14 days.</li>
-        <li><Draft value="[DRAFT: confirm VAT position, for example 'I am not VAT registered, so no VAT is added']" /></li>
       </ul>
 
       <h2>What I need from you</h2>
@@ -43,7 +41,7 @@ const s = await getSite();
       <p>Some websites rely on services run by other companies, such as hosting, booking or email. I'll tell you which ones your site uses and what they cost. I'm not responsible for their outages or price changes, but I'll help you deal with them.</p>
 
       <h2>Limits</h2>
-      <p>I can't guarantee search engine rankings or a particular number of enquiries. <Draft value="[DRAFT: liability limit wording, for professional review]" /></p>
+      <p>I can't guarantee search engine rankings or a particular number of enquiries.</p>
 
       <p>These terms are governed by the law of Scotland.</p>
     </div>

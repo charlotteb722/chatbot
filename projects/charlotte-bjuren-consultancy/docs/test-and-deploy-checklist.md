@@ -63,4 +63,6 @@ Not legal advice. Worth a quick check with Business Gateway or an adviser.
 - **Business name.** If you trade under a name that is not just your own name, the business names rules may require your name and an address on the website and paperwork. Check whether "Charlotte Bjuren | Website Development & Digital Consultancy" counts.
 - **Consumer customers.** If you sell AI coaching or other services to individuals for their personal use (rather than businesses), consumer contract rules apply, including a 14-day cancellation right, which the terms would need to explain.
 - **ICO data protection fee.** Check whether you need to pay it.
+- **VAT, cancellation and liability.** The terms deliberately say nothing about VAT, AI session cancellations or limits of liability. Decide these (ideally with an adviser) and add them.
+- **Email.** Set `emailVerified: true` in `src/data/settings.yaml` once hello@charlottebjuren.com works.
 - **Privacy notice and terms.** Replace the remaining drafts and consider a professional review.
