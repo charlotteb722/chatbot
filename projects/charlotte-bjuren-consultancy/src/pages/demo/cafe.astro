@@ -1,97 +1,108 @@
 ---
 import DemoLayout from '../../layouts/DemoLayout.astro';
-import Hero from '../../components/Hero.astro';
 import Section from '../../components/Section.astro';
 import Gallery from '../../components/Gallery.astro';
 import EnquiryForm from '../../components/EnquiryForm.astro';
+import Photo from '../../components/Photo.astro';
 
 // On a client site these lists would live in a data file the owner can edit.
 const hours = [
-  ['Monday', 'Closed'], ['Tuesday', '9am to 4pm'], ['Wednesday', '9am to 4pm'], ['Thursday', '9am to 4pm'],
-  ['Friday', '9am to 4pm'], ['Saturday', '9am to 5pm'], ['Sunday', '10am to 4pm'],
+  ['Monday', 'Closed'], ['Tuesday', '8.30am to 4pm'], ['Wednesday', '8.30am to 4pm'], ['Thursday', '8.30am to 4pm'],
+  ['Friday', '8.30am to 4pm'], ['Saturday', '8.30am to 5pm'], ['Sunday', '9.30am to 4pm'],
 ];
 const menu = [
-  { section: 'Breakfast', items: [['Bacon roll on a fresh bap', '£4.50'], ['Porridge with berries and honey', '£5.00'], ['Eggs on sourdough', '£6.50']] },
-  { section: 'Lunch', items: [['Soup of the day with bread', '£5.50'], ['Cheese and chutney toastie', '£6.75'], ['Seasonal salad bowl', '£8.50']] },
-  { section: 'From the bakery', items: [['Cheese scone', '£2.80'], ['Millionaire’s shortbread', '£3.00'], ['Cake of the day', '£3.60']] },
+  { src: 'lb-loaf', alt: 'Sliced sourdough loaf on a wooden board', section: 'Bread', items: [['Country sourdough', '£4.80'], ['Seeded rye', '£4.50'], ['White bloomer', '£3.20']] },
+  { src: 'lb-croissants', alt: 'Two golden croissants dusted with flour', section: 'Pastries', items: [['Butter croissant', '£2.60'], ['Cardamom bun', '£3.20'], ['Pain au chocolat', '£2.90']] },
+  { src: 'lb-cake', alt: 'Chocolate layer cake with piped chocolate topping', section: 'Cakes and bakes', items: [['Chocolate fudge cake', '£4.20'], ['Millionaire’s shortbread', '£3.00'], ['Cheese scone', '£2.80']] },
+  { src: 'lb-lattes', alt: 'Two hands holding cups of coffee with latte art', section: 'Coffee', items: [['Flat white', '£3.30'], ['Cappuccino', '£3.40'], ['Filter coffee', '£2.90']] },
 ];
 ---
 <DemoLayout
   name="Larchfield Bakehouse"
-  tagline="Café and bakery"
+  tagline="Artisan bakery and café"
   theme="cafe"
-  title="Village café and bakery"
-  description="Demonstration website for a fictional village café."
+  title="Artisan bakery and café"
+  description="Demonstration website for a fictional village bakery and café."
   home="/demo/cafe/"
   links={[{ href: '#menu', label: 'Menu' }, { href: '#hours', label: 'Opening hours' }, { href: '#find', label: 'Find us' }, { href: '#groups', label: 'Groups' }]}
   cta={{ href: '#hours', label: 'Are we open?' }}
 >
-  <Hero
-    tone="surface"
-    kicker="Fresh every morning"
-    title="Home baking, good coffee and a warm seat by the window"
-    lead="A small village café baking on site every day. Walkers, dogs and muddy boots welcome."
-  >
-    <Fragment slot="actions">
-      <a class="btn btn-primary" href="#menu">See the menu</a>
-      <a class="btn btn-secondary" href="#find">How to find us</a>
-    </Fragment>
-    <div slot="art" class="card" style="background:var(--c-card);text-align:center;padding:2rem;gap:.5rem">
-      <p style="font-family:var(--font-script);font-size:2.2rem;color:var(--c-primary);line-height:1.1">Today's bake</p>
-      <p style="font-size:1.25rem;font-weight:600">Raspberry and white chocolate scones</p>
-      <p class="muted">Updated each morning</p>
+  <section class="photo-hero">
+    <div class="bg"><Photo src="lb-bread" alt="Rustic seeded loaves and wheat on a dark floured table" eager sizes="100vw" widths={[640, 1080, 1440, 1600]} /></div>
+    <div class="container">
+      <span class="kicker" style="font-family:var(--font-script);font-size:1.6rem;letter-spacing:0;text-transform:none">Baked here every morning</span>
+      <h1>Slow-proved bread, proper coffee and a warm seat by the window</h1>
+      <p class="lead">A small village bakery and café in the heart of Perthshire. Walkers, dogs and muddy boots welcome.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#menu">See today's menu</a>
+        <a class="btn btn-ghost-light" href="#find">How to find us</a>
+      </div>
     </div>
-  </Hero>
+  </section>
 
   <Section id="notice" narrow>
     <p class="note"><strong>Winter hours:</strong> from November to February we close at 3pm on weekdays. Thanks for your patience.</p>
   </Section>
 
-  <Section id="menu" kicker="Menu" title="What's on the menu">
-    <div class="grid">
+  <Section id="menu" kicker="Menu" title="Fresh from the oven" intro="Everything is baked on site from 5am. When it's gone, it's gone.">
+    <div class="menu-grid">
       {menu.map((m) => (
-        <div class="card">
-          <h3>{m.section}</h3>
-          <table style="min-width:0">
-            <caption class="visually-hidden">{m.section} menu</caption>
-            <tbody>{m.items.map(([n, p]) => <tr><td style="padding-left:0">{n}</td><td class="num" style="text-align:right;padding-right:0">{p}</td></tr>)}</tbody>
-          </table>
-        </div>
+        <article class="photo-card">
+          <div class="media"><Photo src={m.src} alt={m.alt} ratio="4 / 3" sizes="(min-width: 1000px) 25vw, (min-width: 560px) 50vw, 100vw" /></div>
+          <div class="body">
+            <h3>{m.section}</h3>
+            <ul class="menu-list">{m.items.map(([n, p]) => <li><span>{n}</span><span>{p}</span></li>)}</ul>
+          </div>
+        </article>
       ))}
     </div>
     <p class="hint" style="margin-top:1rem">Please tell us about any allergies when you order. Example menu for demonstration only.</p>
   </Section>
 
-  <Section id="gallery" tone="surface" kicker="Inside" title="Come in and see us">
+  <section class="section section-dark" aria-labelledby="coffee-title">
+    <div class="container split reverse">
+      <div class="media"><Photo src="lb-pour-over" alt="Barista pouring water over a coffee filter" ratio="4 / 3" sizes="(min-width: 800px) 45vw, 100vw" /></div>
+      <div class="copy">
+        <span class="kicker">Coffee</span>
+        <h2 id="coffee-title">Roasted in Scotland, made with care</h2>
+        <p class="lead">Our beans come from a small roaster just down the road. Espresso, filter or a pot of loose-leaf tea, with oat milk at no extra charge.</p>
+      </div>
+    </div>
+  </section>
+
+  <Section id="inside" kicker="Inside" title="Come in and stay a while">
     <Gallery items={[
-      { label: 'The counter', bg: 'linear-gradient(135deg,#A23B54,#6E2638)' },
-      { label: 'Fresh from the oven', bg: 'linear-gradient(135deg,#C08552,#8E5A33)' },
-      { label: 'The window seats', bg: 'linear-gradient(135deg,#6F8F6A,#4A6446)' },
+      { src: 'lb-interior-green', alt: 'Café interior full of plants with wooden tables and hanging lights', caption: 'The garden room', size: 'wide' },
+      { src: 'lb-pastry-case', alt: 'Glass counter filled with croissants and pastries', caption: 'The pastry counter', size: 'tall' },
+      { src: 'lb-counter', alt: 'Café counter with shelves of jars and pendant lights', caption: 'The bakery counter' },
+      { src: 'lb-interior', alt: 'Bright café seating area with mixed chairs and plants', caption: 'Plenty of seats', size: 'wide' },
+      { src: 'lb-coffees', alt: 'Two cups of cappuccino on a wooden table beside plants', caption: 'Flat whites' },
     ]} />
   </Section>
 
-  <Section id="hours" kicker="Opening hours" title="When we're open">
+  <Section id="hours" tone="surface" kicker="Opening hours" title="When we're open">
     <div class="grid-2">
       <div class="table-wrap">
-        <table style="min-width:0">
+        <table>
           <caption class="visually-hidden">Opening hours</caption>
           <tbody>{hours.map(([d, h]) => <tr><th scope="row">{d}</th><td>{h}</td></tr>)}</tbody>
         </table>
       </div>
       <div class="card" id="find">
         <h3>Find us</h3>
-        <p>Main Street, Larchfield (a fictional village in Perthshire).</p>
-        <p class="muted">Free parking beside the village hall. On a real website, a link to directions in Google Maps goes here.</p>
+        <p>Main Street, Larchfield, Perthshire (a fictional village).</p>
+        <p class="muted">Free parking beside the village hall. Step-free entrance and an accessible toilet.</p>
+        <p><strong>Phone:</strong> 01632 960733<br /><strong>Email:</strong> hello@larchfield-bakehouse.example</p>
         <p><a class="btn btn-secondary" href="#find" aria-disabled="true">Get directions (demo)</a></p>
       </div>
     </div>
   </Section>
 
-  <Section id="groups" tone="surface" kicker="Groups and occasions" title="Bringing a group?">
+  <Section id="groups" kicker="Groups and occasions" title="Bringing a group?">
     <div class="grid-2">
-      <div class="prose">
-        <p>We can seat walking groups, birthday teas and small gatherings of up to 16. Let us know a few days ahead and we'll have the big table ready.</p>
-        <p>We don't take bookings for tables of two to four. Just come along.</p>
+      <div class="stack">
+        <p class="lead">We can seat walking groups, birthday teas and small gatherings of up to 16. Let us know a few days ahead and we'll have the big table ready.</p>
+        <div class="media"><Photo src="lb-cookies" alt="Bowl of chocolate chip cookies on baking paper" ratio="16 / 10" sizes="(min-width: 800px) 45vw, 100vw" /></div>
       </div>
       <EnquiryForm mode="demo" formName="cafe-groups" submitLabel="Send group enquiry" fields={[
         { id: 'name', label: 'Your name', required: true, half: true },

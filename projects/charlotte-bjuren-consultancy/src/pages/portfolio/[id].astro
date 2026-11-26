@@ -1,9 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
 import MainLayout from '../../layouts/MainLayout.astro';
-import Hero from '../../components/Hero.astro';
 import Section from '../../components/Section.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import Photo from '../../components/Photo.astro';
 
 export async function getStaticPaths() {
   const items = await getCollection('portfolio');
@@ -13,14 +13,22 @@ const { entry } = Astro.props;
 const p = entry.data;
 ---
 <MainLayout title={`${p.name} (${p.demo ? 'demonstration' : 'case study'})`} description={p.summary}>
-  <Hero kicker={`${p.demo ? 'Demonstration website' : 'Client project'} · ${p.sector}`} title={p.name} lead={p.summary}>
-    <Fragment slot="actions">
-      <a class="btn btn-primary" href={p.url}>Open the website</a>
-      <a class="btn btn-secondary" href="/portfolio/">All projects</a>
-    </Fragment>
-  </Hero>
+  <section class="hero-pro">
+    <div class="container">
+      <div>
+        <span class="kicker">{p.demo ? 'Demonstration website' : 'Client project'} · {p.sector}</span>
+        <h1>{p.name}</h1>
+        <p class="lead">{p.summary}</p>
+        <div class="actions">
+          <a class="btn btn-primary" href={p.url}>View demo website</a>
+          <a class="btn btn-secondary" href="/portfolio/">All projects</a>
+        </div>
+      </div>
+      <div class="hero-visual"><Photo src={p.mockup} alt={`${p.name} website shown on a laptop and a phone`} eager sizes="(min-width: 900px) 50vw, 100vw" widths={[480, 800, 1200, 1600]} /></div>
+    </div>
+  </section>
   <Section tone="surface">
-    {p.demo && <p class="note" style="margin-bottom:2rem">This is a fictional business, created to show what a website for this kind of business could look like. It isn't a paying client.</p>}
+    {p.demo && <p class="note" style="margin-bottom:1.5rem">This is a fictional business, created to show what a website for this kind of business could look like. It isn't a paying client.</p>}
     <div class="grid-2">
       <div class="prose">
         <h2>What the website needs to do</h2>
@@ -28,7 +36,6 @@ const p = entry.data;
         <h2>What's on it</h2>
         <ul class="ticks">{p.features.map((f) => <li>{f}</li>)}</ul>
       </div>
-      <div class="stack">
       <div class="card">
         <h3>Share this demonstration</h3>
         <p class="muted">Send this link to anyone who'd like to see an example.</p>
@@ -39,12 +46,6 @@ const p = entry.data;
         </div>
         <p class="hint share-status" role="status" aria-live="polite"></p>
       </div>
-      <div class="card">
-        <h3>Colours</h3>
-        <div class="swatch-row" aria-hidden="true">{p.colours.map((c) => <span style={`background:${c}`}></span>)}</div>
-        <p class="muted">Each demonstration has its own identity, built from the same reusable parts as every site I make.</p>
-      </div>
-      </div>
     </div>
   </Section>
   <CtaBand title="Want a website like this?">
@@ -53,7 +54,7 @@ const p = entry.data;
 </MainLayout>
 
 <script>
-  // Show the full link for whichever address the site is on, and copy it on request.
+  // Show the full link for whichever address the site is on, and copy or share it on request.
   document.querySelectorAll<HTMLElement>('.share-url').forEach((el) => { el.textContent = location.origin + el.dataset.path; });
   document.querySelectorAll<HTMLButtonElement>('.share-copy').forEach((btn) => btn.addEventListener('click', async () => {
     const url = location.origin + btn.dataset.path;

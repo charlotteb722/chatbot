@@ -1,125 +1,163 @@
 ---
 import { getCollection } from 'astro:content';
 import MainLayout from '../layouts/MainLayout.astro';
-import Hero from '../components/Hero.astro';
-import HillsArt from '../components/HillsArt.astro';
 import Section from '../components/Section.astro';
 import Steps from '../components/Steps.astro';
 import PriceCards from '../components/PriceCards.astro';
 import FaqList from '../components/FaqList.astro';
-import CtaBand from '../components/CtaBand.astro';
 import Testimonials from '../components/Testimonials.astro';
 import Headshot from '../components/Headshot.astro';
-import { getSite as getSiteForPhoto } from '../lib/site';
-const hasPhoto = !!(await getSiteForPhoto()).headshot;
-import { getSite } from '../lib/site';
+import Photo from '../components/Photo.astro';
+import WorkCard from '../components/WorkCard.astro';
+import { getSite, gbp } from '../lib/site';
 
 const s = await getSite();
+const hasPhoto = !!s.headshot;
 const packages = await getCollection('packages');
+const care = await getCollection('care');
 const faqs = (await getCollection('faqs')).filter((f) => f.data.home).map((f) => f.data);
 const portfolio = await getCollection('portfolio');
+const from = gbp(Math.min(...packages.map((p) => p.data.price)));
+const careFrom = gbp(Math.min(...care.map((c) => c.data.price)));
+
+const services = [
+  { src: 'cb-desk', alt: 'Laptop on a bright desk showing a website, beside a plant and a second screen', title: 'Website design and development', text: `New websites and redesigns, written with you and built to bring in enquiries. Fixed prices from ${from}.`, href: '/websites/', link: 'Websites and pricing' },
+  { src: 'cb-together', alt: 'Three people working together around laptops at a café table', title: 'AI coaching', text: 'One-to-one sessions using AI on real tasks from your business. £95 for 90 minutes.', href: '/ai-and-automation/#coaching', link: 'AI coaching' },
+  { src: 'cb-workflow', alt: 'Hand pinning a card to a process map on a wall', title: 'Business automation', text: 'Simple automations for the admin you repeat every week. Small jobs from £150.', href: '/ai-and-automation/#automation', link: 'Automation' },
+  { src: 'cb-notebook', alt: 'Hand ticking off a checklist in a notebook', title: 'Digital business support', text: 'Practical help with Google Business Profile, Microsoft 365, email and the tools you already use.', href: '/contact/?type=Digital%20business%20support#enquiry', link: 'Ask about support' },
+  { src: 'cb-laptop', alt: 'Hands typing on a laptop keyboard', title: 'Website maintenance', text: `Monthly checks, updates and small changes from ${careFrom} a month. No minimum term.`, href: '/websites/#care', link: 'Care plans' },
+];
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   name: `${s.name} | ${s.descriptor}`,
-  url: 'https://charlottebjuren.com/',
   description: 'Website design, website care, AI coaching and business automation for small businesses in Perthshire and across the UK.',
-  areaServed: ['Crieff', 'Perthshire', 'United Kingdom'],
+  areaServed: ['Crieff', 'Perthshire', 'Scotland', 'United Kingdom'],
   address: { '@type': 'PostalAddress', addressLocality: 'Crieff', addressRegion: 'Perthshire', addressCountry: 'GB' },
-  priceRange: 'From £395',
+  priceRange: `From ${from}`,
 };
 ---
 <MainLayout
   title="Websites, AI and automation for small businesses in Perthshire"
-  description="Charlotte Bjuren builds websites for small businesses in Crieff, Perthshire and across the UK. You own everything, you know the running costs up front, and there are no long contracts."
+  description="Charlotte Bjuren builds professional websites for small businesses in Crieff, Perthshire and across the UK. You own everything, you know the running costs up front, and there are no long contracts."
   jsonLd={jsonLd}
 >
-  <Hero
-    kicker="Crieff, Perthshire · Websites, AI and automation"
-    title="Websites for small businesses, built around how you actually work"
-    lead="I help sole traders and small businesses across Perthshire and the UK get a website that brings in enquiries, costs little to run and belongs entirely to you."
-  >
-    <Fragment slot="actions">
-      <a class="btn btn-primary" href="/contact/#book">Book a free 30-minute chat</a>
-      <a class="btn btn-secondary" href="/websites/">See prices</a>
-    </Fragment>
-    <HillsArt slot="art" />
-  </Hero>
+  <section class="hero-pro">
+    <div class="container">
+      <div>
+        <span class="kicker eyebrow-rule">Crieff, Perthshire · Websites, AI and automation</span>
+        <h1>Websites for small businesses, built around how you actually work</h1>
+        <p class="lead">I design and build professional websites that bring in enquiries, cost little to run and belong entirely to you. Then I help you get more from the technology you already have.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="/contact/#book">Book a free 30-minute chat</a>
+          <a class="btn btn-secondary" href="/portfolio/">See example websites</a>
+        </div>
+        <ul class="chips"><li>Fixed prices from {from}</li><li>You own everything</li><li>No long contracts</li></ul>
+      </div>
+      <div class="hero-visual">
+        <Photo src="mock-hero" alt="A joinery website on a laptop and a café website on a phone, both designed by Charlotte Bjuren as demonstrations" eager sizes="(min-width: 900px) 50vw, 100vw" widths={[480, 800, 1200, 1600]} />
+      </div>
+    </div>
+  </section>
   <div class="stripe" aria-hidden="true"></div>
 
-  <Section id="problems" kicker="Sound familiar?" title="Most small business owners I speak to are stuck in one of these places">
-    <div class="grid-4">
-      <div class="card"><h3>No website, or one you're embarrassed by</h3><p class="muted">It was built years ago, it looks dated on a phone, and you're not sure who has the login.</p></div>
-      <div class="card"><h3>Everything runs through Facebook</h3><p class="muted">Social media works, but you don't control it, and customers who search Google can't find you.</p></div>
-      <div class="card"><h3>Paying for things you don't understand</h3><p class="muted">Hosting, SEO, plugins, a monthly fee. You'd just like to know what you're paying for and why.</p></div>
-      <div class="card"><h3>Curious about AI, but short of time</h3><p class="muted">You've heard it could help with admin and replies. You'd like someone to show you, with your own work.</p></div>
-    </div>
-  </Section>
-
-  <Section id="services" tone="surface" kicker="How I can help" title="Websites first, with practical help with technology afterwards">
-    <div class="grid">
-      <article class="card"><h3>Websites</h3><p class="muted">New websites and redesigns, with the words written with you and the Google basics set up properly. Fixed prices from £{packages.find((p) => p.id === 'essentials')?.data.price}.</p><a class="more" href="/websites/">Websites and pricing</a></article>
-      <article class="card"><h3>Website care</h3><p class="muted">I keep your site working, up to date and accurate, and make small changes when you need them. From £29 a month, no minimum term.</p><a class="more" href="/websites/#care">Care plans</a></article>
-      <article class="card"><h3>AI coaching and automation</h3><p class="muted">One-to-one help using AI for a real task in your business, and simple automations for the repetitive admin that eats your evenings.</p><a class="more" href="/ai-and-automation/">AI and automation</a></article>
-    </div>
-  </Section>
-
-  <Section id="promises" kicker="What you can count on" title="Three things I promise every client">
-    <div class="grid">
-      <div class="card"><h3>You own everything</h3><p class="muted">Your domain, hosting and website files are in your name from day one. If you ever want to move, you take it all with you.</p></div>
-      <div class="card"><h3>You know the costs up front</h3><p class="muted">A fixed quote before any work starts, and a plain list of what the website will cost to run each year. Any additional costs are agreed with you first.</p></div>
-      <div class="card"><h3>No long contracts</h3><p class="muted">Care plans are month to month. Stop whenever you like with 30 days' notice.</p></div>
-    </div>
-  </Section>
-
-  <Section id="how" tone="surface" kicker="How it works" title="From first chat to a live website">
-    <Steps items={[
-      { title: 'A free chat', text: 'Thirty minutes, by video or in person around Crieff. You tell me about your business and customers, and I tell you honestly what would help.' },
-      { title: 'A clear plan and a fixed price', text: 'You get a written quote saying what is included, what it costs, what it will cost to run, and when it will be ready.' },
-      { title: 'Build, check and launch', text: 'I build it and you review it before anything goes live. Then I show you how to make simple changes yourself.' },
-    ]} />
-  </Section>
-
-  <Section id="pricing" kicker="Pricing" title="Fixed prices, so you know where you stand" intro="Every website includes mobile-friendly design, an enquiry form, Google basics and accounts in your name.">
-    <PriceCards items={packages} compact cta={{ href: '/contact/', label: 'Ask about this' }} />
-    <p class="note" style="margin-top:1.5rem"><strong>Introductory offer:</strong> my first three website clients pay £299, £599 or £999, in return for letting me write up the project as a case study and asking for an honest review. <a href="/websites/#offer">How the offer works</a>.</p>
-  </Section>
-
-  <Section id="work" tone="surface" kicker="Portfolio" title="See what your website could look like" intro="These three demonstration websites are for fictional businesses. They show the kind of site I build for trades, coaches and cafés.">
-    <div class="grid">
-      {portfolio.map(({ id, data: p }) => (
-        <article class="card">
-          <div class="swatch-row" aria-hidden="true">{p.colours.map((c) => <span style={`background:${c}`}></span>)}</div>
-          <span class="tag">Demonstration · {p.sector}</span>
-          <h3>{p.name}</h3>
-          <p class="muted">{p.summary}</p>
-          <a class="more" href={`/portfolio/${id}/`}>About this project</a>
+  <Section id="services" kicker="Services" title="Everything a small business needs to work well online" intro="Start with a website, then add help where it saves you time. Each service is priced clearly.">
+    <div class="bento">
+      {services.map((sv, i) => (
+        <article class="photo-card">
+          <div class="media"><Photo src={sv.src} alt={sv.alt} ratio={i === 0 ? undefined : '16 / 10'} sizes={i === 0 ? '(min-width: 1000px) 40vw, 100vw' : '(min-width: 1000px) 30vw, (min-width: 560px) 50vw, 100vw'} /></div>
+          <div class="body">
+            <h3>{sv.title}</h3>
+            <p class="muted">{sv.text}</p>
+            <a class="more" href={sv.href}>{sv.link}</a>
+          </div>
         </article>
       ))}
     </div>
   </Section>
 
-  <Section id="about" kicker="About me" title="A business analyst who builds websites">
-    <div class:list={[hasPhoto ? 'grid-2' : 'narrow']}>
-      <div class="prose">
-        <p>I'm Charlotte, an experienced Business Analyst and technology professional based in Crieff. I have always been interested in how technology can help people solve everyday problems, and I have seen how the right technology can make a business more efficient and easier to run.</p>
-        <p>I bring the same approach to small business websites. Before thinking about colours or fonts, I want to understand what you do, who your customers are and what you need them to do next. The website comes out of that.</p>
-        <p><a href="/about/">More about me and how I work</a></p>
+  <section class="section section-surface" aria-labelledby="familiar-title">
+    <div class="container split">
+      <div class="media"><Photo src="cb-typing" alt="Person in a mustard jumper working on a laptop at a wooden table" ratio="4 / 3" sizes="(min-width: 800px) 45vw, 100vw" /></div>
+      <div class="copy">
+        <span class="kicker">Sound familiar?</span>
+        <h2 id="familiar-title">Most business owners I speak to are stuck in one of these places</h2>
+        <ul class="ticks">
+          <li>No website, or one that looks dated on a phone</li>
+          <li>Everything runs through Facebook or Instagram</li>
+          <li>Paying for hosting or SEO without knowing what you get</li>
+          <li>Curious about AI, but short of time to work it out</li>
+        </ul>
+        <p><a class="btn btn-secondary" href="/contact/#book">Talk it through for free</a></p>
       </div>
-      <Headshot />
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="promise-title">
+    <div class="container split reverse">
+      <div class="media"><Photo src="cb-planning" alt="Two people planning together with laptops and a notepad" ratio="4 / 3" sizes="(min-width: 800px) 45vw, 100vw" /></div>
+      <div class="copy">
+        <span class="kicker">Business analysis first</span>
+        <h2 id="promise-title">I start with how your business works, then build</h2>
+        <p class="lead">Before colours and fonts, I want to understand what you do, who your customers are and what you need them to do next.</p>
+        <ul class="facts">
+          <li><strong>You own it</strong><span class="muted">Domain, hosting and files in your name</span></li>
+          <li><strong>Costs up front</strong><span class="muted">A fixed quote and yearly running costs</span></li>
+          <li><strong>No lock-in</strong><span class="muted">Care plans month to month</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <Section id="work" tone="surface" kicker="Portfolio" title="See what your website could look like" intro="Three demonstration websites for fictional businesses, each with its own look. Open them on your phone and explore.">
+    <div class="work-grid compact">
+      {portfolio.map(({ id, data }) => <WorkCard id={id} data={data} compact />)}
     </div>
   </Section>
+
+  <Section id="how" kicker="How it works" title="From first chat to a live website">
+    <Steps items={[
+      { title: 'A free chat', text: 'Thirty minutes, by video or in person around Crieff. You tell me about your business, I tell you honestly what would help.' },
+      { title: 'A plan and a fixed price', text: 'A written quote with what is included, the running costs and a delivery date.' },
+      { title: 'Build, check and launch', text: 'You review everything before it goes live, then I show you how to make simple changes.' },
+    ]} />
+  </Section>
+
+  <Section id="pricing" tone="surface" kicker="Pricing" title="Fixed prices, so you know where you stand" intro="Every website includes mobile-friendly design, an enquiry form, Google basics and accounts in your name.">
+    <PriceCards items={packages} compact cta={{ href: '/contact/', label: 'Ask about this' }} />
+    <p class="note" style="margin-top:1.25rem"><strong>Introductory offer:</strong> my first three website clients pay £299, £599 or £999 in return for a case study and an honest review. <a href="/websites/#offer">How the offer works</a>.</p>
+  </Section>
+
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class:list={['container', hasPhoto ? 'split' : 'narrow']}>
+      <Headshot />
+      <div class="copy">
+        <span class="kicker">About me</span>
+        <h2 id="about-title">A business analyst who builds websites</h2>
+        <p>I'm Charlotte, an experienced Business Analyst and technology professional based in Crieff. I have always been interested in how technology can help people solve everyday problems, and I have seen how the right technology can make a business more efficient and easier to run.</p>
+        <p><a class="more" href="/about/">More about me and how I work</a></p>
+      </div>
+    </div>
+  </section>
 
   <Testimonials />
 
   <Section id="faqs" tone="surface" kicker="Questions" title="Common questions" narrow>
     <FaqList items={faqs} />
-    <p style="margin-top:1.5rem"><a href="/faqs/">All frequently asked questions</a></p>
+    <p style="margin-top:1.25rem"><a href="/faqs/">All frequently asked questions</a></p>
   </Section>
 
-  <CtaBand title="Not sure what you need?" text="That's what the free chat is for. Thirty minutes, no obligation, and you'll come away with a clearer idea either way.">
-    <a class="btn btn-light" href="/contact/#book">Book a free chat</a>
-    <a class="btn btn-secondary" style="color:var(--c-on-dark);border-color:var(--c-on-dark)" href="/contact/">Send a message</a>
-  </CtaBand>
+  <section class="photo-band" aria-labelledby="cta-title">
+    <div class="bg"><Photo src="cb-interior" alt="" sizes="100vw" widths={[640, 1080, 1600]} /></div>
+    <div class="container">
+      <span class="kicker" style="color:var(--c-on-dark-accent)">Free consultation</span>
+      <h2 id="cta-title">Not sure what you need? That's what the free chat is for.</h2>
+      <p>Thirty minutes, no obligation. You'll come away with a clearer idea either way.</p>
+      <div class="actions">
+        <a class="btn btn-light" href="/contact/#book">Book a free chat</a>
+        <a class="btn btn-ghost-light" href="/contact/">Send a message</a>
+      </div>
+    </div>
+  </section>
 </MainLayout>

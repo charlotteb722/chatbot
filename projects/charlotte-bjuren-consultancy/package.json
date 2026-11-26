@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "check:drafts": "node scripts/check-drafts.mjs --strict",
     "test": "node tests/smoke.cjs",
-    "build:netlify": "astro build && node scripts/check-drafts.mjs"
+    "build:netlify": "astro build && node scripts/check-drafts.mjs",
+    "mockups": "node scripts/make-mockups.cjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.6",

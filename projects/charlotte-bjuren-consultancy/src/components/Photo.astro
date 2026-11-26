@@ -1,0 +1,35 @@
+---
+/*
+  Responsive photo. Pass the file name from src/assets/photos or src/assets/mockups (without extension).
+  Astro generates WebP versions at several widths, so phones download small files.
+*/
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+const all = import.meta.glob<{ default: ImageMetadata }>('../assets/{photos,mockups}/*.{jpg,png}', { eager: true });
+
+interface Props {
+  src: string; alt: string; sizes?: string; class?: string; eager?: boolean;
+  ratio?: string; position?: string; widths?: number[];
+}
+const { src, alt, sizes = '(min-width: 1100px) 50vw, 100vw', class: cls, eager = false, ratio, position = 'center', widths = [420, 720, 1080, 1440] } = Astro.props;
+const key = Object.keys(all).find((k) => k.endsWith(`/${src}.jpg`) || k.endsWith(`/${src}.png`));
+if (!key) throw new Error(`Photo not found: ${src}`);
+const img = all[key].default;
+const w = widths.filter((x) => x <= img.width);
+if (!w.length) w.push(img.width);
+const style = `${ratio ? `aspect-ratio:${ratio};` : ''}object-fit:cover;object-position:${position};width:100%;${ratio ? 'height:auto;' : 'height:100%;'}`;
+---
+<Picture
+  src={img}
+  alt={alt}
+  widths={w}
+  sizes={sizes}
+  formats={['webp']}
+  fallbackFormat={src.startsWith('mock') ? 'png' : 'jpg'}
+  loading={eager ? 'eager' : 'lazy'}
+  decoding="async"
+  fetchpriority={eager ? 'high' : undefined}
+  class={cls}
+  style={style}
+/>

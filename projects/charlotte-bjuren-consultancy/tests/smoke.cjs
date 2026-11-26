@@ -45,6 +45,16 @@ const problems = []; const ok = (c, m) => { if (!c) problems.push(m); };
       clipped.forEach((c) => problems.push(`${path} [${vp.name}] ${c}`));
       const h1 = await page.locator('h1').count(); ok(h1 === 1, `${path} has ${h1} h1 elements`);
       if (path.startsWith('/demo/')) ok(await page.locator('.demo-banner').isVisible(), `${path} demo banner not visible`);
+      if (vp.name === 'desktop' || vp.name === 'phone-390') {
+        // Every image must actually load (scroll so lazy images are requested)
+        await page.evaluate(async () => { for (let y = 0; y <= document.body.scrollHeight; y += 400) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 120)); } window.scrollTo(0, document.body.scrollHeight); await new Promise((r) => setTimeout(r, 400)); });
+        await page.waitForLoadState('networkidle');
+        await page.waitForFunction(() => [...document.querySelectorAll('img')].every((i) => i.complete), null, { timeout: 10000 }).catch(() => {});
+        const broken = await page.evaluate(() => [...document.querySelectorAll('img')].filter((i) => !i.complete || i.naturalWidth === 0).map((i) => i.getAttribute('src')));
+        ok(!broken.length, `${path} [${vp.name}] images not loaded: ${broken.slice(0, 3).join(', ')}`);
+        const noAlt = await page.evaluate(() => [...document.querySelectorAll('img:not([alt])')].length);
+        ok(noAlt === 0, `${path} has ${noAlt} images without alt attributes`);
+      }
       if (vp.name === 'desktop') {
         (await page.$$eval('a[href^="/"]', (as) => as.map((a) => a.getAttribute('href')))).forEach((h) => links.add(h.split('#')[0].split('?')[0]));
         await page.addScriptTag({ content: axeSrc });
@@ -107,7 +117,7 @@ const problems = []; const ok = (c, m) => { if (!c) problems.push(m); };
     const d = await (await browser.newContext()).newPage(); await d.goto(BASE + path);
     ok((await d.locator(`form#${id}-form [name]`).count()) === 0, `${path} demo form has named fields`);
     ok((await d.locator(`form#${id}-form`).getAttribute('action')) === null, `${path} demo form has an action`);
-    const sent = []; d.on('request', (r) => sent.push(r.url()));
+    const sent = []; d.on('request', (r) => { if (r.method() !== 'GET' || ['document', 'xhr', 'fetch'].includes(r.resourceType())) sent.push(`${r.method()} ${r.url()}`); });
     for (const inp of await d.locator(`form#${id}-form input, form#${id}-form textarea`).all()) {
       const t = await inp.getAttribute('type');
       await inp.fill(t === 'email' ? 'test@example.com' : t === 'date' ? '2027-01-15' : t === 'number' ? '6' : t === 'tel' ? '01632960000' : 'Test');

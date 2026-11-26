@@ -20,6 +20,12 @@ Read `docs/project-status.md` first.
 3. `npm run check:drafts` (lists what Charlotte still needs to supply)
 4. Look at real screenshots at 320px and 430px wide (pricing, tables, About, footer). Passing tests alone have missed layout problems before.
 
+## Images
+
+- Only use photos you can show are licensed. Record each one in `src/assets/photos/CREDITS.md`.
+- Use the `Photo` component (responsive WebP). No colour blocks or empty boxes in place of photos.
+- After changing a demo, regenerate mockups with `npm run mockups` (needs `npm run preview` running).
+
 ## Building a client site from these templates
 
 Aim: a straightforward client site in a few hours.

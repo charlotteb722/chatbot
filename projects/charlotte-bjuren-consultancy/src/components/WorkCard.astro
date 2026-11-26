@@ -1,0 +1,26 @@
+---
+// Portfolio card: large laptop-and-phone mockup, details, and links to the live demo and project page.
+import Photo from './Photo.astro';
+interface Props {
+  id: string; compact?: boolean; headingLevel?: 'h2' | 'h3';
+  data: { demo: boolean; name: string; sector: string; summary: string; url: string; features: string[]; mockup: string };
+}
+const { id, data: p, compact = false, headingLevel = 'h3' } = Astro.props;
+const H = headingLevel;
+const features = compact ? p.features.slice(0, 3) : p.features;
+---
+<article class="work-card">
+  <a class="shot" href={p.url} tabindex="-1" aria-hidden="true">
+    <Photo src={p.mockup} alt="" sizes={compact ? '(min-width: 900px) 33vw, 100vw' : '(min-width: 900px) 58vw, 100vw'} widths={[480, 800, 1200, 1600]} />
+  </a>
+  <div class="body">
+    <span class="tag">{p.demo ? 'Demonstration' : 'Client project'} · {p.sector}</span>
+    <H>{p.name}</H>
+    <p class="muted">{p.summary}</p>
+    <ul class="ticks">{features.map((f) => <li>{f}</li>)}</ul>
+    <div class="links">
+      <a class="btn btn-primary" href={p.url}>View demo website</a>
+      <a href={`/portfolio/${id}/`}>About this project</a>
+    </div>
+  </div>
+</article>

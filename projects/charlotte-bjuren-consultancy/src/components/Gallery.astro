@@ -1,8 +1,14 @@
 ---
-// Stand-in tiles for photos. Replace with <img> elements when real, licensed photos are available.
-interface Props { items: { label: string; bg: string }[] }
+// Photo gallery. items: { src (photo file name), alt, caption?, size?: 'wide' | 'tall' }
+import Photo from './Photo.astro';
+interface Props { items: { src: string; alt: string; caption?: string; size?: 'wide' | 'tall' }[] }
 const { items } = Astro.props;
 ---
-<ul class="gallery" role="list" style="list-style:none;padding:0">
-  {items.map((t) => <li class="tile" style={`background:${t.bg}`}><span>{t.label}</span></li>)}
-</ul>
+<div class="photo-grid">
+  {items.map((p) => (
+    <figure class={p.size}>
+      <Photo src={p.src} alt={p.alt} ratio={p.size === 'tall' ? undefined : p.size === 'wide' ? '2 / 1' : '1 / 1'} sizes="(min-width: 760px) 25vw, 50vw" widths={[360, 720, 1080]} />
+      {p.caption && <figcaption>{p.caption}</figcaption>}
+    </figure>
+  ))}
+</div>

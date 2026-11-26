@@ -28,7 +28,7 @@ const portfolio = defineCollection({
   loader: file('src/data/portfolio.yaml'),
   schema: z.object({
     demo: z.boolean(), name: z.string(), sector: z.string(), summary: z.string(), url: z.string(),
-    goal: z.string(), features: z.array(z.string()), colours: z.array(z.string()),
+    goal: z.string(), features: z.array(z.string()), mockup: z.string(),
   }),
 });
 const testimonials = defineCollection({

@@ -21,6 +21,12 @@ Rules for YAML files: keep the indentation exactly as it is, and keep text insid
 
 Longer page text is in `src/pages/` (one file per page). The AI coaching price sits in `src/pages/ai-and-automation.astro`.
 
+## Photos and mockups
+
+- Photos live in `src/assets/photos/` (licence record in `CREDITS.md` there). Use them with `<Photo src="file-name" alt="..." />`; Astro makes small WebP versions for phones automatically.
+- To swap your headshot, replace `src/assets/photos/cb-charlotte.jpg`.
+- Portfolio mockups are made from real screenshots: run `npm run preview`, then `npm run mockups`. Rerun it after changing a demo site.
+
 ## Placeholders
 
 Anything starting `[DRAFT:` shows as yellow highlighted text. `npm run check:drafts` lists every one left. It must report none before launch.

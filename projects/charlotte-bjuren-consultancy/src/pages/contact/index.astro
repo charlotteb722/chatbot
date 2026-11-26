@@ -48,7 +48,7 @@ const bookingReady = !isDraft(s.bookingUrl) && s.bookingUrl.startsWith('http');
           { id: 'email', label: 'Email address', type: 'email', required: true, autocomplete: 'email', half: true },
           { id: 'phone', label: 'Phone number', type: 'tel', autocomplete: 'tel', hint: 'Optional. Only if you would like a call back.', half: true },
           { id: 'business', label: 'Business name', autocomplete: 'organization', hint: 'Optional', half: true },
-          { id: 'type', label: 'What can I help with?', type: 'select', required: true, options: ['A new website (not sure which package)', 'Website Essentials', 'Business Website', 'Business Website Plus', 'Redesign of an existing website', 'Website care', 'AI coaching', 'Automation', 'Something else'] },
+          { id: 'type', label: 'What can I help with?', type: 'select', required: true, options: ['A new website (not sure which package)', 'Website Essentials', 'Business Website', 'Business Website Plus', 'Redesign of an existing website', 'Website care', 'AI coaching', 'Automation', 'Digital business support', 'Something else'] },
           { id: 'chat', label: 'Would you like a free 30-minute chat?', type: 'select', options: ['Yes, by video call', 'Yes, in person near Crieff', 'No, just reply by email'] },
           { id: 'website', label: 'Current website, if you have one', hint: 'For example www.yourbusiness.co.uk', half: true },
           { id: 'budget', label: 'Rough budget', type: 'select', options: ['Under £500', '£500 to £1,000', '£1,000 to £1,500', 'Over £1,500', 'Not sure yet'], half: true },

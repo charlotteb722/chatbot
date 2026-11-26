@@ -1,12 +1,11 @@
 ---
-// Shows Charlotte's photo once settings.yaml has a headshot path. Renders nothing until then.
+// Charlotte's photo, once settings.yaml has a headshot file name. Renders nothing until then.
+import Photo from './Photo.astro';
 import { getSite } from '../lib/site';
-interface Props { ratio?: string }
-const { ratio = '1 / 1' } = Astro.props;
 const s = await getSite();
 ---
 {s.headshot && (
-  <figure class="card headshot">
-    <img src={s.headshot} alt={`${s.name}, website developer and digital consultant`} width="800" height="800" loading="lazy" style={`aspect-ratio:${ratio};object-fit:cover;width:100%`} />
+  <figure class="headshot">
+    <Photo src={s.headshot} alt={`${s.name}, website developer and digital consultant`} ratio="1 / 1" sizes="(min-width: 760px) 340px, 220px" widths={[240, 480, 680]} />
   </figure>
 )}

@@ -1,6 +1,7 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import Hero from '../components/Hero.astro';
+import Photo from '../components/Photo.astro';
 import Section from '../components/Section.astro';
 import Steps from '../components/Steps.astro';
 import CtaBand from '../components/CtaBand.astro';
@@ -18,6 +19,7 @@ import CtaBand from '../components/CtaBand.astro';
       <a class="btn btn-primary" href="/contact/?type=AI%20coaching#enquiry">Ask about a session</a>
       <a class="btn btn-secondary" href="/contact/#book">Book a free chat</a>
     </Fragment>
+    <div slot="art" class="media"><Photo src="cb-together" alt="Three people working together around laptops at a café table" eager ratio="4 / 3" sizes="(min-width: 900px) 45vw, 100vw" /></div>
   </Hero>
 
   <Section id="coaching" tone="surface" kicker="AI coaching" title="One-to-one AI sessions, built around your own work">

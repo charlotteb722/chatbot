@@ -1,10 +1,10 @@
 ---
 import DemoLayout from '../../layouts/DemoLayout.astro';
-import Hero from '../../components/Hero.astro';
 import Section from '../../components/Section.astro';
 import Steps from '../../components/Steps.astro';
 import FaqList from '../../components/FaqList.astro';
 import EnquiryForm from '../../components/EnquiryForm.astro';
+import Photo from '../../components/Photo.astro';
 ---
 <DemoLayout
   name="Clearpath Career Coaching"
@@ -13,53 +13,64 @@ import EnquiryForm from '../../components/EnquiryForm.astro';
   title="Career coaching for people ready for a change"
   description="Demonstration website for a fictional career coach."
   home="/demo/coach/"
-  links={[{ href: '#who', label: 'Who it\'s for' }, { href: '#programmes', label: 'Programmes' }, { href: '#about', label: 'About' }, { href: '#faqs', label: 'FAQs' }]}
+  links={[{ href: '#who', label: 'Who it\'s for' }, { href: '#programmes', label: 'Programmes' }, { href: '#process', label: 'How it works' }, { href: '#faqs', label: 'FAQs' }]}
   cta={{ href: '#book', label: 'Book a discovery call' }}
 >
-  <Hero
-    tone="surface"
-    kicker="Online across the UK"
-    title="Feeling stuck in your career? Let's work out what's next."
-    lead="One-to-one coaching for mid-career professionals who know something needs to change but aren't sure what, or how to get there."
-  >
-    <Fragment slot="actions">
-      <a class="btn btn-primary" href="#book">Book a free discovery call</a>
-      <a class="btn btn-secondary" href="#programmes">See programmes</a>
-    </Fragment>
-    <div slot="art" class="card" style="background:var(--c-primary);color:var(--c-on-primary);border:0;padding:2rem;gap:1rem">
-      <p style="font-family:var(--font-head);font-size:1.6rem;line-height:1.25">"What would you do next if you knew it would work out?"</p>
-      <p style="opacity:.85">The question we start with.</p>
+  <section class="hero-pro" style="background:linear-gradient(180deg,var(--c-surface),var(--c-bg))">
+    <div class="container">
+      <div>
+        <span class="kicker">Online across the UK</span>
+        <h1>Feeling stuck in your career? Let's work out what's next.</h1>
+        <p class="lead">One-to-one coaching for mid-career professionals who know something needs to change, but aren't yet sure what, or how to get there.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#book">Book a free discovery call</a>
+          <a class="btn btn-secondary" href="#programmes">See programmes</a>
+        </div>
+        <ul class="chips"><li>Free 20-minute call</li><li>Sessions by video</li><li>No long commitment</li></ul>
+      </div>
+      <div class="media" style="border-radius:28px"><Photo src="cc-coach" alt="Smiling professional woman in a striped blazer in a modern office" eager ratio="4 / 5" position="center 20%" sizes="(min-width: 900px) 45vw, 100vw" /></div>
     </div>
-  </Hero>
+  </section>
 
   <Section id="who" kicker="Who it's for" title="Coaching might be right for you if">
     <div class="grid">
       <div class="card"><h3>You've outgrown your role</h3><p class="muted">You're good at your job, but it no longer fits who you are or where you want to be.</p></div>
-      <div class="card"><h3>You're thinking of a big change</h3><p class="muted">A new field, going freelance, or stepping back. You want to think it through properly first.</p></div>
+      <div class="card"><h3>You're weighing up a big change</h3><p class="muted">A new field, going freelance, or stepping back. You want to think it through properly first.</p></div>
       <div class="card"><h3>You're returning to work</h3><p class="muted">After a break for family, health or study, and want to go back with confidence.</p></div>
     </div>
   </Section>
 
-  <Section id="programmes" tone="surface" kicker="Programmes" title="Ways to work together">
+  <section class="section section-surface" aria-labelledby="space-title">
+    <div class="container split">
+      <div class="media"><Photo src="cc-conversation" alt="Two people talking across a table in a bright meeting room" ratio="4 / 3" sizes="(min-width: 800px) 45vw, 100vw" /></div>
+      <div class="copy">
+        <span class="kicker">The approach</span>
+        <h2 id="space-title">Space to think, and a plan you can act on</h2>
+        <p class="lead">Sessions are calm, structured and confidential. We look at your strengths, what matters to you and the options in front of you, then turn that into clear next steps.</p>
+        <ul class="ticks"><li>Practical exercises between sessions</li><li>A written summary after every session</li><li>Honest feedback, kindly given</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <Section id="programmes" kicker="Programmes" title="Ways to work together">
     <div class="price-grid">
-      <article class="price-card" style="grid-template-rows:auto auto 1fr auto"><h3>Single session</h3><p class="price">£85</p><ul class="ticks"><li>75 minutes by video</li><li>Focused on one decision</li><li>Written summary afterwards</li></ul><a class="btn btn-secondary" href="#book">Ask about this</a></article>
-      <article class="price-card featured" style="grid-template-rows:auto auto auto 1fr auto"><span class="badge">Most chosen</span><h3>Six-week programme</h3><p class="price">£450</p><ul class="ticks"><li>Six weekly sessions</li><li>Strengths and values work</li><li>CV and LinkedIn review</li><li>Email support between sessions</li></ul><a class="btn btn-primary" href="#book">Ask about this</a></article>
-      <article class="price-card" style="grid-template-rows:auto auto 1fr auto"><h3>Interview preparation</h3><p class="price">£120</p><ul class="ticks"><li>Two sessions</li><li>Practice questions for your role</li><li>Feedback you can act on</li></ul><a class="btn btn-secondary" href="#book">Ask about this</a></article>
+      <article class="price-card"><h3>Single session</h3><p class="price">£85</p><p class="muted">For one decision you'd like to talk through.</p><ul class="ticks"><li>75 minutes by video</li><li>Focused on one question</li><li>Written summary afterwards</li></ul><a class="btn btn-secondary" href="#book">Ask about this</a></article>
+      <article class="price-card featured"><span class="badge">Most chosen</span><h3>Six-week programme</h3><p class="price">£450</p><p class="muted">For a career change or a fresh direction.</p><ul class="ticks"><li>Six weekly sessions</li><li>Strengths and values work</li><li>CV and LinkedIn review</li><li>Email support between sessions</li></ul><a class="btn btn-primary" href="#book">Ask about this</a></article>
+      <article class="price-card"><h3>Interview preparation</h3><p class="price">£120</p><p class="muted">For a role you really want.</p><ul class="ticks"><li>Two sessions</li><li>Practice questions for your role</li><li>Feedback you can act on</li></ul><a class="btn btn-secondary" href="#book">Ask about this</a></article>
     </div>
     <p class="hint" style="margin-top:1rem">Example prices for demonstration only.</p>
   </Section>
 
-  <Section id="process" kicker="How it works" title="What to expect">
+  <Section id="process" tone="surface" kicker="How it works" title="What to expect">
     <Steps items={[
-      { title: 'Discovery call', text: 'Twenty minutes, free, to see if coaching is right for you.' },
+      { title: 'Discovery call', text: 'Twenty minutes, free, to see whether coaching is right for you.' },
       { title: 'Choose a programme', text: 'Pick the option that fits. No pressure and no long commitment.' },
       { title: 'Make progress', text: 'Clear actions after every session, at a pace that suits you.' },
     ]} />
-  </Section>
-
-  <Section id="about" tone="surface" kicker="About" title="About your coach" narrow>
-    <div class="prose">
-      <p>On a real website, this section introduces the coach in their own words: their background, qualifications and why they coach. It's often the most-read page on a coaching site, so it's worth writing carefully.</p>
+    <div class="photo-grid" style="margin-top:2rem">
+      <figure class="wide"><Photo src="cc-office" alt="Modern open-plan office with large windows and meeting tables" ratio="2 / 1" sizes="(min-width: 760px) 50vw, 100vw" /></figure>
+      <figure><Photo src="cc-workshop" alt="Small group workshop with sticky notes on a glass wall" ratio="1 / 1" sizes="(min-width: 760px) 25vw, 50vw" /></figure>
+      <figure><Photo src="cc-success" alt="Two colleagues celebrating with a high five at a desk" ratio="1 / 1" sizes="(min-width: 760px) 25vw, 50vw" /></figure>
     </div>
   </Section>
 
@@ -83,7 +94,10 @@ import EnquiryForm from '../../components/EnquiryForm.astro';
         { id: 'interest', label: 'What are you interested in?', type: 'select', options: ['Single session', 'Six-week programme', 'Interview preparation', 'Not sure yet'] },
         { id: 'note', label: 'Anything you’d like me to know?', type: 'textarea' },
       ]} />
-      <div class="card"><h3>Or pick a time</h3><p class="muted">On a real website, this button would open the coach's booking calendar.</p><p><a class="btn btn-primary" href="#book" aria-disabled="true">See available times (demo)</a></p></div>
+      <div class="stack">
+        <div class="media"><Photo src="cc-bright-office" alt="Bright, quiet office with plants and a long white desk" ratio="16 / 10" sizes="(min-width: 800px) 40vw, 100vw" /></div>
+        <div class="card"><h3>Or pick a time</h3><p class="muted">On a real website, this button would open the coach's booking calendar.</p><p><a class="btn btn-primary" href="#book" aria-disabled="true">See available times (demo)</a></p></div>
+      </div>
     </div>
   </Section>
 
