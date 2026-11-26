@@ -12,7 +12,6 @@ const shots = [
   { name: 'joiner', desk: '/demo/joiner/', phone: '/demo/joiner/' },
   { name: 'coach', desk: '/demo/coach/', phone: '/demo/coach/' },
   { name: 'cafe', desk: '/demo/cafe/', phone: '/demo/cafe/' },
-  { name: 'hero', desk: '/demo/joiner/', phone: '/demo/cafe/' },
 ];
 
 async function grab(browser, url, phone, file) {

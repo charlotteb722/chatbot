@@ -28,14 +28,12 @@ Do not sell these photos unaltered, or present them as the work of a real client
 | aj-timber-frame.jpg | https://images.unsplash.com/photo-1590725140246-20acdee442be |
 | aj-kitchen-dark.jpg | https://images.unsplash.com/photo-1600489000022-c2086d79f9d4 |
 | aj-chair.jpg | https://images.unsplash.com/photo-1598300042247-d088f8ab3a91 |
-| cc-coach.jpg | https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e |
 | cc-meeting-room.jpg | https://images.unsplash.com/photo-1462826303086-329426d1aef5 |
 | cc-workshop.jpg | https://images.unsplash.com/photo-1552664730-d307ca884978 |
 | cc-success.jpg | https://images.unsplash.com/photo-1600880292203-757bb62b4baf |
 | cc-office.jpg | https://images.unsplash.com/photo-1497366811353-6870744d04b2 |
 | cc-conversation.jpg | https://images.unsplash.com/photo-1517048676732-d65bc937f952 |
 | cc-bright-office.jpg | https://images.unsplash.com/photo-1497215728101-856f4ea42174 |
-| lb-bread.jpg | https://images.unsplash.com/photo-1509440159596-0249088772ff |
 | lb-loaf.jpg | https://images.unsplash.com/photo-1549931319-a545dcf3bc73 |
 | lb-croissants.jpg | https://images.unsplash.com/photo-1555507036-ab1f4038808a |
 | lb-pastry-case.jpg | https://images.unsplash.com/photo-1568254183919-78a4f43a2877 |
@@ -48,3 +46,16 @@ Do not sell these photos unaltered, or present them as the work of a real client
 | lb-cookies.jpg | https://images.unsplash.com/photo-1558961363-fa8fdf82db35 |
 | lb-cake.jpg | https://images.unsplash.com/photo-1578985545062-69928b1d9587 |
 | cb-charlotte.jpg | Charlotte Bjuren's own headshot, supplied by her |
+
+## Images supplied by Charlotte
+
+AI-generated images supplied by Charlotte Bjuren on 26 November 2026 for use on this website. Check the image generator's terms allow commercial use, and never present them as photos of real client work or of Charlotte herself.
+
+| File | Used for |
+|---|---|
+| cb-devices-highland.jpg | Homepage hero |
+| cb-devices-lake.jpg | Website design service card |
+| cb-devices-multi.jpg | Websites and pricing hero |
+| cc-consultation.jpg | Clearpath Coaching demo hero |
+| lb-bakery-counter.jpg | Larchfield Bakehouse demo hero |
+| aj-oak-kitchen-loch.jpg | Ardvane Joinery demo hero |

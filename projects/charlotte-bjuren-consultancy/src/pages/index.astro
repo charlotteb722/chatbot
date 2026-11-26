@@ -21,7 +21,7 @@ const from = gbp(Math.min(...packages.map((p) => p.data.price)));
 const careFrom = gbp(Math.min(...care.map((c) => c.data.price)));
 
 const services = [
-  { src: 'cb-desk', alt: 'Laptop on a bright desk showing a website, beside a plant and a second screen', title: 'Website design and development', text: `New websites and redesigns, written with you and built to bring in enquiries. Fixed prices from ${from}.`, href: '/websites/', link: 'Websites and pricing' },
+  { src: 'cb-devices-lake', alt: 'Laptop and phone on a sunlit desk displaying a website with a misty mountain lake', title: 'Website design and development', text: `New websites and redesigns, written with you and built to bring in enquiries. Fixed prices from ${from}.`, href: '/websites/', link: 'Websites and pricing' },
   { src: 'cb-together', alt: 'Three people working together around laptops at a café table', title: 'AI coaching', text: 'One-to-one sessions using AI on real tasks from your business. £95 for 90 minutes.', href: '/ai-and-automation/#coaching', link: 'AI coaching' },
   { src: 'cb-workflow', alt: 'Hand pinning a card to a process map on a wall', title: 'Business automation', text: 'Simple automations for the admin you repeat every week. Small jobs from £150.', href: '/ai-and-automation/#automation', link: 'Automation' },
   { src: 'cb-notebook', alt: 'Hand ticking off a checklist in a notebook', title: 'Digital business support', text: 'Practical help with Google Business Profile, Microsoft 365, email and the tools you already use.', href: '/contact/?type=Digital%20business%20support#enquiry', link: 'Ask about support' },
@@ -56,7 +56,7 @@ const jsonLd = {
         <ul class="chips"><li>Fixed prices from {from}</li><li>You own everything</li><li>No long contracts</li></ul>
       </div>
       <div class="hero-visual">
-        <Photo src="mock-hero" alt="A joinery website on a laptop and a café website on a phone, both designed by Charlotte Bjuren as demonstrations" eager sizes="(min-width: 900px) 50vw, 100vw" widths={[480, 800, 1200, 1600]} />
+        <div class="media hero-photo"><Photo src="cb-devices-highland" alt="Laptop and phone on a wooden desk showing a website with a Highland landscape, beside heather, a latte and a tartan blanket" eager ratio="5 / 4" sizes="(min-width: 900px) 48vw, 100vw" widths={[480, 800, 1200, 1400]} /></div>
       </div>
     </div>
   </section>
