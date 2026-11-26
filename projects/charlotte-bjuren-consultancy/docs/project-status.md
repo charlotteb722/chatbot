@@ -30,7 +30,7 @@
 
 ## Waiting for Charlotte
 
-Supply or confirm everything `npm run check:drafts` lists: email, address approach, booking link, headshot, "why I started" sentence, timescale wording, privacy and terms details. Plus domain registrar details and a free Netlify account at deploy time.
+Supply or confirm everything `npm run check:drafts` lists: business email, booking link, headshot, address decision, privacy and terms details. Plus a free Netlify account (steps in the checklist).
 
 ## Known limitation
 
